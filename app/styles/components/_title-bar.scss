@@ -1,0 +1,24 @@
+// Globals
+body {
+  background: white;
+  font-family: 'Lato', sans-serif;
+}
+.container {
+  background: #eee;
+  min-height: 1000px;
+}
+.column {
+  padding: 0;
+}
+
+// TitleBar
+.title-bar {
+  color: white;
+  background: darkgreen;
+  margin-bottom: 1rem;
+
+    .title-bar-text {
+      text-align: center;
+    }
+
+}
