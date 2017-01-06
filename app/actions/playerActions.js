@@ -5,6 +5,12 @@ const playerActions = {
       newPlayer,
     };
   },
+  removePlayer(id) {
+    return {
+      type: 'REMOVE_PLAYER',
+      id,
+    };
+  },
   selectPlayer(id) {
     return {
       type: 'SELECT_PLAYER',

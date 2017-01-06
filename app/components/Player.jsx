@@ -9,11 +9,15 @@ class Player extends Component {
     const handleCheck = () => {
       dispatch(playerActions.selectPlayer(id));
     };
+    const handleDelete = () => {
+      dispatch(playerActions.removePlayer(id));
+    };
     return (
       <div>
         <li>
           <input type="checkbox" checked={checked} onChange={handleCheck} />
           <span>{`${last}, ${first}`}</span>
+          <button className="button tiny alert" onClick={handleDelete}>Delete</button>
         </li>
       </div>
     );

@@ -17,6 +17,13 @@ const playersReducer = (state = initialPlayers, action) => {
     case 'ADD_PLAYER': {
       return [...state, action.newPlayer];
     }
+    case 'REMOVE_PLAYER':
+      return state.filter((player) => {
+        if (player.id === action.id) {
+          return false;
+        }
+        return true;
+      });
     case 'SELECT_PLAYER':
       return state.map((player) => {
         if (player.id === action.id) {
