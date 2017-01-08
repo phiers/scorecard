@@ -1,0 +1,18 @@
+.add-course {
+  margin: 1em;
+  .add-hole-list {
+    margin: 1em;
+      .add-hole {
+        align-items: baseline;
+        display: flex;
+        p {
+          flex: 1;
+          margin-bottom: 0;
+        }
+        input {
+          flex: 4;
+          margin-bottom: 0;
+        }
+      }
+    }
+}

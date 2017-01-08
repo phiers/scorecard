@@ -16,8 +16,10 @@ class PlayerAddForm extends Component {
       const id = Date.now();
       dispatch(actions.addPlayer({ id, first, last, checked: true }));
     }
+    // clean up the UI
     evt.target[0].value = '';
     evt.target[1].value = '';
+    evt.target[0].focus();
   }
   render() {
     return (
