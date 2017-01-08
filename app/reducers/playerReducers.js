@@ -12,7 +12,7 @@ const initialPlayers = [
   { id: 11, last: 'Zimmerman', first: 'Andy', checked: false },
 ];
 
-const playersReducer = (state = initialPlayers, action) => {
+const playersReducers = (state = initialPlayers, action) => {
   switch (action.type) {
     case 'ADD_PLAYER': {
       return [...state, action.newPlayer];
@@ -40,4 +40,4 @@ const playersReducer = (state = initialPlayers, action) => {
   }
 };
 
-export default playersReducer;
+export default playersReducers;

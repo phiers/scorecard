@@ -1,8 +1,12 @@
 import { createStore, combineReducers } from 'redux';
-import playerReducer from 'playerReducers'; // eslint-disable-line
+/* eslint-disable */
+import playerReducers from 'playerReducers';
+import settingsReducers from 'settingsReducers';
+/* eslint-enable */
 
 const reducer = combineReducers({
-  players: playerReducer,
+  players: playerReducers,
+  settings: settingsReducers,
 });
 
 const store = createStore(reducer, {});

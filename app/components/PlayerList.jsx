@@ -6,17 +6,33 @@ import Player from 'Player'; // eslint-disable-line
 /* eslint-disable no-confusing-arrow */
 const PlayerList = (props) => {
   const { players } = props;
-  // TODO: add checked players to top of list
-  const sortedPlayers = players.sort((a, b) => a.last > b.last ? 1 : -1);
-
-  const renderPlayers = () => sortedPlayers.map(player =>
+  // two render functions to add selected to top of the list
+  const selectedPlayers = players
+    .filter((player) => {
+      if (player.checked) {
+        return true;
+      }
+      return false;
+    }).sort((a, b) => a.last > b.last ? 1 : -1);
+  const unSelectedPlayers = players
+    .filter((player) => {
+      if (!player.checked) {
+        return true;
+      }
+      return false;
+    }).sort((a, b) => a.last > b.last ? 1 : -1);
+  const renderSelectedPlayers = () => selectedPlayers.map(player =>
+    <Player key={player.id} {...player} />,
+  );
+  const renderUnselectedPlayers = () => unSelectedPlayers.map(player =>
     <Player key={player.id} {...player} />,
   );
 
   return (
     <div className="player">
       <ul>
-        {renderPlayers()}
+        {renderSelectedPlayers()}
+        {renderUnselectedPlayers()}
       </ul>
     </div>
   );

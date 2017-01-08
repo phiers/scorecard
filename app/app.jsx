@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 /* eslint-disable */
 import Main from 'Main';
 import Start from 'Start';
+import Settings from 'Settings';
 import PlayerChoice from 'PlayerChoice';
 import store from 'configureStore';
 
@@ -23,6 +24,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={Main}>
         <Route path="players" component={PlayerChoice} />
+        <Route path="settings" component={Settings} />
         <IndexRoute component={Start} />
       </Route>
     </Router>
