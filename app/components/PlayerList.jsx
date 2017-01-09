@@ -6,6 +6,9 @@ import Player from 'Player'; // eslint-disable-line
 /* eslint-disable no-confusing-arrow */
 const PlayerList = (props) => {
   const { players } = props;
+  /* TODO: FIGURE HOW TO RENDER THIS WITHOUT CHECKBOXES (SELECT PLAYER)
+  * FOR MANAGE PLAYERS SCREEN
+  */
   // two render functions to add selected to top of the list
   const selectedPlayers = players
     .filter((player) => {

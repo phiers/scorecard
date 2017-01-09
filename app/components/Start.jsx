@@ -14,7 +14,7 @@ export default class Start extends Component {
           <button className="resume button large">Resume Round</button>
         </div>
         <div className="column small-centered">
-          <Link to="/add-course" className=" button large">Add Course</Link>
+          <Link to="/course-list" className=" button large">Manage Courses</Link>
         </div>
         <div className="column small-centered">
           <Link to="/settings" className="button large">Settings</Link>

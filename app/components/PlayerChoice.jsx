@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 /* eslint-disable */
 import TitleBar from 'TitleBar';
 import PlayerList from 'PlayerList';
@@ -19,6 +20,7 @@ class PlayerChoice extends Component {
       // initiate the round object with selected players
       // set all checkmarks in players array to false
       // navigate to choose course screen
+      browserHistory.push('/course-list');
     } else {
       alert("You've selected too many players!");
     }

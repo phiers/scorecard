@@ -13,11 +13,12 @@ class CourseAdd extends Component {
       evt.preventDefault();
       const { dispatch } = this.props;
       const noOfHoles = document.querySelectorAll('input')[2].value;
-      const loc = document.querySelectorAll('input')[1].value;
+      const state = document.querySelectorAll('input')[1].value;
       const name = document.querySelectorAll('input')[0].value;
       const holeData = [];
       const pars = document.querySelectorAll('.par');
       const hdcps = document.querySelectorAll('.hdcp');
+      const id = Date.now();
       for (let i = 0; i < noOfHoles; i += 1) {
         const par = parseInt(pars[i].value, 10);
         const hdcp = parseInt(hdcps[i].value, 10);
@@ -25,7 +26,7 @@ class CourseAdd extends Component {
       }
       // save input
       if (name && noOfHoles) {
-        dispatch(courseActions.saveCourse({ name, loc, noOfHoles, holeData }));
+        dispatch(courseActions.saveCourse({ id, name, state, noOfHoles, holeData }));
         browserHistory.push('/');
       }
     };
@@ -36,15 +37,21 @@ class CourseAdd extends Component {
           <form>
             <input type="text" placeholder="Course Name" />
             <div className="loc-holes">
-              <input type="text" placeholder="Location" />
+              <input type="text" placeholder="State Abbreviation" />
               <input type="text" placeholder="No. of Holes" />
             </div>
             <hr />
             < CourseAddHoleList />
-            <button
-              className="button expanded"
-              onClick={addCourseInfo}
-            >Submit to Enter Course Info</button>
+            <div className="button-group">
+              <button
+                className="button"
+                onClick={() => browserHistory.push('/')}
+              >Cancel</button>
+              <button
+                className="button"
+                onClick={addCourseInfo}
+              >Save</button>
+            </div>
           </form>
         </div>
       </div>

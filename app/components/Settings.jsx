@@ -7,7 +7,7 @@ import TitleBar from 'TitleBar'; // eslint-disable-line
 /* eslint-disable no-param-reassign */
 const Settings = (props) => {
   const { dispatch } = props;
-  // const { first, last, hdcp } = props.settings;
+  const { first, last, hdcp } = props.settings.user;
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const firstName = evt.target[0].value;
@@ -15,9 +15,11 @@ const Settings = (props) => {
     const handicap = evt.target[2].value || 0;
     if (firstName !== '' && lastName !== '') {
       dispatch(settingsActions.updateUserInfo({
-        first: firstName,
-        last: lastName,
-        hdcp: handicap,
+        user: {
+          first: firstName,
+          last: lastName,
+          hdcp: handicap,
+        },
       }));
       browserHistory.push('/');
     }
@@ -32,11 +34,11 @@ const Settings = (props) => {
         <h3>Enter or update your information:</h3>
         <form onSubmit={handleSubmit}>
           <label htmlFor="first">First Name</label>
-          <input type="text" id="first" />
+          <input type="text" id="first" defaultValue={first} />
           <label htmlFor="last">Last Name</label>
-          <input type="text" id="last" />
+          <input type="text" id="last" defaultValue={last} />
           <label htmlFor="hdcp">Handicap</label>
-          <input type="text" id="hcdp" />
+          <input type="text" id="hcdp" defaultValue={hdcp} />
           <button className="button expanded">Submit</button>
         </form>
       </div>
@@ -48,4 +50,7 @@ export default connect(state => state)(Settings);
 
 Settings.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  settings: PropTypes.shape({
+    user: PropTypes.object,
+  }),
 };

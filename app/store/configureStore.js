@@ -6,7 +6,7 @@ import settingsReducers from 'settingsReducers';
 /* eslint-enable */
 
 const reducer = combineReducers({
-  course: courseReducers,
+  courses: courseReducers,
   players: playerReducers,
   settings: settingsReducers,
 });
