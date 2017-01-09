@@ -1,29 +1,36 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import playerActions from 'playerActions'; // eslint-disable-line
 
-class Player extends Component {
-  render() {
-    const { first, last, checked, dispatch, id } = this.props;
-    const handleCheck = () => {
-      dispatch(playerActions.selectPlayer(id));
-    };
-    const handleDelete = () => {
-      dispatch(playerActions.removePlayer(id));
-    };
+const Player = (props) => {
+  /* not ideal as player props passed from list rendering and settings state are
+  intermingled */
+  const { first, last, checked, dispatch, id, selectionMode } = props;
+  const handleCheck = () => {
+    dispatch(playerActions.selectPlayer(id));
+  };
+  const handleDelete = (evt) => {
+    evt.preventDefault();
+    dispatch(playerActions.removePlayer(id));
+  };
+  const renderCheckbox = () => {
+    if (selectionMode) {
+      return <input type="checkbox" checked={checked} onChange={handleCheck} />;
+    }
+    return null;
+  };
 
-    return (
-      <div>
-        <li>
-          <input type="checkbox" checked={checked} onChange={handleCheck} />
-          <span>{`${last}, ${first}`}</span>
-          <button className="button tiny alert" onClick={handleDelete}>Delete</button>;
-        </li>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <li>
+        {renderCheckbox()}
+        <span>{`${last}, ${first}`}</span>
+        <button className="button tiny alert" onClick={handleDelete}>Del</button>
+      </li>
+    </div>
+  );
+};
 
 Player.propTypes = {
   checked: PropTypes.bool.isRequired,
@@ -31,6 +38,7 @@ Player.propTypes = {
   id: PropTypes.number,
   first: PropTypes.string.isRequired,
   last: PropTypes.string.isRequired,
+  selectionMode: PropTypes.bool.isRequired,
 };
 
-export default connect()(Player);
+export default connect(state => state.settings)(Player);

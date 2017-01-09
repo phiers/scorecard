@@ -1,6 +1,6 @@
 const initialPlayers = [
   { id: 1, last: 'Crawford', first: 'Dave', checked: false },
-  { id: 2, last: 'Hickman', first: 'Tim', checked: true },
+  { id: 2, last: 'Hickman', first: 'Tim', checked: false },
   { id: 3, last: 'Staley', first: 'Scott', checked: false },
   { id: 4, last: 'Atkinson', first: 'John', checked: false },
   { id: 5, last: 'Sprankle', first: 'Fred', checked: false },

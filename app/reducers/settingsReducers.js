@@ -4,11 +4,16 @@ const initialState = {
     last: 'None',
     hdcp: 0,
   },
-  gameSelect: false,
+  selectionMode: false,
 };
 
 const settingsReducers = (state = initialState, action) => {
   switch (action.type) {
+    case 'SET_SELECTION_MODE':
+      return {
+        ...state,
+        selectionMode: action.mode,
+      };
     case 'UPDATE_USER_INFO':
       return {
         ...state,

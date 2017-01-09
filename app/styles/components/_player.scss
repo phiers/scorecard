@@ -1,9 +1,10 @@
 .player-choice {
+  margin: 4em 1em 1em 1em;
   display: flex;
   flex-direction: column;
   button {
     flex: 1;
-    margin: auto;
+    margin: 1em auto;
     width: 80%;
   }
   .title-bar {
@@ -11,7 +12,7 @@
     margin-right: 0;
   }
   .player {
-    margin: 0 1em;
+
     ul {
       margin: 0;
     }
@@ -35,7 +36,7 @@
   }
 
   .player-add {
-    margin: 1em;
+    margin: auto;
     h4 {
       text-decoration: underline;
     }
@@ -51,6 +52,7 @@
         flex: 1;
         margin-left: 2px;
         margin-bottom: 1rem;
+        margin-top: 0;
       }
     }
   }

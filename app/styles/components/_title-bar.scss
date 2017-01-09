@@ -9,7 +9,7 @@ body {
 }
 .container {
   background: #eee;
-  min-height: 1000px;
+  min-height: 700px;
 }
 .column {
   padding: 0;
@@ -19,7 +19,9 @@ body {
 .title-bar {
   color: white;
   background: darkgreen;
+  position: fixed;
   margin-bottom: 1rem;
+  top: 0;
   width: 100%;
 
     .title-bar-text {

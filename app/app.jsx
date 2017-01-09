@@ -20,7 +20,7 @@ store.subscribe(() => {
   const state = store.getState();
   console.log(state);
 });
-
+// TODO: course=list should be course-manage (diff comp, too)
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
