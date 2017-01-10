@@ -12,22 +12,24 @@ const Start = (props) => {
     router.push('/players');
   };
   return (
-    <div className="start-page">
+    <div>
       <TitleBar title="Golf Scorecard" />
-      <div className="column small-centered">
-        <button className="start button large" onClick={handleStart}>Start Round</button>
-      </div>
-      <div className="column small-centered">
-        <button className="resume button large">Resume Round</button>
-      </div>
-      <div className="column small-centered">
-        <Link to="/players" className=" button large">Manage Players</Link>
-      </div>
-      <div className="column small-centered">
-        <Link to="/courses" className=" button large">Manage Courses</Link>
-      </div>
-      <div className="column small-centered">
-        <Link to="/settings" className="button large">Settings</Link>
+      <div className="start-page">
+        <div className="column small-centered">
+          <button className="start button large" onClick={handleStart}>Start Round</button>
+        </div>
+        <div className="column small-centered">
+          <button className="resume button large">Resume Round</button>
+        </div>
+        <div className="column small-centered">
+          <Link to="/players" className=" button large">Manage Players</Link>
+        </div>
+        <div className="column small-centered">
+          <Link to="/courses" className=" button large">Manage Courses</Link>
+        </div>
+        <div className="column small-centered">
+          <Link to="/settings" className="button large">Settings</Link>
+        </div>
       </div>
     </div>
   );

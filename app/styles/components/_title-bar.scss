@@ -1,6 +1,6 @@
 // Globals
 body {
-  background: white;
+  background: #eee;
   font-family: 'Lato', sans-serif;
   button:active,
   button:focus {
@@ -10,6 +10,8 @@ body {
 .container {
   background: #eee;
   min-height: 700px;
+  max-width:600px;
+  margin: 0 auto;
 }
 .column {
   padding: 0;
@@ -23,6 +25,7 @@ body {
   display: flex;
   position: fixed;
   margin-bottom: 1rem;
+  max-width: 600px;
   top: 0;
   width: 100%;
     span {
@@ -31,6 +34,7 @@ body {
     .title-bar-text {
       flex: 5;
       text-align: center;
+      line-height: 2.2;
     }
 
 }
