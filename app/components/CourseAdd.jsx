@@ -1,32 +1,30 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 /* eslint-disable */
 import CourseAddHoleList from 'CourseAddHoleList';
 import TitleBar from 'TitleBar';
 import courseActions from 'courseActions';
 /* eslint-enable */
 
-const CourseAdd = () => {
-  const addCourseInfo = (evt) => {
+const CourseAdd = (props) => {
+  const { dispatch, router } = props;
+  const addCourse = (evt) => {
     evt.preventDefault();
-    const { dispatch } = this.props;
-    const noOfHoles = document.querySelectorAll('input')[2].value;
     const state = document.querySelectorAll('input')[1].value;
     const name = document.querySelectorAll('input')[0].value;
     const holeData = [];
     const pars = document.querySelectorAll('.par');
     const hdcps = document.querySelectorAll('.hdcp');
     const id = Date.now();
-    for (let i = 0; i < noOfHoles; i += 1) {
-      const par = parseInt(pars[i].value, 10);
-      const hdcp = parseInt(hdcps[i].value, 10);
+    for (let i = 0; i < 18; i += 1) {
+      const par = parseInt(pars[i].textContent, 10);
+      const hdcp = parseInt(hdcps[i].textContent, 10);
       holeData.push({ no: i + 1, par, hdcp });
     }
     // save input
-    if (name && noOfHoles) {
-      dispatch(courseActions.saveCourse({ id, name, state, noOfHoles, holeData }));
-      browserHistory.push('/');
+    if (name) {
+      dispatch(courseActions.saveCourse({ id, name, state, holeData }));
+      router.push('/');
     }
   };
   return (
@@ -34,21 +32,24 @@ const CourseAdd = () => {
       <TitleBar title="Add Course" />
       <div className="add-course">
         <form>
-          <input type="text" placeholder="Course Name" />
-          <div className="loc-holes">
-            <input type="text" placeholder="State Abbreviation" />
-            <input type="text" placeholder="No. of Holes" />
+          <div className="add-course-info">
+            <input type="text" placeholder="Course Name" />
+            <input type="text" placeholder="  ST" />
           </div>
-          <hr />
+          <span className="add-hole-headings">
+            <p>Hole</p>
+            <p>Par</p>
+            <p>Handicap</p>
+          </span>
           < CourseAddHoleList />
           <div className="button-group">
             <button
               className="button"
-              onClick={() => browserHistory.push('/')}
+              onClick={() => router.push('/')}
             >Cancel</button>
             <button
               className="button"
-              onClick={addCourseInfo}
+              onClick={addCourse}
             >Save</button>
           </div>
         </form>
@@ -61,4 +62,5 @@ export default connect(state => state)(CourseAdd);
 
 CourseAdd.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  router: PropTypes.object, // eslint-disable-line
 };

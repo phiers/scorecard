@@ -33,19 +33,75 @@
 
 .add-course {
   margin: 4em 1em;
+  .add-course-info {
+    display: flex;
+
+    input:first-child {
+      flex: 5;
+    }
+    input {
+      flex: 1;
+      margin: 1em .1em;
+    }
+  }
+  .add-hole-headings {
+    display: flex;
+    margin-right: 1em;
+    p {
+      flex: 2.5;
+      font-size: 1.3em;
+      margin-bottom: -.5em;
+      text-align: center;
+    }
+    p:first-child {
+      flex: 1;
+    }
+  }
   .add-hole-list {
     margin: 1em;
-      .add-hole {
-        align-items: baseline;
+
+    .add-hole {
+      display: flex;
+      font-size: 1.3em;
+      text-align: center;
+      .button-row {
         display: flex;
+        flex: 1;
         p {
+          color: black;
           flex: 1;
           margin-bottom: 0;
+          margin-right: .5em;
+          padding-top: .3em;
         }
-        input {
+        .input-group {
+          background: black;
+          border: 1px solid black;
+          border-radius: 10px;
+          color: white;
+          display: flex;
           flex: 4;
-          margin-bottom: 0;
+          margin-right: 1em;
+
+          button {
+            background: white;
+            border: 1px solid black;
+            border-radius: 10px;
+            color: black;
+            flex: 1.2;
+            min-height: 2em;
+            padding: 0 .2em;
+          }
+          p {
+            color: white;
+            flex: 1;
+            margin: 0 .1em;
+          }
+        }
+        .input-group:nth-of-type(2) {
+          margin-right: 0;
         }
       }
     }
+  }
 }

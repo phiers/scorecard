@@ -2,7 +2,6 @@ const defaultCourses = [
   {
     name: 'York - Standard',
     state: 'OH',
-    noOfHoles: 18,
     id: 'york1',
     holeData: [
       { holeNo: 1, par: 4, hdcp: 11 }, { holeNo: 2, par: 4, hdcp: 5 },
@@ -19,7 +18,6 @@ const defaultCourses = [
   {
     name: 'York - Weekend',
     state: 'OH',
-    noOfHoles: 18,
     id: 'york2',
     holeData: [
       { holeNo: 1, par: 4, hdcp: 10 }, { holeNo: 2, par: 4, hdcp: 4 },
@@ -36,7 +34,6 @@ const defaultCourses = [
   {
     name: 'Junk',
     state: 'OH',
-    noOfHoles: 18,
     id: 'junk',
     holeData: [
       { holeNo: 1, par: 4, hdcp: 10 }, { holeNo: 2, par: 4, hdcp: 4 },
