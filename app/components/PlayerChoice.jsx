@@ -8,7 +8,7 @@ import PlayerAddForm from 'PlayerAddForm';
 
 const PlayerChoice = (props) => {
   const { dispatch, players, router, settings } = props;
-  const mode = settings.selectionMode;
+  const mode = settings.scoringMode;
   const handleContinue = () => {
     let sum = 0;
     players.forEach(player => player.checked ? sum += 1 : sum); // eslint-disable-line
@@ -16,7 +16,7 @@ const PlayerChoice = (props) => {
       // initiate the round object with selected players
       // set all checkmarks in players array to false
       // navigate to choose course screen
-      router.push('/course-list');
+      router.push('/courses');
     } else {
       alert('Max of 3 players may be selected');
     }

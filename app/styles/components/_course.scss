@@ -1,3 +1,36 @@
+.course-choice {
+  margin: 4em 1em 1em 1em;
+  background: darkgray;
+  min-height: 700px;
+    thead tr td {
+      text-align: center;
+    }
+    tbody tr {
+      align-items: baseline;
+      td:last-child {
+        padding-bottom: 0;
+      }
+    }
+    input {
+      margin: 0 0 0 1.5em;
+    }
+    .button.expanded {
+      width: 75% ;
+      margin: 1em auto;
+    }
+    .button-group {
+      display: flex;
+
+      button {
+        flex: 1;
+        margin: 3px;
+      }
+    }
+
+}
+
+
+
 .add-course {
   margin: 4em 1em;
   .add-hole-list {

@@ -1,42 +1,51 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import Course from 'Course'; // eslint-disable-line
 
 
 const CourseList = (props) => {
-  const { courses } = props;
+  const { courses, settings } = props;
+  const mode = settings.scoringMode;
   const renderCourses = () =>
     courses.map(course =>
-      <tr key={course.id}>
-        <td>{course.name}</td>
-        <td>{course.state}</td>
-        <td>
-          <button className="button tiny alert">DEL</button>
-        </td>
-      </tr>,
+      <Course key={course.id} {...course} />,
     );
+  const renderLastColumnTitle = () => {
+    if (mode) {
+      return 'Select';
+    }
+    return 'Actions';
+  };
+  const renderAddButton = () => {
+    if (!mode) {
+      return <Link to="/add-course" className="button expanded">Add New Course</Link>;
+    }
+    return null;
+  };
 
   return (
-    <div className="course-list">
+    <div>
       <table>
         <thead>
           <tr>
             <td>Name</td>
             <td>ST</td>
-            <td>Actions</td>
+            <td>{renderLastColumnTitle()}</td>
           </tr>
         </thead>
         <tbody>
           {renderCourses()}
         </tbody>
       </table>
-      <Link to="/add-course" className="button expanded">Add New Course</Link>
+      {renderAddButton()}
     </div>
   );
 };
 
 export default connect(state => state)(CourseList);
-
+/* eslint-disable react/forbid-prop-types */
 CourseList.propTypes = {
-  courses: React.PropTypes.array, // eslint-disable-line
+  courses: React.PropTypes.array,
+  settings: React.PropTypes.object,
 };

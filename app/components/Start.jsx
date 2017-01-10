@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -8,7 +8,7 @@ import TitleBar from 'TitleBar'; // eslint-disable-line
 const Start = (props) => {
   const handleStart = () => {
     const { dispatch, router } = props;
-    dispatch(settingsActions.setSelectionMode(true));
+    dispatch(settingsActions.setScoringMode(true));
     router.push('/players');
   };
   return (
@@ -24,7 +24,7 @@ const Start = (props) => {
         <Link to="/players" className=" button large">Manage Players</Link>
       </div>
       <div className="column small-centered">
-        <Link to="/courses-manage" className=" button large">Manage Courses</Link>
+        <Link to="/courses" className=" button large">Manage Courses</Link>
       </div>
       <div className="column small-centered">
         <Link to="/settings" className="button large">Settings</Link>

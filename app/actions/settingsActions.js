@@ -1,8 +1,8 @@
 
 const settingsActions = {
-  setSelectionMode(mode) {
+  setScoringMode(mode) {
     return {
-      type: 'SET_SELECTION_MODE',
+      type: 'SET_SCORING_MODE',
       mode,
     };
   },

@@ -17,14 +17,19 @@ body {
 
 // TitleBar
 .title-bar {
+  align-items: baseline;
   color: white;
   background: darkgreen;
+  display: flex;
   position: fixed;
   margin-bottom: 1rem;
   top: 0;
   width: 100%;
-
+    span {
+      flex: 1;
+    }
     .title-bar-text {
+      flex: 5;
       text-align: center;
     }
 

@@ -6,7 +6,7 @@ import playerActions from 'playerActions'; // eslint-disable-line
 const Player = (props) => {
   /* not ideal as player props passed from list rendering and settings state are
   intermingled */
-  const { first, last, checked, dispatch, id, selectionMode } = props;
+  const { first, last, checked, dispatch, id, scoringMode } = props;
   const handleCheck = () => {
     dispatch(playerActions.selectPlayer(id));
   };
@@ -15,7 +15,7 @@ const Player = (props) => {
     dispatch(playerActions.removePlayer(id));
   };
   const renderCheckbox = () => {
-    if (selectionMode) {
+    if (scoringMode) {
       return <input type="checkbox" checked={checked} onChange={handleCheck} />;
     }
     return null;
@@ -38,7 +38,7 @@ Player.propTypes = {
   id: PropTypes.number,
   first: PropTypes.string.isRequired,
   last: PropTypes.string.isRequired,
-  selectionMode: PropTypes.bool.isRequired,
+  scoringMode: PropTypes.bool.isRequired,
 };
 
 export default connect(state => state.settings)(Player);
