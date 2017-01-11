@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import UtilityInput from 'UtilityInput'; // eslint-disable-line
 
 const CourseAddHole = (props) => {
   /* This component will display par and hdcp data if editing a course,
@@ -10,32 +11,13 @@ const CourseAddHole = (props) => {
   const { hdcp, par } = props.data ? props.data[holeNo - 1] : 0;
   const parDisplay = par || 4;
   const hdcpDisplay = hdcp || 9;
-  const handlePlus = (evt) => {
-    evt.preventDefault();
-    const target = evt.target.nextSibling;
-    const newValue = parseInt(target.textContent, 10) + 1;
-    target.textContent = newValue;
-  };
-  const handleMinus = (evt) => {
-    evt.preventDefault();
-    const target = evt.target.previousSibling;
-    const newValue = parseInt(target.textContent, 10) - 1;
-    target.textContent = newValue;
-  };
+
   return (
     <div className="add-hole">
       <span className="button-row">
         <p>{holeNo}</p>
-        <span className="input-group">
-          <button onClick={handlePlus}>+</button>
-          <p className="par">{parDisplay}</p>
-          <button onClick={handleMinus}>-</button>
-        </span>
-        <span className="input-group">
-          <button onClick={handlePlus}>+</button>
-          <p className="hdcp">{hdcpDisplay}</p>
-          <button onClick={handleMinus}>-</button>
-        </span>
+        <UtilityInput assignedClass="par" display={parDisplay} />
+        <UtilityInput assignedClass="hdcp" display={hdcpDisplay} />
       </span>
     </div>
   );

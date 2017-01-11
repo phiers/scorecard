@@ -45,7 +45,7 @@ const CourseAdd = (props) => {
           <div className="button-group">
             <button
               className="button"
-              onClick={() => router.push('/')}
+              onClick={() => router.push('/courses')}
             >Cancel</button>
             <button
               className="button"

@@ -1,3 +1,68 @@
 .round {
-    margin: 4em 1em 1em 1em;
+    margin: 5em 1em 1em 1em;
+
+    .player-list-heading {
+      display: flex;
+      margin: .5em;
+      text-align: center;
+
+      p {
+        flex: 1;
+        margin: 0;
+        text-decoration: underline;
+      }
+      p:first-of-type{
+        flex: 2;
+      }
+    }
+    div.player-list {
+      align-items: center;
+      display: flex;
+      margin: 0 .5em;
+
+      span {
+        flex: 2;
+      }
+      .input-group {
+        background: black;
+        border: 1px solid black;
+        border-radius: 10px;
+        color: white;
+        display: flex;
+        flex: 1;
+        margin-bottom: 0.5em;
+        margin-right: 1em;
+
+        button {
+          background: white;
+          border: 1px solid black;
+          border-radius: 10px;
+          color: black;
+          flex: 1.2;
+          min-height: 2em;
+          padding: 0 .2em;
+        }
+        p {
+          color: white;
+          flex: 1;
+          margin: 0 .1em;
+          padding-top: .2em;
+          text-align: center;
+        }
+      }
+      .input-group:nth-of-type(2) {
+        margin-right: 0;
+      }
+    }
+    .button-group {
+      margin: 2rem auto;
+      text-align: center;
+
+      button {
+        min-width: 6rem;
+      }
+      button:first-of-type{
+        margin-right: 2rem;
+      }
+    }
 }

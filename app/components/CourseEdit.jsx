@@ -10,6 +10,7 @@ const CourseEdit = (props) => {
   const { router, dispatch, courses, params } = props;
   const courseToEdit = courses.filter(course => course.id === parseInt(params.id, 10));
   const { name, id, state, holeData } = courseToEdit[0];
+
   const editCourse = (evt) => {
     evt.preventDefault();
     const courseState = document.querySelectorAll('input')[1].value;
@@ -35,6 +36,12 @@ const CourseEdit = (props) => {
       router.push('/courses');
     }
   };
+
+  const cancelEdit = (evt) => {
+    evt.preventDefault();
+    router.push('/courses');
+  };
+
   return (
     <div>
       <TitleBar title="Edit Course" />
@@ -53,7 +60,7 @@ const CourseEdit = (props) => {
           <div className="button-group">
             <button
               className="button"
-              onClick={() => router.push('/courses')}
+              onClick={cancelEdit}
             >Cancel</button>
             <button
               className="button"
