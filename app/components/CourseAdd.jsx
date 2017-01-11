@@ -24,7 +24,7 @@ const CourseAdd = (props) => {
     // save input
     if (name) {
       dispatch(courseActions.saveCourse({ id, name, state, holeData }));
-      router.push('/');
+      router.push('/courses');
     }
   };
   return (

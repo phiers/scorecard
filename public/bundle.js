@@ -122,6 +122,10 @@
 
 	var _PlayerChoice2 = _interopRequireDefault(_PlayerChoice);
 
+	var _Course = __webpack_require__(292);
+
+	var _Course2 = _interopRequireDefault(_Course);
+
 	var _CourseAdd = __webpack_require__(286);
 
 	var _CourseAdd2 = _interopRequireDefault(_CourseAdd);
@@ -129,6 +133,10 @@
 	var _CourseChoice = __webpack_require__(290);
 
 	var _CourseChoice2 = _interopRequireDefault(_CourseChoice);
+
+	var _CourseEdit = __webpack_require__(303);
+
+	var _CourseEdit2 = _interopRequireDefault(_CourseEdit);
 
 	var _configureStore = __webpack_require__(293);
 
@@ -147,7 +155,7 @@
 	  var state = _configureStore2.default.getState();
 	  console.log(state);
 	});
-	// TODO: course=list should be course-manage (diff comp, too)
+	// TODO: add course show route (in below, but no programmed route)
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: _configureStore2.default },
@@ -158,7 +166,9 @@
 	      _reactRouter.Route,
 	      { path: '/', component: _Main2.default },
 	      _react2.default.createElement(_reactRouter.Route, { path: 'players', component: _PlayerChoice2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: 'course/:id', component: _Course2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: 'add-course', component: _CourseAdd2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: 'edit-course/:id', component: _CourseEdit2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: 'courses', component: _CourseChoice2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: 'settings', component: _Settings2.default }),
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Start2.default })
@@ -29371,7 +29381,7 @@
 	    // save input
 	    if (name) {
 	      dispatch(_courseActions2.default.saveCourse({ id: id, name: name, state: state, holeData: holeData }));
-	      router.push('/');
+	      router.push('/courses');
 	    }
 	  };
 	  return _react2.default.createElement(
@@ -29468,14 +29478,16 @@
 
 	// eslint-disable-line
 
-	var CourseAddHoleList = function CourseAddHoleList() {
+	var CourseAddHoleList = function CourseAddHoleList(props) {
 	  var renderList = function renderList() {
 	    var holeArr = [];
-	    for (var i = 0; i < 18; i += 1) {
-	      holeArr.push(i + 1);
+	    // let holeData = {};
+	    for (var i = 1; i < 19; i += 1) {
+	      holeArr.push(i);
+	      // holeData = props.data ? props.data[i - 1] : null;
 	    }
 	    return holeArr.map(function (hole) {
-	      return _react2.default.createElement(_CourseAddHole2.default, { key: hole, holeNo: hole });
+	      return _react2.default.createElement(_CourseAddHole2.default, { key: hole, holeNo: hole, data: props.data });
 	    });
 	  };
 	  return _react2.default.createElement(
@@ -29504,7 +29516,19 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var CourseAddHole = function CourseAddHole(props) {
+	  /* This component will display par and hdcp data if editing a course,
+	   * otherwise, it displays the default values. Props are passed from
+	   * CourseEdit down thru CourseAddHoleList
+	   */
 	  var holeNo = props.holeNo;
+	  // Next three lines are key to add or edit mode
+
+	  var _ref = props.data ? props.data[holeNo - 1] : 0,
+	      hdcp = _ref.hdcp,
+	      par = _ref.par;
+
+	  var parDisplay = par || 4;
+	  var hdcpDisplay = hdcp || 9;
 	  var handlePlus = function handlePlus(evt) {
 	    evt.preventDefault();
 	    var target = evt.target.nextSibling;
@@ -29539,7 +29563,7 @@
 	        _react2.default.createElement(
 	          "p",
 	          { className: "par" },
-	          "4"
+	          parDisplay
 	        ),
 	        _react2.default.createElement(
 	          "button",
@@ -29558,7 +29582,7 @@
 	        _react2.default.createElement(
 	          "p",
 	          { className: "hdcp" },
-	          "10"
+	          hdcpDisplay
 	        ),
 	        _react2.default.createElement(
 	          "button",
@@ -29574,8 +29598,8 @@
 
 
 	CourseAddHole.propTypes = {
-	  holeNo: _react.PropTypes.number.isRequired
-	};
+	  holeNo: _react.PropTypes.number.isRequired,
+	  data: _react.PropTypes.array };
 
 /***/ },
 /* 289 */
@@ -29590,6 +29614,19 @@
 	  saveCourse: function saveCourse(course) {
 	    return {
 	      type: 'SAVE_COURSE',
+	      course: course
+	    };
+	  },
+	  removeCourse: function removeCourse(id) {
+	    return {
+	      type: 'REMOVE_COURSE',
+	      id: id
+	    };
+	  },
+	  editCourse: function editCourse(id, course) {
+	    return {
+	      type: 'EDIT_COURSE',
+	      id: id,
 	      course: course
 	    };
 	  }
@@ -29801,15 +29838,33 @@
 
 	var _reactRedux = __webpack_require__(240);
 
+	var _reactRouter = __webpack_require__(185);
+
+	var _courseActions = __webpack_require__(289);
+
+	var _courseActions2 = _interopRequireDefault(_courseActions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// eslint-disable-line
 
 	var Course = function Course(props) {
 	  var dispatch = props.dispatch,
 	      name = props.name,
 	      state = props.state,
-	      settings = props.settings;
+	      settings = props.settings,
+	      id = props.id;
 
 	  var mode = settings.scoringMode;
+	  var handleDelete = function handleDelete(evt) {
+	    evt.preventDefault();
+	    var itemId = parseInt(evt.target.id, 10);
+	    dispatch(_courseActions2.default.removeCourse(itemId));
+	  };
+	  var handleEdit = function handleEdit(evt) {
+	    evt.preventDefault();
+	    _reactRouter.browserHistory.push('edit-course/' + id);
+	  };
 	  var renderAction = function renderAction() {
 	    if (mode) {
 	      return _react2.default.createElement('input', { type: 'checkbox' });
@@ -29819,12 +29874,12 @@
 	      { className: 'button-group tiny' },
 	      _react2.default.createElement(
 	        'button',
-	        { className: 'button' },
+	        { className: 'button', id: id, onClick: handleEdit },
 	        'Edit'
 	      ),
 	      _react2.default.createElement(
 	        'button',
-	        { className: 'button' },
+	        { className: 'button', id: id, onClick: handleDelete },
 	        'Delete'
 	      )
 	    );
@@ -29853,6 +29908,18 @@
 	exports.default = (0, _reactRedux.connect)(function (state) {
 	  return state;
 	})(Course);
+
+
+	Course.propTypes = {
+	  dispatch: _react.PropTypes.func.isRequired,
+	  id: _react.PropTypes.number.isRequired,
+	  name: _react.PropTypes.string.isRequired,
+	  state: _react.PropTypes.string.isRequired,
+	  settings: _react.PropTypes.shape({
+	    user: _react.PropTypes.object,
+	    scoringMode: _react.PropTypes.bool
+	  })
+	};
 
 /***/ },
 /* 293 */
@@ -29923,6 +29990,23 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
+	    case 'EDIT_COURSE':
+	      {
+	        var newArray = state.filter(function (course) {
+	          if (course.id === action.id) {
+	            return false;
+	          }
+	          return true;
+	        });
+	        return [].concat(_toConsumableArray(newArray), [action.course]);
+	      }
+	    case 'REMOVE_COURSE':
+	      return state.filter(function (course) {
+	        if (course.id === action.id) {
+	          return false;
+	        }
+	        return true;
+	      });
 	    case 'SAVE_COURSE':
 	      return [].concat(_toConsumableArray(state), [action.course]);
 	    default:
@@ -29944,17 +30028,17 @@
 	var defaultCourses = [{
 	  name: 'York - Standard',
 	  state: 'OH',
-	  id: 'york1',
+	  id: 1,
 	  holeData: [{ holeNo: 1, par: 4, hdcp: 11 }, { holeNo: 2, par: 4, hdcp: 5 }, { holeNo: 3, par: 3, hdcp: 15 }, { holeNo: 4, par: 4, hdcp: 7 }, { holeNo: 5, par: 5, hdcp: 1 }, { holeNo: 6, par: 5, hdcp: 3 }, { holeNo: 7, par: 3, hdcp: 17 }, { holeNo: 8, par: 4, hdcp: 9 }, { holeNo: 9, par: 4, hdcp: 13 }, { holeNo: 10, par: 4, hdcp: 2 }, { holeNo: 11, par: 3, hdcp: 12 }, { holeNo: 12, par: 5, hdcp: 6 }, { holeNo: 13, par: 3, hdcp: 16 }, { holeNo: 14, par: 5, hdcp: 4 }, { holeNo: 15, par: 4, hdcp: 10 }, { holeNo: 16, par: 3, hdcp: 18 }, { holeNo: 17, par: 4, hdcp: 14 }, { holeNo: 18, par: 4, hdcp: 8 }]
 	}, {
 	  name: 'York - Weekend',
 	  state: 'OH',
-	  id: 'york2',
+	  id: 2,
 	  holeData: [{ holeNo: 1, par: 4, hdcp: 10 }, { holeNo: 2, par: 4, hdcp: 4 }, { holeNo: 3, par: 3, hdcp: 14 }, { holeNo: 4, par: 4, hdcp: 1 }, { holeNo: 5, par: 5, hdcp: 7 }, { holeNo: 6, par: 5, hdcp: 11 }, { holeNo: 7, par: 3, hdcp: 18 }, { holeNo: 8, par: 4, hdcp: 3 }, { holeNo: 9, par: 4, hdcp: 8 }, { holeNo: 10, par: 4, hdcp: 2 }, { holeNo: 11, par: 3, hdcp: 17 }, { holeNo: 12, par: 5, hdcp: 13 }, { holeNo: 13, par: 3, hdcp: 15 }, { holeNo: 14, par: 5, hdcp: 9 }, { holeNo: 15, par: 4, hdcp: 6 }, { holeNo: 16, par: 3, hdcp: 16 }, { holeNo: 17, par: 4, hdcp: 12 }, { holeNo: 18, par: 4, hdcp: 5 }]
 	}, {
 	  name: 'Junk',
 	  state: 'OH',
-	  id: 'junk',
+	  id: 3,
 	  holeData: [{ holeNo: 1, par: 4, hdcp: 10 }, { holeNo: 2, par: 4, hdcp: 4 }, { holeNo: 3, par: 3, hdcp: 14 }, { holeNo: 4, par: 4, hdcp: 1 }, { holeNo: 5, par: 5, hdcp: 7 }, { holeNo: 6, par: 5, hdcp: 11 }, { holeNo: 7, par: 3, hdcp: 18 }, { holeNo: 8, par: 4, hdcp: 3 }, { holeNo: 9, par: 4, hdcp: 8 }, { holeNo: 10, par: 4, hdcp: 2 }, { holeNo: 11, par: 3, hdcp: 17 }, { holeNo: 12, par: 5, hdcp: 13 }, { holeNo: 13, par: 3, hdcp: 15 }, { holeNo: 14, par: 5, hdcp: 9 }, { holeNo: 15, par: 4, hdcp: 6 }, { holeNo: 16, par: 3, hdcp: 16 }, { holeNo: 17, par: 4, hdcp: 12 }, { holeNo: 18, par: 4, hdcp: 5 }]
 	}];
 
@@ -30419,6 +30503,150 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 303 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(8);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(240);
+
+	var _courseActions = __webpack_require__(289);
+
+	var _courseActions2 = _interopRequireDefault(_courseActions);
+
+	var _CourseAddHoleList = __webpack_require__(287);
+
+	var _CourseAddHoleList2 = _interopRequireDefault(_CourseAddHoleList);
+
+	var _TitleBar = __webpack_require__(279);
+
+	var _TitleBar2 = _interopRequireDefault(_TitleBar);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/* eslint-enable */
+
+	// eslint-disable-line
+	/* eslint-disable */
+	var CourseEdit = function CourseEdit(props) {
+	  var router = props.router,
+	      dispatch = props.dispatch,
+	      courses = props.courses,
+	      params = props.params;
+
+	  var courseToEdit = courses.filter(function (course) {
+	    return course.id === parseInt(params.id, 10);
+	  });
+	  var _courseToEdit$ = courseToEdit[0],
+	      name = _courseToEdit$.name,
+	      id = _courseToEdit$.id,
+	      state = _courseToEdit$.state,
+	      holeData = _courseToEdit$.holeData;
+
+	  var editCourse = function editCourse(evt) {
+	    evt.preventDefault();
+	    var courseState = document.querySelectorAll('input')[1].value;
+	    var courseName = document.querySelectorAll('input')[0].value;
+	    var courseHoleData = [];
+	    var pars = document.querySelectorAll('.par');
+	    var hdcps = document.querySelectorAll('.hdcp');
+	    var newId = Date.now();
+	    for (var i = 0; i < 18; i += 1) {
+	      var par = parseInt(pars[i].textContent, 10);
+	      var hdcp = parseInt(hdcps[i].textContent, 10);
+	      courseHoleData.push({ no: i + 1, par: par, hdcp: hdcp });
+	    }
+	    // save input
+	    if (name) {
+	      dispatch(_courseActions2.default.editCourse(id, {
+	        id: newId,
+	        name: courseName,
+	        state: courseState,
+	        holeData: courseHoleData
+	      }));
+	      router.push('/courses');
+	    }
+	  };
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_TitleBar2.default, { title: 'Edit Course' }),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'add-course' },
+	      _react2.default.createElement(
+	        'form',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'add-course-info' },
+	          _react2.default.createElement('input', { type: 'text', defaultValue: name }),
+	          _react2.default.createElement('input', { type: 'text', defaultValue: state })
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'add-hole-headings' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'Hole'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'Par'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'Handicap'
+	          )
+	        ),
+	        _react2.default.createElement(_CourseAddHoleList2.default, { data: holeData }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'button-group' },
+	          _react2.default.createElement(
+	            'button',
+	            {
+	              className: 'button',
+	              onClick: function onClick() {
+	                return router.push('/courses');
+	              }
+	            },
+	            'Cancel'
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            {
+	              className: 'button',
+	              onClick: editCourse
+	            },
+	            'Save'
+	          )
+	        )
+	      )
+	    )
+	  );
+	};
+
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	  return state;
+	})(CourseEdit);
+
+
+	CourseEdit.propTypes = {
+	  params: _react.PropTypes.object };
 
 /***/ }
 /******/ ]);

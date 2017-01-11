@@ -7,8 +7,10 @@ import Main from 'Main';
 import Start from 'Start';
 import Settings from 'Settings';
 import PlayerChoice from 'PlayerChoice';
+import Course from 'Course';
 import CourseAdd from 'CourseAdd';
 import CourseChoice from 'CourseChoice';
+import CourseEdit from 'CourseEdit';
 import store from 'configureStore';
 
 // Load foundation
@@ -20,13 +22,15 @@ store.subscribe(() => {
   const state = store.getState();
   console.log(state);
 });
-// TODO: course=list should be course-manage (diff comp, too)
+// TODO: add course show route (in below, but no programmed route)
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={Main}>
         <Route path="players" component={PlayerChoice} />
+        <Route path="course/:id" component={Course} />
         <Route path="add-course" component={CourseAdd} />
+        <Route path="edit-course/:id" component={CourseEdit} />
         <Route path="courses" component={CourseChoice} />
         <Route path="settings" component={Settings} />
         <IndexRoute component={Start} />
