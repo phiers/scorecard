@@ -67,7 +67,10 @@ const CourseEdit = (props) => {
 };
 
 export default connect(state => state)(CourseEdit);
-
+/* eslint-disable react/forbid-prop-types */
 CourseEdit.propTypes = {
-  params: PropTypes.object, // eslint-disable-line
+  courses: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  params: PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
 };

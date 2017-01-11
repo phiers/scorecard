@@ -11,6 +11,7 @@ import Course from 'Course';
 import CourseAdd from 'CourseAdd';
 import CourseChoice from 'CourseChoice';
 import CourseEdit from 'CourseEdit';
+import Round from 'Round';
 import store from 'configureStore';
 
 // Load foundation
@@ -32,6 +33,7 @@ ReactDOM.render(
         <Route path="add-course" component={CourseAdd} />
         <Route path="edit-course/:id" component={CourseEdit} />
         <Route path="courses" component={CourseChoice} />
+        <Route path="round" component={Round} />
         <Route path="settings" component={Settings} />
         <IndexRoute component={Start} />
       </Route>

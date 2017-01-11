@@ -2,10 +2,16 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import courseActions from 'courseActions';  // eslint-disable-line
+import roundActions from 'roundActions';  // eslint-disable-line
 
 const Course = (props) => {
   const { dispatch, name, state, settings, id } = props;
   const mode = settings.scoringMode;
+  // continue setting up round object when in scoring mode
+  const handleSelect = (evt) => {
+    dispatch(roundActions.selectCourse(evt.target.id));
+    browserHistory.push('/round');
+  };
   const handleDelete = (evt) => {
     evt.preventDefault();
     const itemId = parseInt(evt.target.id, 10);
@@ -17,7 +23,7 @@ const Course = (props) => {
   };
   const renderAction = () => {
     if (mode) {
-      return <input type="checkbox" />;
+      return <button className="button tiny" id={id} onClick={handleSelect}>Select</button>;
     }
     return (
       <div className="button-group tiny">

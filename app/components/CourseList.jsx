@@ -3,20 +3,22 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Course from 'Course'; // eslint-disable-line
 
-
+/* eslint-disable no-confusing-arrow */
 const CourseList = (props) => {
   const { courses, settings } = props;
   const mode = settings.scoringMode;
+
   const renderCourses = () =>
-    courses.map(course =>
-      <Course key={course.id} {...course} />,
-    );
+    courses.sort((a, b) => a.name < b.name ? -1 : 1)
+    .map(course => <Course key={course.id} {...course} />);
+  // change title of last column for scoring or manage mode
   const renderLastColumnTitle = () => {
     if (mode) {
       return 'Select';
     }
     return 'Actions';
   };
+  // only render add button in manage mode
   const renderAddButton = () => {
     if (!mode) {
       return <Link to="/add-course" className="button expanded">Add New Course</Link>;

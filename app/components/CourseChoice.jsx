@@ -7,9 +7,6 @@ import CourseList from 'CourseList';
 
 const CourseChoice = (props) => {
   const { router, settings } = props;
-  const handleContinue = () => {
-    console.log('continue');
-  };
   // render items based on choosing or managing mode
   const mode = settings.scoringMode;
   const renderTitle = () => {
@@ -20,7 +17,7 @@ const CourseChoice = (props) => {
   };
   const renderButton = () => {
     if (mode) {
-      return <button className="button warning expanded" onClick={handleContinue}>Continue</button>;
+      return null;
     }
     return <button className="button expanded" onClick={() => router.push('/')}>Cancel</button>;
   };

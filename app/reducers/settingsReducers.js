@@ -1,8 +1,9 @@
 const initialState = {
   user: {
-    first: 'None',
-    last: 'None',
-    hdcp: 0,
+    id: 'user',
+    first: 'Paul',
+    last: 'Hiers',
+    hdcp: 4,
   },
   scoringMode: false,
 };

@@ -4,21 +4,30 @@ import { connect } from 'react-redux';
 import TitleBar from 'TitleBar';
 import PlayerList from 'PlayerList';
 import PlayerAddForm from 'PlayerAddForm';
+import roundActions from 'roundActions';
 /* eslint-enable */
 
 const PlayerChoice = (props) => {
   const { dispatch, players, router, settings } = props;
   const mode = settings.scoringMode;
   const handleContinue = () => {
-    let sum = 0;
-    players.forEach(player => player.checked ? sum += 1 : sum); // eslint-disable-line
-    if (sum <= 3) {
-      // initiate the round object with selected players
-      // set all checkmarks in players array to false
+    // create array of selected players
+    const chosen = [];
+    players.forEach((player) => {
+      if (player.checked) {
+        chosen.push(player);
+      }
+    });
+    if (chosen.length <= 3) {
+      // initiate the round object with selected players' names
+      const p1 = settings.user;
+      chosen.unshift(p1);
+      dispatch(roundActions.addPlayers(chosen));
+
       // navigate to choose course screen
       router.push('/courses');
     } else {
-      alert('Max of 3 players may be selected');
+      alert('YOU HAVE ADDED MORE THAN THREE PLAYERS');
     }
   };
   const renderTitle = () => {
