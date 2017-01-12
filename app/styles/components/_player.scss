@@ -19,10 +19,13 @@
     li {
       display: flex;
       align-items: baseline;
+      margin-bottom: .5em;
 
       input {
         flex: .5;
+        font-size: 1.5em;
         margin: 0 0.5em 0.5em 0;
+        text-align: center;
       }
       span {
         flex: 5;

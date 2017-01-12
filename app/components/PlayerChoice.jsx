@@ -8,7 +8,7 @@ import roundActions from 'roundActions';
 /* eslint-enable */
 
 const PlayerChoice = (props) => {
-  const { dispatch, players, router, settings } = props;
+  const { dispatch, players, router, settings, round } = props;
   const mode = settings.scoringMode;
   const handleContinue = () => {
     // create array of selected players
@@ -24,8 +24,12 @@ const PlayerChoice = (props) => {
       chosen.unshift(p1);
       dispatch(roundActions.addPlayers(chosen));
 
-      // navigate to choose course screen
-      router.push('/courses');
+      // navigate to choose course screen or, if editing, round information screen
+      if (!round.courseId) {
+        router.push('/courses');
+      } else {
+        router.push('/round');
+      }
     } else {
       alert('YOU HAVE ADDED MORE THAN THREE PLAYERS');
     }

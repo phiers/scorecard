@@ -1,17 +1,51 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import TitleBar from 'TitleBar'; // eslint-disable-line
-import UtilityInput from 'UtilityInput'; // eslint-disable-line
-
+/* eslint-disable */
+import TitleBar from 'TitleBar';
+import UtilityInput from 'UtilityInput';
+import playerActions from 'playerActions';
+import roundActions from 'roundActions';
+import settingsActions from 'settingsActions';
+/* eslint-enable */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 const Round = (props) => {
-  const { courses, dispatch, round, router } = props;
-  const course = courses.find(c => c.id.toString() === round.courseId);
-  const hdcpDisplay = 0;
-  const listPlayers = () =>
-    round.players.map(p => (
+  const { course, dispatch, players, round, router } = props;
+
+  const handleStartRound = () => {
+    // add handicaps to round.player object
+    const handicaps = document.querySelectorAll('.hdcp');
+    for (let i = 0; i < handicaps.length; i += 1) {
+      const id = round.players[i].id;
+      const hdcp = parseInt(handicaps[i].textContent, 10);
+      dispatch(roundActions.setHandicaps(id, hdcp));
+    }
+    // add scores array to round.player object
+    const scores = [];
+    for (let h = 1; h < 19; h += 1) {
+      scores.push({
+        hole: h,
+        score: null,
+      });
+    }
+    round.players.forEach(p => dispatch(roundActions.setupScoring(p.id, scores)));
+    // navigate to first hole scoring
+    router.push('/round/1');
+  };
+  const handleCancelRound = () => {
+    // clear round object and reset scoringMode to false
+    dispatch(roundActions.cancelRound());
+    dispatch(settingsActions.setScoringMode(false));
+    // change selection of round players to false
+    players.forEach(p => dispatch(playerActions.selectPlayer(p.id)));
+    // return to start
+    router.push('/');
+  };
+
+  const renderPlayersList = () => round.players.map(
+    p => (
       <div key={p.id} className="player-list">
         <span>{p.first} {p.last}</span>
-        <UtilityInput assignedClass="hdcp" display={hdcpDisplay} />
+        <UtilityInput assignedClass="hdcp" display={p.hdcp || 5} />
       </div>
     ),
     );
@@ -19,24 +53,49 @@ const Round = (props) => {
     <div>
       <TitleBar title="Round Information" />
       <div className="round">
-        <p>COURSE: {course.name}, {course.state}</p>
-        <p>PLAYERS: </p>
+        <div className="round-info">
+          <p>COURSE: {course.name}, {course.state}
+            <a className="button tiny" onClick={() => router.push('/courses')}>Edit</a>
+          </p>
+        </div>
+        <div className="round-info">
+          <p>PLAYERS: <a className="button tiny" onClick={() => router.push('/players')}>Edit</a></p>
+        </div>
         <span className="player-list-heading"><p>Name</p><p>Handicap</p></span>
-        {listPlayers()}
+        {renderPlayersList()}
         <div className="button-group">
-          <button className="button">Cancel</button>
-          <button className="button">Start</button>
+          <button className="button" onClick={handleCancelRound}>Cancel Round</button>
+          <button className="button" onClick={handleStartRound}>Start Round</button>
         </div>
       </div>
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  // grab selected course
+  const course = state.courses.find(c => c.id.toString() === state.round.courseId);
+  // grab selected players by comparing to round player ids
+  const playerIdsArr = state.round.players.map(player => player.id);
+  const players = state.players.filter((p) => {
+    if (playerIdsArr.indexOf(p.id) > -1) {
+      return true;
+    }
+    return false;
+  });
 
-export default connect(state => state)(Round);
+  return {
+    course,
+    players,
+    round: state.round,
+  };
+};
+
+export default connect(mapStateToProps)(Round);
 /* eslint-disable react/forbid-prop-types */
 Round.propTypes = {
-  dispatch: PropTypes.func,
-  courses: PropTypes.array,
-  round: PropTypes.object,
-  router: PropTypes.object,
+  course: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  players: PropTypes.array.isRequired,
+  round: PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
 };

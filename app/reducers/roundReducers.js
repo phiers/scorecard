@@ -9,6 +9,8 @@ const roundReducers = (state = {}, action) => {
         players,
       };
     }
+    case 'CANCEL_ROUND':
+      return {};
     case 'SELECT_COURSE': {
       const courseId = action.id;
       return {
@@ -16,7 +18,20 @@ const roundReducers = (state = {}, action) => {
         courseId,
       };
     }
-
+    case 'SET_HANDICAPS': {
+      const player = state.players.find(p => p.id === action.id);
+      player.hdcp = action.hdcp;
+      return {
+        ...state,
+      };
+    }
+    case 'SETUP_SCORING': {
+      const player = state.players.find(p => p.id === action.id);
+      player.scores = action.scores;
+      return {
+        ...state,
+      };
+    }
     default:
       return state;
   }
