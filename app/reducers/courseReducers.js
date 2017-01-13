@@ -3,6 +3,7 @@ import defaultCourses from 'defaultCourses'; // eslint-disable-line
 const courseReducers = (state = defaultCourses, action) => {
   switch (action.type) {
     case 'EDIT_COURSE': {
+      // delete the old course from state
       const newArray = state.filter((course) => {
         if (course.id === action.id) {
           return false;

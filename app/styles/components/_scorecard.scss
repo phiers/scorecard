@@ -1,0 +1,40 @@
+.scorecard {
+  margin: 4em 0;
+
+  .summary {
+    .summary-info {
+      background: white;
+      border: 1px solid black;
+      margin: auto;
+      padding: .5rem;
+        .heading-row {
+          display: flex;
+          text-align: center;
+          font-weight: bold;
+          font-size: 1.1em;
+          span {
+            flex: 1;
+          }
+          span:first-of-type {
+            flex: 3;
+          }
+        }
+        .summary-row {
+          display: flex;
+          span {
+            flex: 1;
+            text-align: center;
+          }
+          span:first-of-type {
+            flex: 3;
+            text-align: left;
+          }
+        }
+      }
+  }
+
+  .hide {
+    display: none;
+    height: 0;
+  }
+}

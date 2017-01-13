@@ -10,6 +10,14 @@ const roundActions = {
       type: 'CANCEL_ROUND',
     };
   },
+  saveHoleScore(id, hole, score) {
+    return {
+      type: 'SAVE_HOLE_SCORE',
+      id,
+      hole,
+      score,
+    };
+  },
   selectCourse(id) {
     return {
       type: 'SELECT_COURSE',
@@ -28,6 +36,12 @@ const roundActions = {
       type: 'SETUP_SCORING',
       id,
       scores,
+    };
+  },
+  updateLastHole(hole) {
+    return {
+      type: 'UPDATE_LAST_HOLE',
+      hole,
     };
   },
 };
