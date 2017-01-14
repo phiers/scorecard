@@ -31,6 +31,34 @@
           }
         }
       }
+    }
+  .row-flex {
+    display: flex;
+
+    td {
+      flex: 1;
+      font-size: 1em;
+      max-width: 12%;
+      margin: 0 2px;
+      text-align: center;
+      padding: 3px;
+    }
+    .player {
+      flex: 1.5;
+      flex-wrap: wrap;
+      max-width: 16%;
+    }
+  }
+
+  .row-flex.header {
+    td.nonplayer {
+      font-size: 1em;
+      flex-wrap: wrap;
+      padding-top: 2em;
+    }
+    td.player {
+      padding-top: 3px;
+    }
   }
 
   .hide {

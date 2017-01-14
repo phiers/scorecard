@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 
 const ScorecardSummary = (props) => {
-  const renderRows = () => {
-    return props.players.map((player) => {
+  const renderRows = () =>
+    props.players.map((player) => {
       let totalScore = 0;
       for (let t = 0; t < props.lastHole; t += 1) {
         totalScore += player.scores[t].score;
@@ -24,7 +24,7 @@ const ScorecardSummary = (props) => {
         </div>
       );
     });
-  };
+
   return (
     <div className="summary-info">
       <div className="heading-row">
@@ -36,6 +36,10 @@ const ScorecardSummary = (props) => {
       {renderRows()}
     </div>
   );
+};
+
+ScorecardSummary.propTypes = {
+  players: PropTypes.array.isRequired, // eslint-disable-line
 };
 
 export default ScorecardSummary;
