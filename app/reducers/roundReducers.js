@@ -15,31 +15,9 @@ const roundReducers = (state = {}, action) => {
         state: newState,
       };
     }
-    case 'SELECT_COURSE': {
-      const courseId = action.id;
-      return {
-        ...state,
-        courseId,
-      };
-    }
-    case 'SET_HANDICAPS': {
-      const players = state.players.map((player) => {
-        if (player.id === action.id) {
-          return {
-            ...player,
-            hdcp: action.hdcp,
-          };
-        }
-        return player;
-      });
-      return {
-        ...state,
-        players,
-      };
-    }
     case 'SAVE_HOLE_SCORE': {
       const newPlayerState = state.players.map((player) => {
-        if (player.id === action.id) {
+        if (player.roundId === action.id) {
           const newScoreArray = player.scores.map((score) => {
             if (score.hole === action.hole) {
               const holeScore = action.score;
@@ -57,9 +35,44 @@ const roundReducers = (state = {}, action) => {
         }
         return player;
       });
+      const newHoleArray = state.course.holeData.map((hole) => {
+        if (hole.holeNo === action.hole) {
+          const score = action.score;
+          const propName = action.id;
+          return {
+            ...hole,
+            [propName]: score,
+          };
+        }
+        return hole;
+      });
+
       return {
         ...state,
         players: newPlayerState,
+        course: { holeData: newHoleArray },
+      };
+    }
+    case 'SELECT_COURSE': {
+      const course = action.course;
+      return {
+        ...state,
+        course,
+      };
+    }
+    case 'SET_HANDICAPS': {
+      const players = state.players.map((player) => {
+        if (player.id === action.id) {
+          return {
+            ...player,
+            hdcp: action.hdcp,
+          };
+        }
+        return player;
+      });
+      return {
+        ...state,
+        players,
       };
     }
     case 'SETUP_SCORING': {

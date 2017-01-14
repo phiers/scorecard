@@ -16,7 +16,14 @@ class Scorecard extends Component {
 
   render() {
     const { course, round, router } = this.props;
-    const renderContinue = () => {
+    const { holeData } = course;
+    const player = round.players;
+    const player1Name = `${player[0].first.slice(0, 5)} ${player[0].last.slice(0, 5)}`;
+    const player2Name = player[1] ? `${player[1].first.slice(0, 5)} ${player[1].last.slice(0, 5)}` : '';
+    const player3Name = player[2] ? `${player[2].first.slice(0, 5)} ${player[2].last.slice(0, 5)}` : '';
+    const player4Name = player[3] ? `${player[3].first.slice(0, 5)} ${player[3].last.slice(0, 5)}` : '';
+
+    const renderContinueButton = () => {
       const lastHole = round.lastHole || 0;
       const handleClick = () => router.push(`/round/${lastHole + 1}`);
       return (
@@ -25,7 +32,8 @@ class Scorecard extends Component {
     };
     // set class variable to show or hide summary
     const showSummary = this.state.card ? 'summary hide' : 'summary';
-    const renderSummary = () => {
+
+    const renderSummaryButton = () => {
       const buttonText = this.state.card ? 'Show Summary' : 'Hide Summary';
 
       const handleClick = () => {
@@ -34,12 +42,12 @@ class Scorecard extends Component {
 
       return <button className="button tiny" onClick={handleClick}>{buttonText}</button>;
     };
-    const renderCard = () => {
-      return this.props.course.holeData.map(hole => <ScorecardRow key={hole.holeNo} {...hole} />);
-    };
+
+    const renderCard = () =>
+      holeData.map(hole => <ScorecardRow key={hole.holeNo} {...hole} />);
     return (
       <div>
-        <TitleBar title="Scorecard" left={renderSummary()} right={renderContinue()} />
+        <TitleBar title="Scorecard" left={renderSummaryButton()} right={renderContinueButton()} />
         <div className="scorecard">
           <div className={showSummary}>
             <ScorecardSummary {...round} />
@@ -48,12 +56,12 @@ class Scorecard extends Component {
             <thead>
               <tr className="row-flex header">
                 <td className="nonplayer">Hole</td>
-                <td className="nonplayer">Hdcp</td>
+                <td className="nonplayer">Hcp</td>
                 <td className="nonplayer">Par</td>
-                <td className="player">Player 1</td>
-                <td className="player">Player 2</td>
-                <td className="player">Player 3</td>
-                <td className="player">Player 4</td>
+                <td className="player">{player1Name}</td>
+                <td className="player">{player2Name}</td>
+                <td className="player">{player3Name}</td>
+                <td className="player">{player4Name}</td>
               </tr>
             </thead>
             <tbody>
@@ -72,13 +80,10 @@ Scorecard.propTypes = {
   router: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  // grab selected course
-  const course = state.courses.find(c => c.id.toString() === state.round.courseId);
-  return {
-    course,
+const mapStateToProps = state =>
+  ({
+    course: state.round.course,
     round: state.round,
-  };
-};
+  });
 
 export default connect(mapStateToProps)(Scorecard);

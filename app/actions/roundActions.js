@@ -18,10 +18,10 @@ const roundActions = {
       score,
     };
   },
-  selectCourse(id) {
+  selectCourse(course) {
     return {
       type: 'SELECT_COURSE',
-      id,
+      course,
     };
   },
   setHandicaps(id, hdcp) {

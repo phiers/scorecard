@@ -4,6 +4,7 @@ const initialState = {
     first: 'Paul',
     last: 'Hiers',
     hdcp: 4,
+    roundId: 'playerNo1',
   },
   scoringMode: false,
 };

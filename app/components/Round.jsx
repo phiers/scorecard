@@ -72,8 +72,6 @@ const Round = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  // grab selected course
-  const course = state.courses.find(c => c.id.toString() === state.round.courseId);
   // grab selected players by comparing to round player ids
   const playerIdsArr = state.round.players.map(player => player.id);
   const players = state.players.filter((p) => {
@@ -84,7 +82,7 @@ const mapStateToProps = (state) => {
   });
 
   return {
-    course,
+    course: state.round.course,
     players,
     round: state.round,
   };

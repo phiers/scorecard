@@ -27,7 +27,8 @@
 
     span {
       flex: 1.5;
-      font-size: 1.2em;
+      font-size: 1.0em;
+      padding-bottom: .5em;
     }
 
     .input-group {
@@ -37,8 +38,10 @@
       color: white;
       display: flex;
       flex: 1;
+      font-size: 1.2em;
       margin-bottom: .5em;
       margin-right: 1em;
+      padding-bottom: 0;
 
       button {
         background: white;
@@ -52,7 +55,6 @@
       p {
         color: white;
         flex: 1;
-        font-size: 1.3em;
         margin: 0 .1em;
         padding-top: .2em;
         text-align: center;

@@ -5,11 +5,13 @@ import courseActions from 'courseActions';  // eslint-disable-line
 import roundActions from 'roundActions';  // eslint-disable-line
 
 const Course = (props) => {
-  const { dispatch, name, state, settings, id } = props;
+  const { courses, dispatch, name, state, settings, id } = props;
   const mode = settings.scoringMode;
   // continue setting up round object when in scoring mode
   const handleSelect = (evt) => {
-    dispatch(roundActions.selectCourse(evt.target.id));
+    evt.preventDefault();
+    const courseChoice = courses.find(c => c.id.toString() === evt.target.id);
+    dispatch(roundActions.selectCourse(courseChoice));
     browserHistory.push('/round');
   };
   const handleDelete = (evt) => {

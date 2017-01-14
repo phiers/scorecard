@@ -13,9 +13,12 @@ const PlayerChoice = (props) => {
   const handleContinue = () => {
     // create array of selected players
     const chosen = [];
+    let playerNo = 2;
     players.forEach((player) => {
       if (player.checked) {
+        player.roundId = `playerNo${playerNo}`;
         chosen.push(player);
+        playerNo += 1;
       }
     });
     if (chosen.length <= 3) {
@@ -25,7 +28,7 @@ const PlayerChoice = (props) => {
       dispatch(roundActions.addPlayers(chosen));
 
       // navigate to choose course screen or, if editing, round information screen
-      if (!round.courseId) {
+      if (!round.course) {
         router.push('/courses');
       } else {
         router.push('/round');
@@ -71,6 +74,7 @@ export default connect(state => state)(PlayerChoice);
 PlayerChoice.propTypes = {
   dispatch: PropTypes.func,
   players: PropTypes.array,
+  round: PropTypes.object,
   router: PropTypes.object,
   settings: PropTypes.object,
 };

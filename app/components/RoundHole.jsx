@@ -16,7 +16,7 @@ const RoundHole = (props) => {
   const handleSave = () => {
     const scoreNode = document.querySelectorAll('.score');
     for (let i = 0; i < scoreNode.length; i += 1) {
-      const playerID = round.players[i].id;
+      const playerID = round.players[i].roundId;
       const score = parseInt(scoreNode[i].textContent, 10);
       dispatch(roundActions.saveHoleScore(playerID, hole, score));
       dispatch(roundActions.updateLastHole(hole));
@@ -31,7 +31,7 @@ const RoundHole = (props) => {
   const renderPlayersList = () => round.players.map(
     p => (
       <div key={p.id} className="player-list">
-        <span>{p.first} {p.last} {'( +1 ) '}</span>
+        <span>{p.first} {p.last}</span>
         <UtilityInput assignedClass="score" display={par} />
       </div>
     ),
@@ -62,12 +62,10 @@ RoundHole.propTypes = {
   router: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  // grab selected course
-  const course = state.courses.find(c => c.id.toString() === state.round.courseId);
+const mapStateToProps = (state) => {  // eslint-disable-line
   return {
     round: state.round,
-    course,
+    course: state.round.course,
   };
 };
 
