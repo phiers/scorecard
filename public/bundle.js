@@ -30639,11 +30639,15 @@
 	        var handleClick = function handleClick() {
 	          return router.push('/round/' + (lastHole + 1));
 	        };
-	        return _react2.default.createElement(
-	          'button',
-	          { className: 'button tiny', onClick: handleClick },
-	          'Continue'
-	        );
+	        // only show continue if all 18 holes aren't scorecard
+	        if (lastHole < 18) {
+	          return _react2.default.createElement(
+	            'button',
+	            { className: 'button tiny', onClick: handleClick },
+	            'Continue'
+	          );
+	        }
+	        return null;
 	      };
 	      // set class variable to show or hide summary
 	      var showSummary = this.state.card ? 'summary hide' : 'summary';

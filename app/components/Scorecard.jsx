@@ -26,9 +26,13 @@ class Scorecard extends Component {
     const renderContinueButton = () => {
       const lastHole = round.lastHole || 0;
       const handleClick = () => router.push(`/round/${lastHole + 1}`);
-      return (
-        <button className="button tiny" onClick={handleClick}>Continue</button>
-      );
+      // only show continue if all 18 holes aren't scorecard
+      if (lastHole < 18) {
+        return (
+          <button className="button tiny" onClick={handleClick}>Continue</button>
+        );
+      }
+      return null;
     };
     // set class variable to show or hide summary
     const showSummary = this.state.card ? 'summary hide' : 'summary';
