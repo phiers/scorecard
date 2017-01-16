@@ -22,7 +22,7 @@ const CourseEdit = (props) => {
     for (let i = 0; i < 18; i += 1) {
       const par = parseInt(pars[i].textContent, 10);
       const hdcp = parseInt(hdcps[i].textContent, 10);
-      courseHoleData.push({ no: i + 1, par, hdcp });
+      courseHoleData.push({ holeNo: i + 1, par, hdcp });
     }
     // save input
     if (name) {

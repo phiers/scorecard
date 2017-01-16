@@ -50,7 +50,12 @@ const roundReducers = (state = {}, action) => {
       return {
         ...state,
         players: newPlayerState,
-        course: { holeData: newHoleArray },
+        course: {
+          id: state.course.id,
+          name: state.course.name,
+          state: state.course.state,
+          holeData: newHoleArray,
+        },
       };
     }
     case 'SELECT_COURSE': {
@@ -76,7 +81,6 @@ const roundReducers = (state = {}, action) => {
       };
     }
     case 'SETUP_SCORING': {
-      /**/
       const players = state.players.map((player) => {
         if (player.id === action.id) {
           return {

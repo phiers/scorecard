@@ -55,7 +55,7 @@ const Round = (props) => {
       <div className="round">
         <div className="round-info">
           <p>COURSE: {course.name}, {course.state}
-            <a className="button tiny" onClick={() => router.push('/courses')}>Edit</a>
+            <button className="button tiny" onClick={() => router.push('/courses')}>Edit</button>
           </p>
         </div>
         <div className="round-info">

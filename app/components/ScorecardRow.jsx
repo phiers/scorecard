@@ -1,9 +1,18 @@
 import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 
+/* eslint-disable jsx-a11y/no-static-element-interactions*/
 const ScorecardRow = (props) => {
   const { par, hdcp, holeNo, playerNo1, playerNo2, playerNo3, playerNo4 } = props;
+  const handleEdit = () => {
+    if (playerNo1) {
+      browserHistory.push(`round-edit/${holeNo}`);
+    } else {
+      browserHistory.push(`round/${holeNo}`);
+    }
+  };
   return (
-    <tr className="row-flex">
+    <tr className="row-flex" onClick={handleEdit}>
       <td>{holeNo}</td>
       <td>{hdcp}</td>
       <td>{par}</td>

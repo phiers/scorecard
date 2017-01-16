@@ -13,6 +13,8 @@ import CourseChoice from 'CourseChoice';
 import CourseEdit from 'CourseEdit';
 import Round from 'Round';
 import RoundHole from 'RoundHole';
+import RoundHoleEdit from 'RoundHoleEdit';
+import RoundSummary from 'RoundSummary';
 import Scorecard from 'Scorecard';
 import store from 'configureStore';
 
@@ -37,6 +39,8 @@ ReactDOM.render(
         <Route path="courses" component={CourseChoice} />
         <Route path="round" component={Round} />
         <Route path="round/:hole" component={RoundHole} />
+        <Route path="round-edit/:hole" component={RoundHoleEdit} />
+        <Route path="round-summary" component={RoundSummary} />
         <Route path="/scorecard" component={Scorecard} />
         <Route path="settings" component={Settings} />
         <IndexRoute component={Start} />

@@ -9,7 +9,6 @@ import roundActions from 'roundActions';
 const RoundHole = (props) => {
   const { course, dispatch, params, round, router } = props;
   const hole = parseInt(params.hole, 10);
-  const nextHole = hole + 1;
   const hdcp = hole < 19 ? course.holeData[hole - 1].hdcp : 0;
   const par = hole < 19 ? course.holeData[hole - 1].par : 0;
 
@@ -19,34 +18,23 @@ const RoundHole = (props) => {
       const playerID = round.players[i].roundId;
       const score = parseInt(scoreNode[i].textContent, 10);
       dispatch(roundActions.saveHoleScore(playerID, hole, score));
-      dispatch(roundActions.updateLastHole(hole));
     }
     // Navigation
-    if (nextHole <= 18) {
-      router.push(`/round/${nextHole}`);
-    } else {
-      router.push('/scorecard');
-    }
+    router.push('/scorecard');
   };
 
-  const returnToRoundInfoButton = () => (
-    <button
-      className="button tiny"
-      onClick={() => router.push('/round')}
-    > Round Info</button>
-  );
-
-  const renderPlayersList = () => round.players.map(
-    p => (
+  const renderPlayersList = () => round.players.map((p) => {
+    const score = p.scores[hole - 1].score;
+    return (
       <div key={p.id} className="player-list">
         <span>{p.first} {p.last}</span>
-        <UtilityInput assignedClass="score" display={4} />
+        <UtilityInput assignedClass="score" display={score} />
       </div>
-    ),
     );
+  });
   return (
     <div>
-      <TitleBar left={returnToRoundInfoButton()} title={`Scoring for Hole #${hole}`} />
+      <TitleBar title={`Edit Hole #${hole}`} />
       <div className="hole">
         <div className="hole-info">
           <div className="hole-label"><span>Par</span><span>{par}</span></div>
@@ -54,8 +42,8 @@ const RoundHole = (props) => {
         </div>
         {renderPlayersList()}
         <div className="button-group">
-          <button className="button" onClick={() => router.push('/scorecard')}>View Card</button>
-          <button className="button" onClick={handleSave}>Save</button>
+          <button className="button" onClick={() => router.push('/scorecard')}>Back to Card</button>
+          <button className="button" onClick={handleSave}>Save Changes</button>
         </div>
       </div>
     </div>

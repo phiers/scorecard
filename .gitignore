@@ -1,3 +1,5 @@
 node_modules/
 .DS_Store
 .eslintrc
+public/bundle.js
+__Todos

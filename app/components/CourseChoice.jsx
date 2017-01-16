@@ -7,6 +7,7 @@ import CourseList from 'CourseList';
 
 const CourseChoice = (props) => {
   const { router, settings } = props;
+
   // render items based on choosing or managing mode
   const mode = settings.scoringMode;
   const renderTitle = () => {
@@ -15,12 +16,14 @@ const CourseChoice = (props) => {
     }
     return 'Manage Courses';
   };
+
   const renderButton = () => {
     if (mode) {
       return null;
     }
     return <button className="button expanded" onClick={() => router.push('/')}>Cancel</button>;
   };
+
   return (
     <div>
       <TitleBar title={renderTitle()} />

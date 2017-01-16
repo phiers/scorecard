@@ -14,5 +14,7 @@ const TitleBar = props => (
 export default TitleBar;
 
 TitleBar.propTypes = {
+  left: PropTypes.func,
   title: PropTypes.string.isRequired,
+  right: PropTypes.func,
 };
