@@ -12,12 +12,13 @@ const Round = (props) => {
   const { course, dispatch, players, round, router } = props;
 
   const handleStartRound = () => {
-    // add handicaps to round.player object
+    // add handicaps and roundId to round.player object
     const handicaps = document.querySelectorAll('.hdcp');
     for (let i = 0; i < handicaps.length; i += 1) {
       const id = round.players[i].id;
       const hdcp = parseInt(handicaps[i].textContent, 10);
-      dispatch(roundActions.setHandicaps(id, hdcp));
+      const roundId = `playerNo${i + 1}`;
+      dispatch(roundActions.setHandicapsAndRoundId(id, hdcp, roundId));
     }
     // add scores array to round.player object
     const scores = [];

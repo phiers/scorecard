@@ -65,12 +65,13 @@ const roundReducers = (state = {}, action) => {
         course,
       };
     }
-    case 'SET_HANDICAPS': {
+    case 'SET_HANDICAPS_AND_ROUND_ID': {
       const players = state.players.map((player) => {
         if (player.id === action.id) {
           return {
             ...player,
             hdcp: action.hdcp,
+            roundId: action.roundId,
           };
         }
         return player;

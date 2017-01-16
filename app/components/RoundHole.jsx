@@ -40,7 +40,7 @@ const RoundHole = (props) => {
     p => (
       <div key={p.id} className="player-list">
         <span>{p.first} {p.last}</span>
-        <UtilityInput assignedClass="score" display={4} />
+        <UtilityInput assignedClass="score" display={par} />
       </div>
     ),
     );

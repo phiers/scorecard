@@ -24,11 +24,12 @@ const roundActions = {
       course,
     };
   },
-  setHandicaps(id, hdcp) {
+  setHandicapsAndRoundId(id, hdcp, roundId) {
     return {
-      type: 'SET_HANDICAPS',
+      type: 'SET_HANDICAPS_AND_ROUND_ID',
       id,
       hdcp,
+      roundId,
     };
   },
   setupScoring(id, scores) {

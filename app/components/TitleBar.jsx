@@ -12,9 +12,9 @@ const TitleBar = props => (
 );
 
 export default TitleBar;
-
+/* eslint-disable react/forbid-prop-types */
 TitleBar.propTypes = {
-  left: PropTypes.func,
+  left: PropTypes.object,
   title: PropTypes.string.isRequired,
-  right: PropTypes.func,
+  right: PropTypes.object,
 };
