@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router';
 const ScorecardRow = (props) => {
   const { par, hdcp, holeNo, playerNo1, playerNo2, playerNo3, playerNo4 } = props;
   const handleEdit = () => {
+    // Ensure the hole has some sccores to edit by checking existence of playerNo1
     if (playerNo1) {
       browserHistory.push(`round-edit/${holeNo}`);
     } else {

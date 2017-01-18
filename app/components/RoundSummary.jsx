@@ -10,10 +10,15 @@ import settingsActions from 'settingsActions';
 const RoundSummary = (props) => {
   const { course, dispatch, players, round, router } = props;
   const handleFinalizeRound = () => {
-    console.log(round);
+    // TODO: some kind of warning that the round will be wiped out
+    // TODO: make archiveRound object - player scroes and handicaps
+    dispatch(roundActions.cancelRound());
+    dispatch(settingsActions.setScoringMode(false));
+    alert('Your round has been submitted');
+    router.push('/');
   };
   const renderPlayersList = () => round.players.map((p) => {
-    const gross = p.scores.reduce((a, b) => {
+    const gross = p.scores.reduce((a, b) => { // eslint-disable-line
       return a + b.score;
     }, 0);
     return (

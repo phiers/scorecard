@@ -9,12 +9,9 @@ const roundReducers = (state = {}, action) => {
         players,
       };
     }
-    case 'CANCEL_ROUND': {
-      const newState = {};
-      return {
-        state: newState,
-      };
-    }
+    case 'CANCEL_ROUND':
+      return {};
+
     case 'SAVE_HOLE_SCORE': {
       const newPlayerState = state.players.map((player) => {
         if (player.roundId === action.id) {

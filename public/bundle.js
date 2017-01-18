@@ -30767,11 +30767,17 @@
 	      router = props.router;
 
 	  var handleFinalizeRound = function handleFinalizeRound() {
-	    console.log(round);
+	    // TODO: some kind of warning that the round will be wiped out
+	    // TODO: make archiveRound object - player scroes and handicaps
+	    dispatch(_roundActions2.default.cancelRound());
+	    dispatch(_settingsActions2.default.setScoringMode(false));
+	    alert('Your round has been submitted');
+	    router.push('/');
 	  };
 	  var renderPlayersList = function renderPlayersList() {
 	    return round.players.map(function (p) {
 	      var gross = p.scores.reduce(function (a, b) {
+	        // eslint-disable-line
 	        return a + b.score;
 	      }, 0);
 	      return _react2.default.createElement(
@@ -31134,6 +31140,7 @@
 	      playerNo4 = props.playerNo4;
 
 	  var handleEdit = function handleEdit() {
+	    // Ensure the hole has some sccores to edit by checking existence of playerNo1
 	    if (playerNo1) {
 	      _reactRouter.browserHistory.push('round-edit/' + holeNo);
 	    } else {
@@ -31490,12 +31497,8 @@
 	        });
 	      }
 	    case 'CANCEL_ROUND':
-	      {
-	        var newState = {};
-	        return {
-	          state: newState
-	        };
-	      }
+	      return {};
+
 	    case 'SAVE_HOLE_SCORE':
 	      {
 	        var newPlayerState = state.players.map(function (player) {
