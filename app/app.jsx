@@ -1,21 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Router, IndexRoute, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 /* eslint-disable */
-import Main from 'Main';
-import Start from 'Start';
-import Settings from 'Settings';
-import PlayerChoice from 'PlayerChoice';
-import Course from 'Course';
-import CourseAdd from 'CourseAdd';
-import CourseChoice from 'CourseChoice';
-import CourseEdit from 'CourseEdit';
-import Round from 'Round';
-import RoundHole from 'RoundHole';
-import RoundHoleEdit from 'RoundHoleEdit';
-import RoundSummary from 'RoundSummary';
-import Scorecard from 'Scorecard';
+import routes from 'routes';
 import store from 'configureStore';
 
 // Load foundation
@@ -30,21 +17,6 @@ store.subscribe(() => {
 // TODO: add course show route (in below, but no programmed route)
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={Main}>
-        <Route path="players" component={PlayerChoice} />
-        <Route path="course/:id" component={Course} />
-        <Route path="add-course" component={CourseAdd} />
-        <Route path="edit-course/:id" component={CourseEdit} />
-        <Route path="courses" component={CourseChoice} />
-        <Route path="round" component={Round} />
-        <Route path="round/:hole" component={RoundHole} />
-        <Route path="round-edit/:hole" component={RoundHoleEdit} />
-        <Route path="round-summary" component={RoundSummary} />
-        <Route path="/scorecard" component={Scorecard} />
-        <Route path="settings" component={Settings} />
-        <IndexRoute component={Start} />
-      </Route>
-    </Router>
+    {routes}
   </Provider>,
     document.getElementById('app')); //eslint-disable-line

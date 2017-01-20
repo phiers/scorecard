@@ -29,6 +29,7 @@ module.exports = {
       './app/api',
       './app/actions',
       './app/reducers',
+      './app/router',
       './app/store',
     ],
     alias: {
@@ -51,5 +52,5 @@ module.exports = {
       path.resolve(__dirname, './node_modules/foundation-sites/scss'),
     ],
   },
-  devTool: 'inline-source-map',
+  devtool: 'inline-source-map',
 };
