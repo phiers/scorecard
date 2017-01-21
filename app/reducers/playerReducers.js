@@ -1,6 +1,6 @@
-import initialPlayers from 'defaultPlayers'; // eslint-disable-line
+import defaultPlayers from 'defaultPlayers'; // eslint-disable-line
 
-const playersReducers = (state = initialPlayers, action) => {
+const playersReducers = (state = defaultPlayers, action) => {
   switch (action.type) {
     case 'ADD_PLAYER': {
       return [...state, action.newPlayer];

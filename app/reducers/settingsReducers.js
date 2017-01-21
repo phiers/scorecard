@@ -5,11 +5,16 @@ const initialState = {
 
 const settingsReducers = (state = initialState, action) => {
   switch (action.type) {
-    case 'LOGIN':
+    case 'SET_USER_ID': {
+      const user = {
+        ...state.user,
+        id: action.id,
+      };
       return {
         ...state,
-        user: { id: action.id },
+        user,
       };
+    }
     case 'LOGOUT':
       return {
         ...state,
@@ -22,6 +27,11 @@ const settingsReducers = (state = initialState, action) => {
       return {
         ...state,
         scoringMode: action.mode,
+      };
+    case 'FETCH_SETTINGS':
+      return {
+        ...state,
+        ...action.settings,
       };
     case 'UPDATE_USER_INFO':
       return {

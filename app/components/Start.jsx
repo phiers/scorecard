@@ -9,7 +9,7 @@ import TitleBar from 'TitleBar';
 const Start = (props) => {
   const handleStart = () => {
     const { dispatch, router } = props;
-    dispatch(actions.setScoringMode(true));
+    dispatch(actions.startSetScoringMode(true));
     router.push('/players');
   };
   return (

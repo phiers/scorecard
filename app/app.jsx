@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router';
 /* eslint-disable */
 import * as actions from 'settingsActions';
-import firebase from 'firebaseConfig';
+import firebase, {firebaseRef } from 'firebaseConfig';
 import routes from 'routes';
 import store from 'configureStore';
 
@@ -19,24 +19,20 @@ firebase.auth().onAuthStateChanged((user) => {
       name: user.displayName,
       id: user.uid,
     };
-    store.dispatch(actions.login(player.id));
-    // Add player name if blank (first login)
-    const settings = store.getState().settings;
-    if (!settings.firstName) {
-      const nameArr = player.name.split(' ');
-      const first = nameArr[0];
-      const last = nameArr[nameArr.length - 1];
-      store.dispatch(actions.updateUserInfo({
-        user: {
-          id: player.id,
-          first,
-          last,
-          hdcp: 0,
-          roundId: 'player1',
-        },
-      }));
-    }
-    // TODO: fetch data from firebase
+    // login is a misnomomer - more like update user id
+    store.dispatch(actions.setUserId(player.id));
+    // Add user if first login; otherwise, initialize user info with firebase data
+    const nameArr = player.name.split(' ');
+    const first = nameArr[0];
+    const last = nameArr[nameArr.length - 1];
+    store.dispatch(actions.initializeUserInfo({
+      user: {
+        id: player.id,
+        first,
+        last,
+        roundId: 'player1',
+      },
+    }));
     browserHistory.push('/start');
   } else {
     store.dispatch(actions.logout());
@@ -45,7 +41,7 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 store.subscribe(() => {
-  // const state = store.getState();
+  store.getState();
 });
 
 ReactDOM.render(

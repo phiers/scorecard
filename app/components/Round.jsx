@@ -44,7 +44,7 @@ const Round = (props) => {
   const handleCancelRound = () => {
     // clear round object and reset scoringMode to false
     dispatch(roundActions.cancelRound());
-    dispatch(settingsActions.setScoringMode(false));
+    dispatch(settingsActions.startSetScoringMode(false));
     // change selection of round players to false
     players.forEach(p => dispatch(playerActions.selectPlayer(p.id)));
     // return to start
@@ -55,7 +55,7 @@ const Round = (props) => {
     p => (
       <div key={p.id} className="player-list">
         <span>{p.first} {p.last}</span>
-        <UtilityInput assignedClass="hdcp" display={p.hdcp || 5} />
+        <UtilityInput assignedClass="hdcp" display={parseInt(p.hdcp, 10) || 5} />
       </div>
     ),
     );
