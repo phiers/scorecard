@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import TitleBar from 'TitleBar';
 import PlayerList from 'PlayerList';
 import PlayerAddForm from 'PlayerAddForm';
-import roundActions from 'roundActions';
+import * as roundActions from 'roundActions';
 /* eslint-enable */
 
 const PlayerChoice = (props) => {

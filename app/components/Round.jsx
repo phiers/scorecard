@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 /* eslint-disable */
 import TitleBar from 'TitleBar';
 import UtilityInput from 'UtilityInput';
-import playerActions from 'playerActions';
-import roundActions from 'roundActions';
+import * as playerActions from 'playerActions';
+import * as roundActions from 'roundActions';
 import * as settingsActions from 'settingsActions';
 /* eslint-enable */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -33,6 +33,14 @@ const Round = (props) => {
     // navigate to first hole scoring
     router.push('/round/1');
   };
+
+  const handleContinueRound = () => {
+    // course change will already be handled on Course component
+    // TODO: player change
+    // navigate to scorecard
+    router.push('/scorecard');
+  };
+
   const handleCancelRound = () => {
     // clear round object and reset scoringMode to false
     dispatch(roundActions.cancelRound());
@@ -51,28 +59,47 @@ const Round = (props) => {
       </div>
     ),
     );
+
+  const renderStartOrContinueButton = () => {
+    if (!round.lastHole) {
+      return <button className="button" onClick={handleStartRound}>Start Round</button>;
+    }
+    return <button className="button" onClick={handleContinueRound}>Continue Round</button>;
+  };
+
   return (
     <div>
       <TitleBar title="Round Information" />
       <div className="round">
         <div className="round-info">
           <p>COURSE: {course.name}, {course.state}
-            <button className="button tiny" onClick={() => router.push('/courses')}>Edit</button>
+            <button className="button tiny" disabled>Edit</button>
           </p>
         </div>
         <div className="round-info">
-          <p>PLAYERS: <a className="button tiny" onClick={() => router.push('/players')}>Edit</a></p>
+          <p>PLAYERS: <button className="button tiny" disabled>Edit</button></p>
         </div>
         <span className="player-list-heading"><p>Name</p><p>Handicap</p></span>
         {renderPlayersList()}
         <div className="button-group">
           <button className="button" onClick={handleCancelRound}>Cancel Round</button>
-          <button className="button" onClick={handleStartRound}>Start Round</button>
+          {renderStartOrContinueButton()}
         </div>
       </div>
     </div>
   );
 };
+
+/* eslint-disable react/forbid-prop-types */
+Round.propTypes = {
+  course: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  players: PropTypes.array.isRequired,
+  round: PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
+};
+
+// make container
 const mapStateToProps = (state) => {
   // grab selected players by comparing to round player ids
   const playerIdsArr = state.round.players.map(player => player.id);
@@ -91,11 +118,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(Round);
-/* eslint-disable react/forbid-prop-types */
-Round.propTypes = {
-  course: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  players: PropTypes.array.isRequired,
-  round: PropTypes.object.isRequired,
-  router: PropTypes.object.isRequired,
-};

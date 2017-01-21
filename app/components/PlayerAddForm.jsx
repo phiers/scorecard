@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import actions from 'playerActions'; // eslint-disable-line
+import * as actions from 'playerActions'; // eslint-disable-line
 /* eslint-disable no-param-reassign */
 
 const PlayerAddForm = (props) => {

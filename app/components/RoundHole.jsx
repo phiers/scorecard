@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 /* eslint-disable */
 import TitleBar from 'TitleBar';
 import UtilityInput from 'UtilityInput';
-import roundActions from 'roundActions';
+import * as roundActions from 'roundActions';
 /* eslint-enable */
 
 const RoundHole = (props) => {
@@ -14,14 +14,16 @@ const RoundHole = (props) => {
   const par = hole < 19 ? course.holeData[hole - 1].par : 0;
 
   const handleSave = () => {
+    // post scores
     const scoreNode = document.querySelectorAll('.score');
     for (let i = 0; i < scoreNode.length; i += 1) {
       const playerID = round.players[i].roundId;
       const score = parseInt(scoreNode[i].textContent, 10);
       dispatch(roundActions.saveHoleScore(playerID, hole, score));
-      dispatch(roundActions.updateLastHole(hole));
     }
-    // Navigation
+    // update last hole played
+    dispatch(roundActions.updateLastHole(hole));
+    // continue to next hole
     if (nextHole <= 18) {
       router.push(`/round/${nextHole}`);
     } else {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 /* eslint-disable */
 import CourseAddHoleList from 'CourseAddHoleList';
 import TitleBar from 'TitleBar';
-import courseActions from 'courseActions';
+import * as courseActions from 'courseActions';
 /* eslint-enable */
 
 const CourseAdd = (props) => {

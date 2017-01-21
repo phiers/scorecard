@@ -1,8 +1,5 @@
 import React, { PropTypes } from 'react';
 
-// TODO: figure how to use this for buttons
-// TODO: figure out sticky navigation
-
 const TitleBar = props => (
   <div className="title-bar">
     <span className="title-bar-left">{props.left}</span>

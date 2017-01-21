@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import playerActions from 'playerActions'; // eslint-disable-line
+import * as playerActions from 'playerActions'; // eslint-disable-line
 
 const Player = (props) => {
   /* not ideal as player props passed from list rendering and settings state are

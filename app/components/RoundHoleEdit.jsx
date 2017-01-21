@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 /* eslint-disable */
 import TitleBar from 'TitleBar';
 import UtilityInput from 'UtilityInput';
-import roundActions from 'roundActions';
+import * as roundActions from 'roundActions';
 /* eslint-enable */
 
 const RoundHole = (props) => {

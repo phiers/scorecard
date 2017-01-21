@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import courseActions from 'courseActions';  // eslint-disable-line
-import roundActions from 'roundActions';  // eslint-disable-line
+import * as courseActions from 'courseActions';  // eslint-disable-line
+import * as roundActions from 'roundActions';  // eslint-disable-line
 
 const Course = (props) => {
   const { courses, dispatch, name, state, settings, id } = props;

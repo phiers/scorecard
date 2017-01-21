@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 /* eslint-disable */
 import TitleBar from 'TitleBar';
-import playerActions from 'playerActions';
-import roundActions from 'roundActions';
+import * as playerActions from 'playerActions';
+import * as roundActions from 'roundActions';
 import * as settingsActions from 'settingsActions';
 /* eslint-enable */
 

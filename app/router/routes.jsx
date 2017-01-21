@@ -4,7 +4,7 @@ import { IndexRoute, Router, Route, browserHistory } from 'react-router';
 /* eslint-disable */
 import firebase from 'firebaseConfig';
 import Login from 'Login';
-import Main from 'Main';
+import Main from 'Main';  // TODO: not using, but worried to delete
 import PlayerChoice from 'PlayerChoice';
 import Course from 'Course';
 import CourseAdd from 'CourseAdd';

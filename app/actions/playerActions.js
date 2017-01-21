@@ -1,22 +1,23 @@
-const playerActions = {
-  addPlayer(newPlayer) {
-    return {
-      type: 'ADD_PLAYER',
-      newPlayer,
-    };
-  },
-  removePlayer(id) {
-    return {
-      type: 'REMOVE_PLAYER',
-      id,
-    };
-  },
-  selectPlayer(id) {
-    return {
-      type: 'SELECT_PLAYER',
-      id,
-    };
-  },
-};
+import firebase from 'firebaseConfig'; // eslint-disable-line
 
-export default playerActions;
+
+export function addPlayer(newPlayer) {
+  return {
+    type: 'ADD_PLAYER',
+    newPlayer,
+  };
+}
+
+export function removePlayer(id) {
+  return {
+    type: 'REMOVE_PLAYER',
+    id,
+  };
+}
+
+export function selectPlayer(id) {
+  return {
+    type: 'SELECT_PLAYER',
+    id,
+  };
+}

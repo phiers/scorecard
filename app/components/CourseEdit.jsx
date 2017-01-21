@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import courseActions from 'courseActions';  // eslint-disable-line
+import * as courseActions from 'courseActions';  // eslint-disable-line
 /* eslint-disable */
 import CourseAddHoleList from 'CourseAddHoleList';
 import TitleBar from 'TitleBar';
