@@ -1,24 +1,28 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+// import { browserHistory } from 'react-router';
 /* eslint-disable */
+import TitleBar from 'TitleBar';
 import * as actions from 'settingsActions';
-import { googleProvider } from 'firebaseConfig';
+import firebase, { googleProvider } from 'firebaseConfig';
 /* eslint-enable */
 
-const Login = (props) => {
+const Login = () => {
   const onLogin = () => {
-    props.dispatch(actions.startLogin(googleProvider));
+    firebase.auth().signInWithPopup(googleProvider);
   };
   return (
-    <div className="login">
-      <h1 className="page-title">Todo App</h1>
-      <div className="row">
-        <div className="columns small-centered small-10 medium 6 large 4">
-          <div className="callout callout-auth">
-            <h3>Please Login</h3>
-            <button className="button" onClick={onLogin}>Login with Google</button>
-          </div>
+    <div>
+      <TitleBar title="Login Screen" />
+      <div className="login">
+        <div className="callout">
+          <p>This app requires you to sign in with your Google account.</p>
+          <button className="button" onClick={onLogin}>Login with Google</button>
         </div>
+        <p>Need a Google account or need to sign in to your account?</p>
+        <p>
+          <a href="https://accounts.google.com/signup?hl=en" target="_blank" rel="noopener noreferrer">Click here</a>
+        </p>
       </div>
     </div>
   );

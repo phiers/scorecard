@@ -5,7 +5,7 @@ import TitleBar from 'TitleBar';
 import UtilityInput from 'UtilityInput';
 import playerActions from 'playerActions';
 import roundActions from 'roundActions';
-import settingsActions from 'settingsActions';
+import * as settingsActions from 'settingsActions';
 /* eslint-enable */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 const Round = (props) => {
@@ -17,6 +17,7 @@ const Round = (props) => {
     for (let i = 0; i < handicaps.length; i += 1) {
       const id = round.players[i].id;
       const hdcp = parseInt(handicaps[i].textContent, 10);
+      // roundId is used for scorecard rendering
       const roundId = `playerNo${i + 1}`;
       dispatch(roundActions.setHandicapsAndRoundId(id, hdcp, roundId));
     }

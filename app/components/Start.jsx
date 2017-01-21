@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-
-import settingsActions from 'settingsActions'; // eslint-disable-line
-import TitleBar from 'TitleBar'; // eslint-disable-line
-
+/* eslint-disable */
+import firebase from 'firebaseConfig';
+import * as actions from 'settingsActions';
+import TitleBar from 'TitleBar';
+/* eslint-enable */
 const Start = (props) => {
   const handleStart = () => {
     const { dispatch, router } = props;
-    dispatch(settingsActions.setScoringMode(true));
+    dispatch(actions.setScoringMode(true));
     router.push('/players');
   };
   return (
@@ -19,9 +20,6 @@ const Start = (props) => {
           <button className="start button large" onClick={handleStart}>Start Round</button>
         </div>
         <div className="column small-centered">
-          <button className="resume button large">Resume Round</button>
-        </div>
-        <div className="column small-centered">
           <Link to="/players" className=" button large">Manage Players</Link>
         </div>
         <div className="column small-centered">
@@ -29,6 +27,12 @@ const Start = (props) => {
         </div>
         <div className="column small-centered">
           <Link to="/settings" className="button large">Settings</Link>
+        </div>
+        <div className="column small-centered">
+          <button
+            className="alert button large"
+            onClick={() => firebase.auth().signOut()}
+          >Logout</button>
         </div>
       </div>
     </div>

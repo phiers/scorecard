@@ -1,17 +1,27 @@
 
-const settingsActions = {
-  setScoringMode(mode) {
-    return {
-      type: 'SET_SCORING_MODE',
-      mode,
-    };
-  },
-  updateUserInfo(user) {
-    return {
-      type: 'UPDATE_USER_INFO',
-      user,
-    };
-  },
-};
+export function login(id) {
+  return {
+    type: 'LOGIN',
+    id,
+  };
+}
 
-export default settingsActions;
+export function logout() {
+  return {
+    type: 'LOGOUT',
+  };
+}
+
+export function setScoringMode(mode) {
+  return {
+    type: 'SET_SCORING_MODE',
+    mode,
+  };
+}
+
+export function updateUserInfo(user) {
+  return {
+    type: 'UPDATE_USER_INFO',
+    user,
+  };
+}

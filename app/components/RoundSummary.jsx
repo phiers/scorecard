@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import TitleBar from 'TitleBar';
 import playerActions from 'playerActions';
 import roundActions from 'roundActions';
-import settingsActions from 'settingsActions';
+import * as settingsActions from 'settingsActions';
 /* eslint-enable */
 
 const RoundSummary = (props) => {

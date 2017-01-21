@@ -13,12 +13,9 @@ const PlayerChoice = (props) => {
   const handleContinue = () => {
     // create array of selected players
     const chosen = [];
-    // let playerNo = 2;
     players.forEach((player) => {
       if (player.checked) {
-        // player.roundId = `playerNo${playerNo}`;
         chosen.push(player);
-        // playerNo += 1;
       }
     });
     if (chosen.length <= 3) {
