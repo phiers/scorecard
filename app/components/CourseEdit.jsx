@@ -8,7 +8,7 @@ import TitleBar from 'TitleBar';
 
 const CourseEdit = (props) => {
   const { router, dispatch, courses, params } = props;
-  const courseToEdit = courses.filter(course => course.id === parseInt(params.id, 10));
+  const courseToEdit = courses.filter(course => course.id === params.id);
   const { name, id, state, holeData } = courseToEdit[0];
 
   const editCourse = (evt) => {
@@ -18,7 +18,6 @@ const CourseEdit = (props) => {
     const courseHoleData = [];
     const pars = document.querySelectorAll('.par');
     const hdcps = document.querySelectorAll('.hdcp');
-    const newId = Date.now();
     for (let i = 0; i < 18; i += 1) {
       const par = parseInt(pars[i].textContent, 10);
       const hdcp = parseInt(hdcps[i].textContent, 10);
@@ -26,9 +25,9 @@ const CourseEdit = (props) => {
     }
     // save input
     if (name) {
-      dispatch(courseActions.editCourse(id,
+      dispatch(courseActions.startEditCourse(id,
         {
-          id: newId,
+          id: params.id,
           name: courseName,
           state: courseState,
           holeData: courseHoleData,

@@ -19,8 +19,8 @@ const Course = (props) => {
   // functionality for manage mode
   const handleDelete = (evt) => {
     evt.preventDefault();
-    const itemId = parseInt(evt.target.id, 10);
-    dispatch(courseActions.removeCourse(itemId));
+    const itemId = evt.target.id;
+    dispatch(courseActions.startRemoveCourse(itemId));
   };
 
   const handleEdit = (evt) => {
@@ -57,7 +57,7 @@ export default connect(state => state)(Course);
 Course.propTypes = {
   courses: PropTypes.array.isRequired, // eslint-disable-line
   dispatch: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,
   settings: PropTypes.shape({

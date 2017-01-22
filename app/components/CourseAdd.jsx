@@ -15,7 +15,6 @@ const CourseAdd = (props) => {
     const holeData = [];
     const pars = document.querySelectorAll('.par');
     const hdcps = document.querySelectorAll('.hdcp');
-    const id = Date.now();
     for (let i = 0; i < 18; i += 1) {
       const par = parseInt(pars[i].textContent, 10);
       const hdcp = parseInt(hdcps[i].textContent, 10);
@@ -23,7 +22,7 @@ const CourseAdd = (props) => {
     }
     // save input
     if (name) {
-      dispatch(courseActions.saveCourse({ id, name, state, holeData }));
+      dispatch(courseActions.startAddCourse({ name, state, holeData }));
       router.push('/courses');
     }
   };

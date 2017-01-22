@@ -1,4 +1,4 @@
-import firebase, { firebaseRef } from 'firebaseConfig'; // eslint-disable-line
+import { firebaseRef } from 'firebaseConfig'; // eslint-disable-line
 import initialPlayers from 'defaultPlayers'; // eslint-disable-line
 
 function addPlayer(newPlayer) {
@@ -17,7 +17,7 @@ export function startAddPlayer(player) {
       ...player,
       id: key,
     };
-    return playersRef.push({ ...player, id: key }).then(() => {
+    return playersRef.push(newPlayer).then(() => {
       dispatch(addPlayer(newPlayer));
     });
   };

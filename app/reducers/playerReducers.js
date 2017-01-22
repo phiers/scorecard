@@ -13,10 +13,7 @@ const playersReducers = (state = [], action) => {
         return true;
       });
     case 'FETCH_PLAYERS':
-      return [
-        ...state,
-        ...action.players,
-      ];
+      return [...action.players];
     case 'SELECT_PLAYER':
       return state.map((player) => {
         if (player.id === action.id) {

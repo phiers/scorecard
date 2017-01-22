@@ -46,7 +46,7 @@ const Round = (props) => {
     dispatch(roundActions.cancelRound());
     dispatch(settingsActions.startSetScoringMode(false));
     // change selection of round players to false
-    players.forEach(p => dispatch(playerActions.selectPlayer(p.id)));
+    players.forEach(p => dispatch(playerActions.startSelectPlayer(p.id)));
     // return to start
     router.push('/');
   };
