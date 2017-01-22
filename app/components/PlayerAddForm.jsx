@@ -10,8 +10,8 @@ const PlayerAddForm = (props) => {
     const first = evt.target[0].value;
     const last = evt.target[1].value;
     if (first !== '' && last !== '') {
-      const id = Date.now();
-      props.addPlayer({ id, first, last, checked: mode });
+      // const id = Date.now();
+      props.startAddPlayer({ first, last, checked: mode });
     }
     // clean up the UI
     evt.target[0].value = '';
@@ -33,6 +33,6 @@ const PlayerAddForm = (props) => {
 export default connect(state => state, actions)(PlayerAddForm);
 
 PlayerAddForm.propTypes = {
-  addPlayer: PropTypes.func,
+  startAddPlayer: PropTypes.func,
   settings: PropTypes.object, // eslint-disable-line
 };

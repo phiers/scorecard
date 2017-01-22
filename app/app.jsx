@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router';
 /* eslint-disable */
-import * as actions from 'settingsActions';
+import * as settingsActions from 'settingsActions';
+import * as playerActions from 'playerActions';
 import firebase, {firebaseRef } from 'firebaseConfig';
 import routes from 'routes';
 import store from 'configureStore';
@@ -20,12 +21,12 @@ firebase.auth().onAuthStateChanged((user) => {
       id: user.uid,
     };
     // login is a misnomomer - more like update user id
-    store.dispatch(actions.setUserId(player.id));
+    store.dispatch(settingsActions.setUserId(player.id));
     // Add user if first login; otherwise, initialize user info with firebase data
     const nameArr = player.name.split(' ');
     const first = nameArr[0];
     const last = nameArr[nameArr.length - 1];
-    store.dispatch(actions.initializeUserInfo({
+    store.dispatch(settingsActions.initializeUserInfo({
       user: {
         id: player.id,
         first,
@@ -33,9 +34,11 @@ firebase.auth().onAuthStateChanged((user) => {
         roundId: 'player1',
       },
     }));
+    // add player data from database
+    store.dispatch(playerActions.startFetchPlayers());
     browserHistory.push('/start');
   } else {
-    store.dispatch(actions.logout());
+    store.dispatch(settingsActions.logout());
     browserHistory.push('/');
   }
 });

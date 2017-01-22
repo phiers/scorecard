@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-
+/* eslint-disable */
 import TitleBar from 'TitleBar'; // eslint-disable-line
 import Player from 'Player'; // eslint-disable-line
+import * as actions from 'playerActions';
+/* eslint-enable */
 /* eslint-disable no-confusing-arrow */
 const PlayerList = (props) => {
   const { players } = props;

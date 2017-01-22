@@ -1,6 +1,6 @@
 import defaultPlayers from 'defaultPlayers'; // eslint-disable-line
 
-const playersReducers = (state = defaultPlayers, action) => {
+const playersReducers = (state = [], action) => {
   switch (action.type) {
     case 'ADD_PLAYER': {
       return [...state, action.newPlayer];
@@ -12,6 +12,11 @@ const playersReducers = (state = defaultPlayers, action) => {
         }
         return true;
       });
+    case 'FETCH_PLAYERS':
+      return [
+        ...state,
+        ...action.players,
+      ];
     case 'SELECT_PLAYER':
       return state.map((player) => {
         if (player.id === action.id) {

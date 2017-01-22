@@ -8,11 +8,11 @@ const Player = (props) => {
   intermingled */
   const { first, last, checked, dispatch, id, scoringMode } = props;
   const handleCheck = () => {
-    dispatch(playerActions.selectPlayer(id));
+    dispatch(playerActions.startSelectPlayer(id));
   };
   const handleDelete = (evt) => {
     evt.preventDefault();
-    dispatch(playerActions.removePlayer(id));
+    dispatch(playerActions.startRemovePlayer(id));
   };
   const renderCheckbox = () => {
     if (scoringMode) {
@@ -34,8 +34,8 @@ const Player = (props) => {
 
 Player.propTypes = {
   checked: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func,
-  id: PropTypes.number,
+  dispatch: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
   first: PropTypes.string.isRequired,
   last: PropTypes.string.isRequired,
   scoringMode: PropTypes.bool.isRequired,
