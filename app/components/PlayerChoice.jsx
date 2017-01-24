@@ -23,6 +23,7 @@ const PlayerChoice = (props) => {
       const p1 = settings.user;
       chosen.unshift(p1);
       dispatch(roundActions.addPlayers(chosen));
+      dispatch(roundActions.startAddPlayers(chosen));
 
       // navigate to choose course screen or, if editing, round information screen
       if (!round.course) {

@@ -12,6 +12,9 @@ const Course = (props) => {
   const handleSelect = (evt) => {
     evt.preventDefault();
     const courseChoice = courses.find(c => c.id.toString() === evt.target.id);
+    dispatch(roundActions.startSelectCourse(courseChoice));
+    // did this here rather than in promise to ensure state is right for round page
+    // (it depends on there being a round.course object)
     dispatch(roundActions.selectCourse(courseChoice));
     browserHistory.push('/round');
   };

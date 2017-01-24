@@ -5,7 +5,7 @@
   .summary {
     .summary-info {
       background: white;
-      border: 1px solid black;
+      border: 1px solid darkgreen;
       margin: auto;
       padding: .5rem;
         .heading-row {
@@ -34,13 +34,14 @@
       }
     }
   tbody tr:nth-child(even) {
-    background: #c0d4bd;
+    background: #f9ecdb;
   }
   .row-flex {
     display: flex;
+    border-bottom: 1px solid darkgreen;
 
     td {
-      border-right: 1px solid black;
+      border-right: 1px solid darkgreen;
       flex: 1;
       font-size: 1em;
       min-width: 11%;

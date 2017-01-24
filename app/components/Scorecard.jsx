@@ -9,6 +9,7 @@ import ScorecardSummary from 'ScorecardSummary';
 class Scorecard extends Component {
   constructor() {
     super();
+    // state variable used to show or hide summary
     this.state = {
       card: true,
     };
@@ -17,6 +18,7 @@ class Scorecard extends Component {
   render() {
     const { course, round, router } = this.props;
     const { holeData } = course;
+    // construct player names for scorecard
     const player = round.players;
     const player1Name = `${player[0].first.slice(0, 5)} ${player[0].last.slice(0, 5)}`;
     const player2Name = player[1] ? `${player[1].first.slice(0, 5)} ${player[1].last.slice(0, 5)}` : '';

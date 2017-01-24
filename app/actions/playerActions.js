@@ -34,7 +34,6 @@ export function startRemovePlayer(id) {
   return (dispatch, getState) => {
     const uid = getState().settings.user.id;
     const playersRef = firebaseRef.child(`users/${uid}/players`);
-    // let nodeToDelete;
     playersRef.once('value').then((snapshot) => {
       snapshot.forEach((child) => {
         // find the node selected for deletion

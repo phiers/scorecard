@@ -5,22 +5,35 @@ import { browserHistory } from 'react-router';
 const ScorecardRow = (props) => {
   const { par, hdcp, holeNo, playerNo1, playerNo2, playerNo3, playerNo4 } = props;
   const handleEdit = () => {
-    // Ensure the hole has some sccores to edit by checking existence of playerNo1
+    // Ensure the hole has some scores to edit by checking existence of playerNo1
     if (playerNo1) {
       browserHistory.push(`round-edit/${holeNo}`);
     } else {
       browserHistory.push(`round/${holeNo}`);
     }
   };
+
+  const renderScores = () => {
+    const scoreArray = [playerNo1, playerNo2, playerNo3, playerNo4];
+    return scoreArray.map((score, index) => {
+      const style = () => {
+        if (score < par) {
+          return { color: 'red' };
+        }
+        if (score > par) {
+          return { color: '#ff9800' };
+        }
+        return {};
+      };
+      return <td key={index} className="player" style={style()}>{score}</td>;
+    });
+  };
   return (
     <tr className="row-flex" onClick={handleEdit}>
       <td>{holeNo}</td>
       <td>{hdcp}</td>
       <td>{par}</td>
-      <td className="player">{playerNo1}</td>
-      <td className="player">{playerNo2}</td>
-      <td className="player">{playerNo3}</td>
-      <td className="player">{playerNo4}</td>
+      {renderScores()}
     </tr>
   );
 };

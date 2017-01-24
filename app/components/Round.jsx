@@ -19,7 +19,7 @@ const Round = (props) => {
       const hdcp = parseInt(handicaps[i].textContent, 10);
       // roundId is used for scorecard rendering
       const roundId = `playerNo${i + 1}`;
-      dispatch(roundActions.setHandicapsAndRoundId(id, hdcp, roundId));
+      dispatch(roundActions.startSetHandicapsAndRoundId(id, hdcp, roundId));
     }
     // add scores array to round.player object
     const scores = [];
@@ -29,7 +29,8 @@ const Round = (props) => {
         score: null,
       });
     }
-    round.players.forEach(p => dispatch(roundActions.setupScoring(p.id, scores)));
+    // round.players.forEach(p => dispatch(roundActions.setupScoring(p.id, scores)));
+    round.players.forEach(p => dispatch(roundActions.startSetupScoring(p.id, scores)));
     // navigate to first hole scoring
     router.push('/round/1');
   };
@@ -43,7 +44,7 @@ const Round = (props) => {
 
   const handleCancelRound = () => {
     // clear round object and reset scoringMode to false
-    dispatch(roundActions.cancelRound());
+    dispatch(roundActions.startCancelRound());
     dispatch(settingsActions.startSetScoringMode(false));
     // change selection of round players to false
     players.forEach(p => dispatch(playerActions.startSelectPlayer(p.id)));
@@ -67,17 +68,19 @@ const Round = (props) => {
     return <button className="button" onClick={handleContinueRound}>Continue Round</button>;
   };
 
+  const editButtonClasses = round.lastHole ? 'button tiny hide' : 'button tiny';
+
   return (
     <div>
       <TitleBar title="Round Information" />
       <div className="round">
         <div className="round-info">
           <p>COURSE: {course.name}, {course.state}
-            <button className="button tiny" disabled>Edit</button>
+            <button className={editButtonClasses}>Edit</button>
           </p>
         </div>
         <div className="round-info">
-          <p>PLAYERS: <button className="button tiny" disabled>Edit</button></p>
+          <p>PLAYERS: <button className={editButtonClasses}>Edit</button></p>
         </div>
         <span className="player-list-heading"><p>Name</p><p>Handicap</p></span>
         {renderPlayersList()}

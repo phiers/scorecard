@@ -13,6 +13,7 @@ const roundReducers = (state = {}, action) => {
       return {};
 
     case 'SAVE_HOLE_SCORE': {
+      // save scores to round.player.scores
       const newPlayerState = state.players.map((player) => {
         if (player.roundId === action.id) {
           const newScoreArray = player.scores.map((score) => {
@@ -32,6 +33,7 @@ const roundReducers = (state = {}, action) => {
         }
         return player;
       });
+      // save scores to round.course.holeData
       const newHoleArray = state.course.holeData.map((hole) => {
         if (hole.holeNo === action.hole) {
           const score = action.score;

@@ -62,7 +62,7 @@ export function startEditCourse(id, course) {
     const coursesRef = firebaseRef.child(`users/${uid}/courses`);
     coursesRef.once('value').then((snapshot) => {
       snapshot.forEach((child) => {
-        // find the node selected for deletion
+        // find the node selected for update
         if (child.val().id === id) {
           // the child.key appended to coursesRef is the path to update
           return coursesRef.child(child.key).update(course)

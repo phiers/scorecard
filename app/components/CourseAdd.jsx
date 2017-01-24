@@ -8,6 +8,7 @@ import * as courseActions from 'courseActions';
 
 const CourseAdd = (props) => {
   const { dispatch, router } = props;
+
   const addCourse = (evt) => {
     evt.preventDefault();
     const state = document.querySelectorAll('input')[1].value;
@@ -25,6 +26,11 @@ const CourseAdd = (props) => {
       dispatch(courseActions.startAddCourse({ name, state, holeData }));
       router.push('/courses');
     }
+  };
+
+  const cancelAdd = (evt) => {
+    evt.preventDefault();
+    router.push('/courses');
   };
   return (
     <div>
@@ -44,7 +50,7 @@ const CourseAdd = (props) => {
           <div className="button-group">
             <button
               className="button"
-              onClick={() => router.push('/courses')}
+              onClick={cancelAdd}
             >Cancel</button>
             <button
               className="button"

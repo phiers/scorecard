@@ -7,22 +7,23 @@ import * as roundActions from 'roundActions';
 /* eslint-enable */
 
 const RoundHole = (props) => {
-  const { course, dispatch, params, round, router } = props;
+  const { dispatch, params, round, router } = props;
   const hole = parseInt(params.hole, 10);
   const nextHole = hole + 1;
-  const hdcp = hole < 19 ? course.holeData[hole - 1].hdcp : 0;
-  const par = hole < 19 ? course.holeData[hole - 1].par : 0;
-
+  const hdcp = hole < 19 ? round.course.holeData[hole - 1].hdcp : 0;
+  const par = hole < 19 ? round.course.holeData[hole - 1].par : 0;
   const handleSave = () => {
     // post scores
     const scoreNode = document.querySelectorAll('.score');
     for (let i = 0; i < scoreNode.length; i += 1) {
-      const playerID = round.players[i].roundId;
+      const playerId = round.players[i].roundId;
       const score = parseInt(scoreNode[i].textContent, 10);
-      dispatch(roundActions.saveHoleScore(playerID, hole, score));
+
+      dispatch(roundActions.startSaveHoleScore(playerId, hole, score));
+      dispatch(roundActions.startSavePlayerScore(playerId, hole, score));
     }
     // update last hole played
-    dispatch(roundActions.updateLastHole(hole));
+    dispatch(roundActions.startUpdateLastHole(hole));
     // continue to next hole
     if (nextHole <= 18) {
       router.push(`/round/${nextHole}`);
@@ -65,7 +66,6 @@ const RoundHole = (props) => {
 };
 /* eslint-disable react/forbid-prop-types */
 RoundHole.propTypes = {
-  course: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
   round: PropTypes.object.isRequired,
@@ -75,7 +75,6 @@ RoundHole.propTypes = {
 const mapStateToProps = (state) => {  // eslint-disable-line
   return {
     round: state.round,
-    course: state.round.course,
   };
 };
 

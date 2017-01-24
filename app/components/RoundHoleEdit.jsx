@@ -7,10 +7,10 @@ import * as roundActions from 'roundActions';
 /* eslint-enable */
 
 const RoundHole = (props) => {
-  const { course, dispatch, params, round, router } = props;
+  const { dispatch, params, round, router } = props;
   const hole = parseInt(params.hole, 10);
-  const hdcp = hole < 19 ? course.holeData[hole - 1].hdcp : 0;
-  const par = hole < 19 ? course.holeData[hole - 1].par : 0;
+  const hdcp = hole < 19 ? round.course.holeData[hole - 1].hdcp : 0;
+  const par = hole < 19 ? round.course.holeData[hole - 1].par : 0;
 
   const handleSave = () => {
     const scoreNode = document.querySelectorAll('.score');
@@ -51,7 +51,6 @@ const RoundHole = (props) => {
 };
 /* eslint-disable react/forbid-prop-types */
 RoundHole.propTypes = {
-  course: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
   round: PropTypes.object.isRequired,
@@ -61,7 +60,6 @@ RoundHole.propTypes = {
 const mapStateToProps = (state) => {  // eslint-disable-line
   return {
     round: state.round,
-    course: state.round.course,
   };
 };
 

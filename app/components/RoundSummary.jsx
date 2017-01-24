@@ -12,8 +12,8 @@ const RoundSummary = (props) => {
   const handleFinalizeRound = () => {
     // TODO: some kind of warning that the round will be wiped out
     // TODO: make archiveRound object - player scroes and handicaps
-    dispatch(roundActions.cancelRound());
-    dispatch(settingsActions.setScoringMode(false));
+    dispatch(roundActions.startCancelRound());
+    dispatch(settingsActions.startSetScoringMode(false));
     alert('Your round has been submitted');
     router.push('/');
   };
