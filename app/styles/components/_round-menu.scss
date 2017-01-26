@@ -1,0 +1,21 @@
+.round-menu {
+  background: #eee;
+  margin: 6em 1em;
+  .column {
+    display: flex;
+    align-content: center;
+
+    .button {
+      flex: 1;
+      border-radius: 10px;
+      margin: 1em;
+      width: 80%;
+    }
+    .start {
+      background: darkgreen;
+    }
+    .resume {
+      background: goldenrod;
+    }
+  }
+}

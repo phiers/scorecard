@@ -11,7 +11,8 @@ const roundReducers = (state = {}, action) => {
     }
     case 'CANCEL_ROUND':
       return {};
-
+    case 'FETCH_ROUND':
+      return { ...action.round };
     case 'SAVE_HOLE_SCORE': {
       // save scores to round.player.scores
       const newPlayerState = state.players.map((player) => {

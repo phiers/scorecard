@@ -21,7 +21,7 @@ const ScorecardRow = (props) => {
           return { color: 'red' };
         }
         if (score > par) {
-          return { color: '#ff9800' };
+          return { color: '#2fbf04' };
         }
         return {};
       };

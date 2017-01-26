@@ -6,6 +6,7 @@ import { browserHistory } from 'react-router';
 import * as settingsActions from 'settingsActions';
 import * as playerActions from 'playerActions';
 import * as courseActions from 'courseActions';
+import * as roundActions from 'roundActions';
 import firebase, {firebaseRef } from 'firebaseConfig';
 import routes from 'routes';
 import store from 'configureStore';
@@ -38,6 +39,8 @@ firebase.auth().onAuthStateChanged((user) => {
     // add player and course data from database
     store.dispatch(playerActions.startFetchPlayers());
     store.dispatch(courseActions.startFetchCourses());
+    store.dispatch(roundActions.startFetchActiveRound());
+
     browserHistory.push('/start');
   } else {
     store.dispatch(settingsActions.logout());

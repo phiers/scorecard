@@ -24,7 +24,7 @@ export function startFetchSettings() {
   return (dispatch, getState) => {
     const uid = getState().settings.user.id;
     const settingsRef = firebaseRef.child(`users/${uid}/settings`);
-    return settingsRef.on('value', (snapshot) => {
+    return settingsRef.once('value').then((snapshot) => {
       dispatch(fetchSettings(snapshot.val()));
     });
   };

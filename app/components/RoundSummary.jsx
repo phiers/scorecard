@@ -10,9 +10,7 @@ import * as settingsActions from 'settingsActions';
 const RoundSummary = (props) => {
   const { course, dispatch, players, round, router } = props;
   const handleFinalizeRound = () => {
-    // TODO: some kind of warning that the round will be wiped out
-    // TODO: make archiveRound object - player scroes and handicaps
-    dispatch(roundActions.startCancelRound());
+    dispatch(roundActions.startArchiveRound());
     dispatch(settingsActions.startSetScoringMode(false));
     alert('Your round has been submitted');
     router.push('/');

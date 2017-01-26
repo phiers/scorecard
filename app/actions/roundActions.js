@@ -161,8 +161,58 @@ export function startUpdateLastHole(hole) {
   return (dispatch, getState) => {
     const uid = getState().settings.user.id;
     const roundRef = firebaseRef.child(`users/${uid}/round`);
-    return roundRef.update({ lasthole: hole }).then(() => {
+    return roundRef.update({ lastHole: hole }).then(() => {
       dispatch(updateLastHole(hole));
+    });
+  };
+}
+
+function fetchActiveRound(round) {
+  return {
+    type: 'FETCH_ROUND',
+    round,
+  };
+}
+
+export function startFetchActiveRound() {
+  return (dispatch, getState) => {
+    const uid = getState().settings.user.id;
+    const roundRef = firebaseRef.child(`users/${uid}/round`);
+    return roundRef.once('value').then((snapshot) => {
+      if (snapshot.val() !== null) {
+        const players = snapshot.val().players;
+        // App expects players as an array, so need to convert
+        const playersArray = [];
+        Object.keys(players).forEach((playerId) => {
+          playersArray.push({
+            id: playerId,
+            ...players[playerId], //grab the player object with this id
+          });
+        });
+        const round = { ...snapshot.val(), players: playersArray };
+        dispatch(fetchActiveRound(round));
+      }
+    });
+  };
+}
+
+export function startArchiveRound() {
+  return (dispatch, getState) => {
+    const uid = getState().settings.user.id;
+    const roundRef = firebaseRef.child(`users/${uid}/round`);
+    const archivedRoundRef = firebaseRef.child(`users/${uid}/archivedRounds`);
+    return roundRef.once('value').then((snapshot) => {
+      const round = snapshot.val();
+      const milliseconds = Date.now();
+      const dateObj = new Date();
+      const date = dateObj.toDateString().slice(4);
+      const archivedRound = {
+        ...round,
+        milliseconds,
+        date,
+      };
+      archivedRoundRef.push(archivedRound);
+      dispatch(startCancelRound());
     });
   };
 }

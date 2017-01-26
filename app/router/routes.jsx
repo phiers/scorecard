@@ -10,10 +10,12 @@ import Course from 'Course';
 import CourseAdd from 'CourseAdd';
 import CourseEdit from 'CourseEdit';
 import CourseChoice from 'CourseChoice';
+import RoundMenu from 'RoundMenu';
 import Round from 'Round';
 import RoundHole from 'RoundHole';
 import RoundHoleEdit from 'RoundHoleEdit';
 import RoundSummary from 'RoundSummary';
+import RoundList from 'RoundList';
 import Scorecard from 'Scorecard';
 import Settings from 'Settings';
 import Start from 'Start';
@@ -46,10 +48,12 @@ export default (
       <Route path="add-course" component={CourseAdd} onEnter={requireLogin} />
       <Route path="edit-course/:id" component={CourseEdit} onEnter={requireLogin} />
       <Route path="courses" component={CourseChoice} onEnter={requireLogin} />
+      <Route path="round-menu" component={RoundMenu} onEnter={requireLogin} />
       <Route path="round" component={Round} onEnter={requireLogin} />
       <Route path="round/:hole" component={RoundHole} onEnter={requireLogin} />
       <Route path="round-edit/:hole" component={RoundHoleEdit} onEnter={requireLogin} />
       <Route path="round-summary" component={RoundSummary} onEnter={requireLogin} />
+      <Route path="roundlist" component={RoundList} onEnter={requireLogin} />
       <Route path="/scorecard" component={Scorecard} onEnter={requireLogin} />
       <Route path="settings" component={Settings} onEnter={requireLogin} />
       <IndexRoute component={Login} onEnter={redirectIfLoggedIn} />

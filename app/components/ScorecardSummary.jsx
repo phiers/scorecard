@@ -17,7 +17,7 @@ const ScorecardSummary = (props) => {
       const backScoreDisplay = backScore === 0 ? '-' : backScore;
       return (
         <div key={player.id} className="summary-row">
-          <span>{player.first} {player.last}</span>
+          <span>{`${player.first} ${player.last} (${player.hdcp})`}</span>
           <span>{frontScoreDisplay}</span>
           <span>{backScoreDisplay}</span>
           <span>{totalScore}</span>
@@ -28,7 +28,7 @@ const ScorecardSummary = (props) => {
   return (
     <div className="summary-info">
       <div className="heading-row">
-        <span>Name</span>
+        <span>Name (hdcp)</span>
         <span>Front</span>
         <span>Back</span>
         <span>Total</span>
