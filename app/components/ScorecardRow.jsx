@@ -3,12 +3,12 @@ import { browserHistory } from 'react-router';
 
 /* eslint-disable jsx-a11y/no-static-element-interactions*/
 const ScorecardRow = (props) => {
-  const { par, hdcp, holeNo, playerNo1, playerNo2, playerNo3, playerNo4 } = props;
+  const { par, hdcp, holeNo, playerNo1, playerNo2, playerNo3, playerNo4, editable } = props;
   const handleEdit = () => {
     // Ensure the hole has some scores to edit by checking existence of playerNo1
-    if (playerNo1) {
+    if (playerNo1 && editable) {
       browserHistory.push(`round-edit/${holeNo}`);
-    } else {
+    } else if (editable) {
       browserHistory.push(`round/${holeNo}`);
     }
   };
@@ -41,6 +41,7 @@ const ScorecardRow = (props) => {
 export default ScorecardRow;
 
 ScorecardRow.propTypes = {
+  editable: PropTypes.bool,
   hdcp: PropTypes.number.isRequired,
   holeNo: PropTypes.number.isRequired,
   par: PropTypes.number.isRequired,

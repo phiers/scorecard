@@ -17,6 +17,7 @@ import RoundHoleEdit from 'RoundHoleEdit';
 import RoundSummary from 'RoundSummary';
 import ArchivedRoundList from 'ArchivedRoundList';
 import Scorecard from 'Scorecard';
+import ArchivedScorecard from 'ArchivedScoreCard';
 import Settings from 'Settings';
 import Start from 'Start';
 /* eslint-enable */
@@ -54,7 +55,8 @@ export default (
       <Route path="round-edit/:hole" component={RoundHoleEdit} onEnter={requireLogin} />
       <Route path="round-summary" component={RoundSummary} onEnter={requireLogin} />
       <Route path="roundlist" component={ArchivedRoundList} onEnter={requireLogin} />
-      <Route path="/scorecard" component={Scorecard} onEnter={requireLogin} />
+      <Route path="scorecard" component={Scorecard} onEnter={requireLogin} />
+      <Route path="scorecard/:id" component={ArchivedScorecard} onEnter={requireLogin} />
       <Route path="settings" component={Settings} onEnter={requireLogin} />
       <IndexRoute component={Login} onEnter={redirectIfLoggedIn} />
     </Route>

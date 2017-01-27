@@ -7,16 +7,16 @@ body {
     outline: none;
   }
 }
-.container {
-  background: #eee;
-  max-width:600px;
-  margin: 0 auto;
 
-}
 .column {
   padding: 0;
 }
 
+.container {
+  background: #eee;
+  max-width: 600px;
+  margin: 0 auto;
+}
 // TitleBar
 .title-bar {
   align-items: baseline;

@@ -1,3 +1,22 @@
 .round-list {
-  margin: 4em 1em;
+  margin: 4em auto;
+
+  table {
+    width: 95%;
+  }
+
+  thead tr td  {
+    text-align: center;
+  }
+
+  tbody {
+    tr td:last-of-type {
+      text-align: center;
+    }
+    .button {
+      border-radius: 5px;
+      margin: .8em;
+      width: 5em;
+    }
+  }
 }

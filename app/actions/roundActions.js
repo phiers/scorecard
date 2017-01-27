@@ -203,12 +203,22 @@ export function startArchiveRound() {
     const archivedRoundRef = firebaseRef.child(`users/${uid}/archivedRounds`);
     return roundRef.once('value').then((snapshot) => {
       const round = snapshot.val();
-      const milliseconds = Date.now();
+      const id = archivedRoundRef.push().key;
       const dateObj = new Date();
-      const date = formatDate(dateObj);
+      const date = formatDate(dateObj); // eslint-disable-line
+      const players = round.players;
+      // App expects an array, so need to convert
+      const playersArray = [];
+      Object.keys(players).forEach((playerId) => {
+        playersArray.push({
+          id: playerId,
+          ...players[playerId], //grab the player object with this id
+        });
+      });
       const archivedRound = {
         ...round,
-        milliseconds,
+        players: playersArray,
+        id,
         date,
       };
       archivedRoundRef.push(archivedRound);
@@ -226,5 +236,5 @@ function formatDate(date) {
   day = day > 9 ? day : `0${day}`;
   month = month > 9 ? month : `0${month}`;
 
-  return [month, day, year].join('-');
+  return [month, day, year].join('/');
 }

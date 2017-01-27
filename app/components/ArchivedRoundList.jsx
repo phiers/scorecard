@@ -6,20 +6,18 @@ import * as actions from 'archivedRoundActions';
 import ArchivedRound from 'ArchivedRound';
 /* eslint-enable */
 
+/* eslint-disable no-confusing-arrow */
 class ArchivedRoundList extends Component {
-  constructor() {
-    super();
-    this.state = { rounds: null };
-  }
+
   componentDidMount() {
     this.props.dispatch(actions.startFetchArchivedRounds());
-    // this.setState({ rounds: this.state.rounds });
   }
 
   renderRoundList() {
     const { rounds } = this.props;
     if (rounds.length > 0) {
-      return rounds.map(round => <ArchivedRound key={round.milliseconds} {...round} />);
+      return rounds.map(round => <ArchivedRound key={round.id} {...round} />)
+      .sort((a, b) => a - b > 0 ? -1 : 1);
     }
     return <tr><td>No Archived Rounds</td></tr>;
   }
@@ -33,7 +31,6 @@ class ArchivedRoundList extends Component {
             <tr>
               <td>Date</td>
               <td>Course</td>
-              <td>Holes</td>
               <td>Actions</td>
             </tr>
           </thead>
@@ -47,6 +44,8 @@ class ArchivedRoundList extends Component {
 }
 
 ArchivedRoundList.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  rounds: PropTypes.object,  // eslint-disable-line
 };
 
 const mapStateToProps = state => ({ rounds: state.archivedRounds });

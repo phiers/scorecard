@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const isProd = (process.env.NODE_ENV === 'production');
+
 module.exports = {
   entry: [
     'script!jquery/dist/jquery.min.js',
@@ -16,6 +18,16 @@ module.exports = {
       '$': 'jquery',
       'jQuery': 'jquery',
     }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false,
+    //   },
+    //}),
   ],
   output: {
     path: __dirname + '/public',
@@ -53,5 +65,5 @@ module.exports = {
       path.resolve(__dirname, './node_modules/foundation-sites/scss'),
     ],
   },
-  devtool: 'inline-source-map',
+  devtool: isProd ? '' : 'inline-source-map',
 };

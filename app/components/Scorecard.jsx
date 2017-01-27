@@ -52,7 +52,7 @@ class Scorecard extends Component {
     };
 
     const renderCard = () =>
-      holeData.map(hole => <ScorecardRow key={hole.holeNo} {...hole} />);
+      holeData.map(hole => <ScorecardRow key={hole.holeNo} editable {...hole} />);
 
     return (
       <div>
