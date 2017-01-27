@@ -205,7 +205,7 @@ export function startArchiveRound() {
       const round = snapshot.val();
       const milliseconds = Date.now();
       const dateObj = new Date();
-      const date = dateObj.toDateString().slice(4);
+      const date = formatDate(dateObj);
       const archivedRound = {
         ...round,
         milliseconds,
@@ -215,4 +215,16 @@ export function startArchiveRound() {
       dispatch(startCancelRound());
     });
   };
+}
+
+function formatDate(date) {
+  const d = new Date(date);
+  let month = d.getMonth() + 1;
+  let day = d.getDate();
+  const year = d.getFullYear() - 2000;
+
+  day = day > 9 ? day : `0${day}`;
+  month = month > 9 ? month : `0${month}`;
+
+  return [month, day, year].join('-');
 }

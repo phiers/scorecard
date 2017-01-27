@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 /* eslint-disable */
+import archivedRoundReducers from 'archivedRoundReducers';
 import courseReducers from 'courseReducers';
 import playerReducers from 'playerReducers';
 import roundReducers from 'roundReducers';
@@ -12,6 +13,7 @@ const reducer = combineReducers({
   courses: courseReducers,
   players: playerReducers,
   round: roundReducers,
+  archivedRounds: archivedRoundReducers,
   settings: settingsReducers,
 });
 
