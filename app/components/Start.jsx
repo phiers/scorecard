@@ -10,7 +10,7 @@ const Start = () => (
     <TitleBar title="Main Menu" />
     <div className="start-page">
       <div className="column small-centered">
-        <Link to="round-menu" className="start button large">My Rounds</Link>
+        <Link to="round-menu" className="button large">My Rounds</Link>
       </div>
       <div className="column small-centered">
         <Link to="/players" className=" button large">My Players</Link>

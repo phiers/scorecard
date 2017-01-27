@@ -43,7 +43,7 @@ const PlayerChoice = (props) => {
   };
   const renderMessage = () => {
     if (!mode) {
-      return <p>To edit a player, just delete and re-add</p>;
+      return <p><strong>To edit a player, delete and re-add</strong></p>;
     }
     return null;
   };
@@ -51,7 +51,7 @@ const PlayerChoice = (props) => {
     if (mode) {
       return <button className="button warning" onClick={handleContinue}>Continue</button>;
     }
-    return <button className="button" onClick={() => router.push('/')}>Cancel</button>;
+    return <button className="button cancel" onClick={() => router.push('/')}>Cancel</button>;
   };
 
   return (

@@ -6,16 +6,11 @@
     align-content: center;
 
     .button {
+      background: $mainblue;
       flex: 1;
       border-radius: 10px;
       margin: 1em;
       width: 80%;
-    }
-    .start {
-      background: darkgreen;
-    }
-    .resume {
-      background: goldenrod;
     }
   }
 }

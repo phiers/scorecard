@@ -21,7 +21,7 @@ const CourseChoice = (props) => {
     if (mode) {
       return null;
     }
-    return <button className="button expanded" onClick={() => router.push('/')}>Cancel</button>;
+    return <button className="button expanded cancel" onClick={() => router.push('/')}>Cancel</button>;
   };
 
   return (

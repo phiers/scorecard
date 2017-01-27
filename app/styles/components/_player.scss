@@ -1,5 +1,5 @@
 .player-choice {
-  margin: 4em 1em 1em 1em;
+  margin: 5em 1em 1em 1em;
   display: flex;
   flex-direction: column;
   button {
@@ -12,7 +12,9 @@
     margin-right: 0;
   }
   .player {
-
+    .cancel {
+      background: $cancelyellow;
+    }
     ul {
       margin: 0;
     }
@@ -35,6 +37,10 @@
         margin: .2em 1em;
         border-radius: 5px;
       }
+      .alert {
+        background: $alertred;
+        margin-right: 0;
+      }
     }
   }
 
@@ -51,11 +57,13 @@
         flex: 3;
       }
       button {
-        background: darkgreen !important;
+        background: $mainblue;
         flex: 1;
-        margin-left: 2px;
+        font-size: 1.8em;
+        margin-left: 6px;
         margin-bottom: 1rem;
         margin-top: 0;
+        padding: 2px 8px 10px 8px;
       }
     }
   }

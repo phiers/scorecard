@@ -47,9 +47,9 @@ const CourseAdd = (props) => {
             <p>Handicap</p>
           </span>
           < CourseAddHoleList />
-          <div className="button-group">
+        <div className="button-group expanded">
             <button
-              className="button"
+              className="button cancel"
               onClick={cancelAdd}
             >Cancel</button>
             <button

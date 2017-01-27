@@ -24,7 +24,7 @@ const PlayerAddForm = (props) => {
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="First name" />
         <input type="text" placeholder="Last name" />
-        <button className="button">Add</button>
+        <button className="button">+</button>
       </form>
     </div>
   );

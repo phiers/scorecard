@@ -41,8 +41,8 @@ const RoundSummary = (props) => {
         <span className="player-list-heading"><p>Name</p><p>Gross</p><p>Hdcp</p><p>Net</p></span>
         {renderPlayersList()}
         <div className="button-group">
-          <button className="button" onClick={() => router.push('/scorecard')}>View Scorecard</button>
-          <button className="button" onClick={handleFinalizeRound}>Finalize Round</button>
+          <button className="button" onClick={() => router.push('/scorecard')}>Edit Scorecard</button>
+          <button className="button alert" onClick={handleFinalizeRound}>Finalize Round</button>
         </div>
       </div>
     </div>
