@@ -15,10 +15,22 @@ const RoundMenu = (props) => {
       dispatch(settingsActions.startSetScoringMode(true));
       router.push('/players');
     };
+    const handleGroupStart = () => {
+      console.log('functionality todo');
+    };
     if (activeRound) {
-      return <p>You have an active round. To start a new round, first do one of the following:</p>;
+      return (
+        <p>You have an active round. To resume that round, choose the appropriate button below.
+          To start a new round, cancel or archive your active round.
+      </p>
+      );
     }
-    return <button className="button large" onClick={handleStart}>New Round</button>;
+    return (
+      <div className="column small-centered">
+        <button className="button large" onClick={handleStart}>New Round</button>
+        <button className="button large" onClick={handleGroupStart}>New Group Round</button>
+      </div>
+    );
   };
 
   const renderActiveRoundSection = () => {
@@ -61,7 +73,7 @@ const RoundMenu = (props) => {
     <div>
       <TitleBar title="Round Menu" />
       <div className="round-menu">
-        <div className="column small-centered">
+        <div>
           {renderStartSection()}
         </div>
         {renderActiveRoundSection()}

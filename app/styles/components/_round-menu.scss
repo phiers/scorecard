@@ -4,6 +4,7 @@
   .column {
     display: flex;
     align-content: center;
+    flex-direction: column;
 
     .button {
       background: $mainblue;

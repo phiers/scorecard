@@ -65,5 +65,5 @@ module.exports = {
       path.resolve(__dirname, './node_modules/foundation-sites/scss'),
     ],
   },
-  devtool: isProd ? '' : 'inline-source-map',
+  devtool: isProd ? '' : 'eval-source-map',
 };

@@ -38,6 +38,12 @@ const RoundHole = (props) => {
       onClick={() => router.push('/round')}
     > Round Info</button>
   );
+  const goHomeButton = () => (
+    <button
+      className="button tiny"
+      onClick={() => router.push('/start')}
+    > Main Menu</button>
+  );
 
   const renderPlayersList = () => round.players.map(
     p => (
@@ -49,7 +55,11 @@ const RoundHole = (props) => {
     );
   return (
     <div>
-      <TitleBar left={returnToRoundInfoButton()} title={`Scoring for Hole #${hole}`} />
+      <TitleBar
+        left={returnToRoundInfoButton()}
+        title={`Scoring for Hole #${hole}`}
+        right={goHomeButton()}
+      />
       <div className="hole">
         <div className="hole-info">
           <div className="hole-label"><span>Par</span><span>{par}</span></div>
