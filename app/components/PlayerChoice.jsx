@@ -41,6 +41,14 @@ const PlayerChoice = (props) => {
     }
     return 'Manage Players';
   };
+
+  const goHomeButton = () => (
+    <button
+      className="button tiny"
+      onClick={() => props.router.push('/start')}
+    > Main Menu</button>
+  );
+
   const renderMessage = () => {
     if (!mode) {
       return <p><strong>To edit a player, delete and re-add</strong></p>;
@@ -51,12 +59,12 @@ const PlayerChoice = (props) => {
     if (mode) {
       return <button className="button warning" onClick={handleContinue}>Continue</button>;
     }
-    return <button className="button cancel" onClick={() => router.push('/')}>Cancel</button>;
+    return null;
   };
 
   return (
     <div>
-      <TitleBar title={renderTitle()} />
+      <TitleBar left={goHomeButton()} title={renderTitle()} />
       <div className="player-choice">
         <PlayerAddForm />
         {renderMessage()}

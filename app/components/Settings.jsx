@@ -29,9 +29,17 @@ const Settings = (props) => {
     evt.target[1].value = '';
     evt.target[2].value = '';
   };
+
+  const goBackButton = () => (
+    <button
+      className="button tiny"
+      onClick={() => props.router.push('/start')}
+    > Main Menu</button>
+  );
+
   return (
     <div>
-      <TitleBar title="Settings" />
+      <TitleBar left={goBackButton()} title="Settings" />
       <div className="settings">
         <h3>Enter or update your information:</h3>
         <form onSubmit={handleSubmit}>

@@ -39,7 +39,7 @@ const Course = (props) => {
     return (
       <div className="button-group tiny">
         <button className="button" id={id} onClick={handleEdit}>Edit</button>
-        <button className="button" id={id} onClick={handleDelete}>Delete</button>
+        <button className="button alert" id={id} onClick={handleDelete}>Delete</button>
       </div>
     );
   };

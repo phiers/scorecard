@@ -9,12 +9,18 @@ import * as settingsActions from 'settingsActions';
 
 const RoundSummary = (props) => {
   const { course, dispatch, players, round, router } = props;
+
   const handleFinalizeRound = () => {
+    // uncheck players in players object
+    round.players.forEach(p => dispatch(playerActions.startSelectPlayer(p.id)));
+    // move to archivedRounds and delete current round
     dispatch(roundActions.startArchiveRound());
+    // set scoringMode back to false
     dispatch(settingsActions.startSetScoringMode(false));
     alert('Your round has been submitted');
     router.push('/');
   };
+
   const renderPlayersList = () => round.players.map((p) => {
     const gross = p.scores.reduce((a, b) => { // eslint-disable-line
       return a + b.score;

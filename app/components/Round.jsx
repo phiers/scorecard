@@ -76,11 +76,13 @@ const Round = (props) => {
       <div className="round">
         <div className="round-info">
           <p>COURSE: {course.name}, {course.state}
-            <button className={editButtonClasses}>Edit</button>
+            <button className={editButtonClasses} onClick={() => router.push('/courses')}>Edit</button>
           </p>
         </div>
         <div className="round-info">
-          <p>PLAYERS: <button className={editButtonClasses}>Edit</button></p>
+          <p>PLAYERS:
+            <button className={editButtonClasses} onClick={() => router.push('/players')}>Edit</button>
+          </p>
         </div>
         <span className="player-list-heading"><p>Name</p><p>Handicap</p></span>
         {renderPlayersList()}

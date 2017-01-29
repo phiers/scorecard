@@ -7,6 +7,7 @@ import * as settingsActions from 'settingsActions';
 import * as playerActions from 'playerActions';
 import * as courseActions from 'courseActions';
 import * as roundActions from 'roundActions';
+import * as archiveActions from 'archivedRoundActions';
 import firebase, {firebaseRef } from 'firebaseConfig';
 import routes from 'routes';
 import store from 'configureStore';
@@ -36,11 +37,11 @@ firebase.auth().onAuthStateChanged((user) => {
         roundId: 'player1',
       },
     }));
-    // add player and course data from database
+    // add data from database
     store.dispatch(playerActions.startFetchPlayers());
     store.dispatch(courseActions.startFetchCourses());
     store.dispatch(roundActions.startFetchActiveRound());
-
+    store.dispatch(archiveActions.startFetchArchivedRounds());
     browserHistory.push('/start');
   } else {
     store.dispatch(settingsActions.logout());

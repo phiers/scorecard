@@ -69,9 +69,17 @@ const RoundMenu = (props) => {
     }
     return null;
   };
+
+  const goBackButton = () => (
+    <button
+      className="button tiny"
+      onClick={() => props.router.push('/start')}
+    > Main Menu</button>
+  );
+
   return (
     <div>
-      <TitleBar title="Round Menu" />
+      <TitleBar left={goBackButton()} title="Round Menu" />
       <div className="round-menu">
         <div>
           {renderStartSection()}

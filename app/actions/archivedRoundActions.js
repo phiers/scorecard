@@ -35,7 +35,7 @@ function fetchArchivedRound(round) {
 export function startFetchArchivedRounds() {
   return (dispatch, getState) => {
     const uid = getState().settings.user.id;
-    const roundRef = firebaseRef.child(`users/${uid}/archivedRounds`);
+    const roundRef = firebaseRef.child(`users/${uid}/archivedRounds`).limitToLast(20);
     return roundRef.once('value').then((snapshot) => {
       if (snapshot.val() !== null) {
         snapshot.forEach((round) => {

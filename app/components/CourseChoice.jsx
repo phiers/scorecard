@@ -17,19 +17,18 @@ const CourseChoice = (props) => {
     return 'Manage Courses';
   };
 
-  const renderButton = () => {
-    if (mode) {
-      return null;
-    }
-    return <button className="button expanded cancel" onClick={() => router.push('/')}>Cancel</button>;
-  };
+  const goBackButton = () => (
+    <button
+      className="button tiny"
+      onClick={() => props.router.push('/start')}
+    > Main Menu</button>
+  );
 
   return (
     <div>
-      <TitleBar title={renderTitle()} />
+      <TitleBar left={goBackButton()} title={renderTitle()} />
       <div className="course-choice">
         <CourseList />
-        {renderButton()}
       </div>
     </div>
   );

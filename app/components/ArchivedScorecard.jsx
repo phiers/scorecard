@@ -39,12 +39,19 @@ class Scorecard extends Component {
       return <button className="button tiny" onClick={handleClick}>{buttonText}</button>;
     };
 
+    const goBackButton = () => (
+      <button
+        className="button tiny"
+        onClick={() => this.props.router.push('/roundlist')}
+      > Round List</button>
+    );
+
     const renderCard = () =>
       holeData.map(hole => <ScorecardRow key={hole.holeNo} {...hole} />);
 
     return (
       <div>
-        <TitleBar title="Scorecard" left={renderSummaryButton()} />
+        <TitleBar title="Scorecard" left={renderSummaryButton()} right={goBackButton()} />
         <div className="scorecard">
           <div className={showSummary}>
             <ScorecardSummary {...round} />
@@ -73,7 +80,8 @@ class Scorecard extends Component {
 /* eslint-disable react/forbid-prop-types */
 Scorecard.propTypes = {
   params: PropTypes.object.isRequired,
-  rounds: PropTypes.object.isRequired,
+  rounds: PropTypes.array.isRequired,
+  router: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({ rounds: state.archivedRounds });

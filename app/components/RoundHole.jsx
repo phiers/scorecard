@@ -32,12 +32,12 @@ const RoundHole = (props) => {
     }
   };
 
-  const returnToRoundInfoButton = () => (
-    <button
-      className="button tiny"
-      onClick={() => router.push('/round')}
-    > Round Info</button>
-  );
+  // const returnToRoundInfoButton = () => (
+  //   <button
+  //     className="button tiny"
+  //     onClick={() => router.push('/round')}
+  //   > Round Info</button>
+  // );
   const goHomeButton = () => (
     <button
       className="button tiny"
@@ -56,9 +56,8 @@ const RoundHole = (props) => {
   return (
     <div>
       <TitleBar
-        left={returnToRoundInfoButton()}
+        left={goHomeButton()}
         title={`Scoring for Hole #${hole}`}
-        right={goHomeButton()}
       />
       <div className="hole">
         <div className="hole-info">
