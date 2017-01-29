@@ -1,39 +1,73 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const isProd = (process.env.NODE_ENV === 'production');
+const production = process.env.NODE_ENV === 'production';
+// Define base plugins
+let plugins = [
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+  }),
+  new webpack.optimize.CommonsChunkPlugin({
+    names: ['vendor', 'manifest'], // exclude any duplicate imports already in vendor bundle
+  }),
+  new HtmlWebpackPlugin({
+    template: 'app/index.html',
+  }),
+];
+// Add plugins to be run in production
+if (production) {
+  plugins = plugins.concat([
+    new webpack.optimize.DedupePlugin(),  // won't be necessary in wp2
+    new webpack.optimize.OccurenceOrderPlugin(), // also not necessary in 2
+    new webpack.optimize.MinChunkSizePlugin({
+      minChunkSize: 51200,
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: true,
+      compress: {
+        warnings: false,
+        pure_getters: true,
+        unsafe: true,
+        unsafe_comps: true,
+        screw_ie8: true,
+      },
+      output: {
+        comments: false,
+      },
+      exclude: [/\.min\.js$/gi], // skip pre-minified libs
+    }),
+    new webpack.DefinePlugin({ // makes var available on window
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
+  ]);
+}
+const VENDOR_LIBS = [
+  'firebase', 'lodash.clonedeep', 'react', 'react-dom',
+  'react-redux', 'react-router', 'redux', 'redux-logger', 'redux-thunk',
+];
 
+// Finally, webpack config
 module.exports = {
-  entry: [
-    'script!jquery/dist/jquery.min.js',
-    'script!foundation-sites/dist/js/foundation.min.js',
-    './app/app.jsx',
-  ],
+  entry: {
+    foundation: [
+      '!!script!jquery/dist/jquery.min.js',
+      '!!script!foundation-sites/dist/js/foundation.min.js',
+    ],
+    bundle: './app/app.jsx',
+    vendor: VENDOR_LIBS,
+  },
+  output: {
+    path: path.join(__dirname, '/public'),
+    publicPath: '/',
+    filename: '[name].[chunkhash].js',
+  },
   externals: {
     jquery: 'jQuery',
     foundation: 'Foundation',
   },
-  plugins: [
-    new webpack.ProvidePlugin({
-      '$': 'jquery',
-      'jQuery': 'jquery',
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false,
-    //   },
-    //}),
-  ],
-  output: {
-    path: __dirname + '/public',
-    publicPath: '/public/',
-    filename: 'bundle.js',
-  },
+  plugins,
   resolve: {
     root: __dirname,
     modulesDirectories: [
@@ -65,5 +99,6 @@ module.exports = {
       path.resolve(__dirname, './node_modules/foundation-sites/scss'),
     ],
   },
-  devtool: isProd ? '' : 'eval-source-map',
+  debug: !production,
+  devtool: production ? false : 'eval-source-map',
 };

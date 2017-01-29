@@ -5,14 +5,14 @@
   "main": "index.html",
   "scripts": {
     "test": "karma start",
-    "build": "webpack -p",
+    "clean": "rimraf public",
+    "build": "NODE_ENV=production npm run clean && webpack -p",
     "start": "npm run build && node server.js",
-    "dev": "node server.js"
+    "dev": "npm run clean && webpack && node server.js"
   },
   "author": "Paul Hiers",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.14.0",
     "express": "^4.14.0",
     "firebase": "^3.6.6",
     "lodash.clonedeep": "^4.5.0",
@@ -23,7 +23,8 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.2.0",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "webpack-dev-middleware": "^1.9.0"
   },
   "devDependencies": {
     "babel-core": "^6.5.1",
@@ -40,6 +41,7 @@
     "eslint-plugin-react": "^6.8.0",
     "expect": "^1.14.0",
     "foundation-sites": "^6.2.0",
+    "html-webpack-plugin": "^2.26.0",
     "jquery": "^2.2.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.2",
@@ -50,6 +52,7 @@
     "mocha": "^2.4.5",
     "node-sass": "^3.4.2",
     "react-addons-test-utils": "^15.4.1",
+    "rimraf": "^2.5.4",
     "sass-loader": "^3.1.2",
     "script-loader": "^0.6.1",
     "style-loader": "^0.13.0",
