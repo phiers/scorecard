@@ -1,4 +1,5 @@
 import { firebaseRef } from 'firebaseConfig'; // eslint-disable-line
+import { archiveRound } from 'archivedRoundActions'; // eslint-disable-line
 
 export function addPlayers(players) {
   return {
@@ -222,6 +223,7 @@ export function startArchiveRound() {
         date,
       };
       archivedRoundRef.push(archivedRound);
+      dispatch(archiveRound(archivedRound)); // actually an archived round action...
       dispatch(startCancelRound());
     });
   };

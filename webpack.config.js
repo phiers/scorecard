@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; // eslint-disable-line
 
 const production = process.env.NODE_ENV === 'production';
 // Define base plugins
@@ -9,17 +10,12 @@ let plugins = [
     $: 'jquery',
     jQuery: 'jquery',
   }),
-  new webpack.optimize.CommonsChunkPlugin({
-    names: ['vendor', 'manifest'], // exclude any duplicate imports already in vendor bundle
-  }),
-  new HtmlWebpackPlugin({
-    template: 'app/index.html',
-  }),
 ];
+
 // Add plugins to be run in production
 if (production) {
   plugins = plugins.concat([
-    new webpack.optimize.DedupePlugin(),  // won't be necessary in wp2
+    // new webpack.optimize.DedupePlugin(),  // won't be necessary in wp2
     new webpack.optimize.OccurenceOrderPlugin(), // also not necessary in 2
     new webpack.optimize.MinChunkSizePlugin({
       minChunkSize: 51200,
@@ -28,10 +24,6 @@ if (production) {
       mangle: true,
       compress: {
         warnings: false,
-        pure_getters: true,
-        unsafe: true,
-        unsafe_comps: true,
-        screw_ie8: true,
       },
       output: {
         comments: false,
@@ -41,12 +33,9 @@ if (production) {
     new webpack.DefinePlugin({ // makes var available on window
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
+    new BundleAnalyzerPlugin(),
   ]);
 }
-const VENDOR_LIBS = [
-  'firebase', 'lodash.clonedeep', 'react', 'react-dom',
-  'react-redux', 'react-router', 'redux', 'redux-logger', 'redux-thunk',
-];
 
 // Finally, webpack config
 module.exports = {
@@ -56,12 +45,11 @@ module.exports = {
       '!!script!foundation-sites/dist/js/foundation.min.js',
     ],
     bundle: './app/app.jsx',
-    vendor: VENDOR_LIBS,
   },
   output: {
     path: path.join(__dirname, '/public'),
     publicPath: '/',
-    filename: '[name].[chunkhash].js',
+    filename: '[name].js',
   },
   externals: {
     jquery: 'jQuery',
@@ -100,5 +88,5 @@ module.exports = {
     ],
   },
   debug: !production,
-  devtool: production ? false : 'eval-source-map',
+  devtool: !production ? 'eval-source-map' : '',
 };

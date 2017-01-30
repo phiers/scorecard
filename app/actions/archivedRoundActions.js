@@ -1,5 +1,12 @@
 import { firebaseRef } from 'firebaseConfig'; // eslint-disable-line
 
+export function archiveRound(round) {
+  return {
+    type: 'ARCHIVE_ROUND',
+    round,
+  };
+}
+
 function removeRound(id) {
   return {
     type: 'REMOVE_ROUND',

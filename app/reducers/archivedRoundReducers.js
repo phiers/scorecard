@@ -1,9 +1,13 @@
 const archivedRoundReducers = (state = [], action) => {
   switch (action.type) {
+    case 'ARCHIVE_ROUND':
+      return [...state, action.round];
+
     case 'FETCH_ARCHIVED_ROUND': {
       const round = action.round;
       return [...state, round];
     }
+
     case 'REMOVE_ROUND':
       return state.filter((round) => {
         if (round.id === action.id) {
@@ -11,6 +15,7 @@ const archivedRoundReducers = (state = [], action) => {
         }
         return true;
       });
+
     default:
       return state;
   }

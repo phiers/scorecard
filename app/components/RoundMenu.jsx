@@ -86,7 +86,7 @@ const RoundMenu = (props) => {
         </div>
         {renderActiveRoundSection()}
         <div className="column small-centered">
-          <Link to="/roundList" className="button large">History</Link>
+          <Link to="/roundList" className="button large">Round History</Link>
         </div>
       </div>
     </div>

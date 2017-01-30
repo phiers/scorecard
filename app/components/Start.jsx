@@ -10,16 +10,16 @@ const Start = () => (
     <TitleBar title="Main Menu" />
     <div className="start-page">
       <div className="column small-centered">
-        <Link to="round-menu" className="button large">My Rounds</Link>
+        <Link to="round-menu" className="button large play">Play Golf</Link>
       </div>
       <div className="column small-centered">
-        <Link to="/players" className=" button large">My Players</Link>
+        <Link to="/players" className=" button large">Manage Players</Link>
       </div>
       <div className="column small-centered">
-        <Link to="/courses" className=" button large">My Courses</Link>
+        <Link to="/courses" className=" button large">Manage Courses</Link>
       </div>
       <div className="column small-centered">
-        <Link to="/settings" className="button large">My Settings</Link>
+        <Link to="/settings" className="button large user-info">Manage My User Info</Link>
       </div>
       <div className="column small-centered">
         <button

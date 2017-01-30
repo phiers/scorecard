@@ -10,6 +10,7 @@ const initialPlayers = [
   { id: 9, last: 'Kristoff', first: 'Jeff', checked: false },
   { id: 10, last: 'Uhlman', first: 'Jim', checked: false },
   { id: 11, last: 'Zimmerman', first: 'Andy', checked: false },
+  { id: 12, last: 'Hiers', first: 'Paul', checked: false },
 ];
 
 export default initialPlayers;

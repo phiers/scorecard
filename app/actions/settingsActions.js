@@ -67,7 +67,7 @@ export function initializeUserInfo(user) {
     const uid = getState().settings.user.id;
     const settingsRef = firebaseRef.child(`users/${uid}/settings`);
     return settingsRef.once('value').then((snap) => {
-      if (!snap.val().user.first) {
+      if (snap.val() === null) {
         return settingsRef.update(user).then(() => {
           dispatch(updateUserInfo(user));
         });
