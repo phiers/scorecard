@@ -6,21 +6,22 @@ import Course from 'Course'; // eslint-disable-line
 /* eslint-disable no-confusing-arrow */
 const CourseList = (props) => {
   const { courses, settings } = props;
-  const mode = settings.scoringMode;
+  const scoring = settings.scoringMode;
+  const group = settings.groupMode;
 
   const renderCourses = () =>
     courses.sort((a, b) => a.name < b.name ? -1 : 1)
     .map(course => <Course key={course.id} {...course} />);
   // change title of last column for scoring or manage mode
   const renderLastColumnTitle = () => {
-    if (mode) {
+    if (scoring || group) {
       return 'Select';
     }
     return 'Actions';
   };
   // only render add button in manage mode
   const renderAddButton = () => {
-    if (!mode) {
+    if (!scoring && !group) {
       return <Link to="/add-course" className="button expanded">Add New Course</Link>;
     }
     return null;

@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 /* eslint-disable */
 import archivedRoundReducers from 'archivedRoundReducers';
 import courseReducers from 'courseReducers';
+import groupRoundReducers from 'groupRoundReducers';
 import playerReducers from 'playerReducers';
 import roundReducers from 'roundReducers';
 import settingsReducers from 'settingsReducers';
@@ -11,6 +12,7 @@ import settingsReducers from 'settingsReducers';
 
 const reducer = combineReducers({
   courses: courseReducers,
+  groupRounds: groupRoundReducers,
   players: playerReducers,
   round: roundReducers,
   archivedRounds: archivedRoundReducers,

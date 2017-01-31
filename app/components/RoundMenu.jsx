@@ -8,16 +8,20 @@ import * as roundActions from 'roundActions';
 import * as playerActions from 'playerActions';
 /* eslint-enable */
 const RoundMenu = (props) => {
-  const { dispatch, router, activeRound, round } = props;
+  const { dispatch, groups, router, activeRound, round } = props;
 
   const renderStartSection = () => {
-    const handleStart = () => {
+    const handleStart = (evt) => {
       dispatch(settingsActions.startSetScoringMode(true));
-      router.push('/players');
+      if (evt.target.textContent === 'New Round') {
+        router.push('/players');
+      } else if (groups.length > 0) { // check to see if there are groups to choose from
+        router.push('/group-rounds');
+      } else {
+        alert('There are no active groups. Select "Add Group Round" or "New Round"');
+      }
     };
-    const handleGroupStart = () => {
-      console.log('functionality todo');
-    };
+
     if (activeRound) {
       return (
         <p>You have an active round. To resume that round, choose the appropriate button below.
@@ -28,7 +32,7 @@ const RoundMenu = (props) => {
     return (
       <div className="column small-centered">
         <button className="button large" onClick={handleStart}>New Round</button>
-        <button className="button large" onClick={handleGroupStart}>New Group Round</button>
+        <button className="button large" onClick={handleStart}>Join Group Round</button>
       </div>
     );
   };
@@ -64,6 +68,7 @@ const RoundMenu = (props) => {
           </div>
         </div>
       );
+      // clear the active round automatically if no hole scores
     } else if (activeRound && !props.round.lastHole) {
       handleCancel();
     }
@@ -86,6 +91,9 @@ const RoundMenu = (props) => {
         </div>
         {renderActiveRoundSection()}
         <div className="column small-centered">
+          <Link to="/group-round-add" className="button large">Add Group Round</Link>
+        </div>
+        <div className="column small-centered">
           <Link to="/roundList" className="button large">Round History</Link>
         </div>
       </div>
@@ -96,6 +104,7 @@ const RoundMenu = (props) => {
 RoundMenu.propTypes = {
   dispatch: PropTypes.func.isRequired,
   activeRound: PropTypes.bool.isRequired,
+  groups: PropTypes.array.isRequired, // eslint-disable-line
   round: PropTypes.object.isRequired, // eslint-disable-line
   router: PropTypes.object.isRequired, // eslint-disable-line
 };
@@ -104,6 +113,7 @@ const mapStateToProps = (state) => { // eslint-disable-line
   return {
     activeRound: state.settings.scoringMode,
     round: state.round,
+    groups: state.groupRounds,
   };
 };
 

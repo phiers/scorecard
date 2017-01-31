@@ -23,6 +23,11 @@ const settingsReducers = (state = initialState, action) => {
           id: undefined,
         },
       };
+    case 'SET_GROUP_MODE':
+      return {
+        ...state,
+        groupMode: action.mode,
+      };
     case 'SET_SCORING_MODE':
       return {
         ...state,

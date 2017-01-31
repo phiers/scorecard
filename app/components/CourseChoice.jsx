@@ -9,9 +9,10 @@ const CourseChoice = (props) => {
   const { router, settings } = props;
 
   // render items based on choosing or managing mode
-  const mode = settings.scoringMode;
+  const scoring = settings.scoringMode;
+  const group = settings.groupMode;
   const renderTitle = () => {
-    if (mode) {
+    if (scoring || group) {
       return 'Choose Course';
     }
     return 'Manage Courses';

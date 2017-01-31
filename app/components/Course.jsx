@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import * as courseActions from 'courseActions';  // eslint-disable-line
 import * as roundActions from 'roundActions';  // eslint-disable-line
+import * as groupActions from 'groupRoundActions'; // eslint-disable-line
 
 const Course = (props) => {
-  const { courses, dispatch, name, state, settings, id } = props;
-  const mode = settings.scoringMode;
+  const { courses, dispatch, name, state, settings, id, groupRounds } = props;
+  const scoring = settings.scoringMode;
+  const group = settings.groupMode;
 
   // set up round object when in scoring mode
   const handleSelect = (evt) => {
@@ -17,6 +19,16 @@ const Course = (props) => {
     // (it depends on there being a round.course object)
     dispatch(roundActions.selectCourse(courseChoice));
     browserHistory.push('/round');
+  };
+  // Group select mode
+  const handleGroupSelect = (evt) => {
+    evt.preventDefault();
+    // grab course selected
+    const courseChoice = courses.find(c => c.id.toString() === evt.target.id);
+    // grab relevant group round (course initially set to false)
+    const groupChoice = groupRounds.find(g => g.course === false);
+    dispatch(groupActions.startSelectCourse(groupChoice.id, courseChoice));
+    browserHistory.push('/round-menu');
   };
 
   // functionality for manage mode
@@ -33,8 +45,11 @@ const Course = (props) => {
 
   // render button group based on mode
   const renderAction = () => {
-    if (mode) {
+    if (scoring) {
       return <button className="button tiny" id={id} onClick={handleSelect}>Select</button>;
+    }
+    if (group) {
+      return <button className="button tiny" id={id} onClick={handleGroupSelect}>Select</button>;
     }
     return (
       <div className="button-group tiny">

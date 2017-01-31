@@ -9,6 +9,11 @@ const roundReducers = (state = {}, action) => {
         players,
       };
     }
+    case 'ADD_GROUP_KEY':
+      return {
+        ...state,
+        groupKey: action.groupKey,
+      };
     case 'CANCEL_ROUND':
       return {};
     case 'FETCH_ROUND':

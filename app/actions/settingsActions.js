@@ -30,6 +30,24 @@ export function startFetchSettings() {
   };
 }
 
+function setGroupMode(mode) {
+  return {
+    type: 'SET_GROUP_MODE',
+    mode,
+  };
+}
+
+export function startSetGroupMode(mode) {
+  return (dispatch, getState) => {
+    const uid = getState().settings.user.id;
+    const settingsRef = firebaseRef.child(`users/${uid}/settings`);
+    const update = { scoringMode: mode };
+    return settingsRef.update(update).then(() => {
+      dispatch(setGroupMode(mode));
+    });
+  };
+}
+
 export function setScoringMode(mode) {
   return {
     type: 'SET_SCORING_MODE',
@@ -42,10 +60,7 @@ export function startSetScoringMode(mode) {
     const user = getState().settings.user;
     const uid = user.id;
     const settingsRef = firebaseRef.child(`users/${uid}/settings`);
-    const update = {
-      scoringMode: mode,
-      user,
-    };
+    const update = { scoringMode: mode };
     return settingsRef.update(update).then(() => {
       dispatch(setScoringMode(mode));
     });

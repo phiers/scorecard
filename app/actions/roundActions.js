@@ -1,6 +1,22 @@
 import { firebaseRef } from 'firebaseConfig'; // eslint-disable-line
 import { archiveRound } from 'archivedRoundActions'; // eslint-disable-line
 
+function addGroupKey(groupKey) {
+  return {
+    type: 'ADD_GROUP_KEY',
+    groupKey,
+  };
+}
+
+export function startAddGroupKey(groupKey) {
+  return (dispatch, getState) => {
+    const uid = getState().settings.user.id;
+    const ref = firebaseRef.child(`users/${uid}/round`);
+    ref.update({ groupKey })
+    .then(() => dispatch(addGroupKey(groupKey)));
+  };
+}
+
 export function addPlayers(players) {
   return {
     type: 'ADD_PLAYERS',

@@ -1,6 +1,12 @@
 {
   "rules": {
     "users": {
+      "public": {
+      	"$publicRoundId": {
+        	".read": true,
+        	".write": true
+      	}
+    	},
       "$userId": {
         ".read": "auth != null",
         ".write": "$userId === auth.uid"

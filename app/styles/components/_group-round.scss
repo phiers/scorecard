@@ -1,0 +1,22 @@
+.group-round {
+  margin: 4em 0;
+
+  table {
+    margin-top: 0;
+    thead, tbody {
+      .group-list-row {
+        td:first-of-type {
+          text-align: center;
+          input {
+            font-size: 1.5em;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+  .button {
+    width: 75%;
+    margin: 2rem auto;
+  }
+}

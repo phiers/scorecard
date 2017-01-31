@@ -8,6 +8,7 @@ import * as playerActions from 'playerActions';
 import * as courseActions from 'courseActions';
 import * as roundActions from 'roundActions';
 import * as archiveActions from 'archivedRoundActions';
+import * as groupActions from 'groupRoundActions';
 import firebase, {firebaseRef } from 'firebaseConfig';
 import routes from 'routes';
 import store from 'configureStore';
@@ -42,6 +43,7 @@ firebase.auth().onAuthStateChanged((user) => {
     store.dispatch(courseActions.startFetchCourses());
     store.dispatch(roundActions.startFetchActiveRound());
     store.dispatch(archiveActions.startFetchArchivedRounds());
+    store.dispatch(groupActions.startFetchGroupRoundList());
     browserHistory.push('/start');
   } else {
     store.dispatch(settingsActions.logout());
