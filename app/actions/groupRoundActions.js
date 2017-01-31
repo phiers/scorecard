@@ -12,14 +12,29 @@ export function startAddGroupRound(name) {
     const publicRef = firebaseRef.child('public');
     const id = publicRef.push().key;
     const newRound = { name, id, checked: false, course: false };
-    publicRef.push(newRound)
+    return publicRef.push(newRound)
     .then(dispatch(addGroupRound(newRound)));
   };
 }
+// TODO: no reducer -- add to some firebase api file? See bigger ? about groups in redux state
+export function addPlayersToGroup(groupKey, players) {
+  return (dispatch) => {
+    const publicRef = firebaseRef.child('public');
+    return publicRef.once('value').then((snap) => {
+      snap.forEach((group) => {
+        if (group.val().id === groupKey) {
+          publicRef.child(`${group.key}`).push(players);
+          // .then(() => dispatch(selectCourse(id, course)));
+        }
+        return false;
+      });
+    });
+  };
+}
 
-function selectCourse(id, course) {
+export function selectGroupCourse(course) {
   return {
-    type: 'SELECT_COURSE',
+    type: 'SELECT_GROUP_COURSE',
     course,
   };
 }
@@ -30,8 +45,8 @@ export function startSelectCourse(id, course) {
     return publicRef.once('value').then((snap) => {
       snap.forEach((group) => {
         if (group.val().id === id) {
-          return publicRef.child(group.key).update({ course })
-          .then(() => dispatch(selectCourse(id, course)));
+          return publicRef.child(group.key).update({ course });
+          // .then(() => dispatch(selectGroupCourse(course)));
         }
         return false;
       });
@@ -58,6 +73,30 @@ export function startSelectGroup(id) {
           .then(() => dispatch(selectGroup(id, child.key)));
         }
         return false;
+      });
+    });
+  };
+}
+
+export function saveGroupPlayerScore(groupKey, playerId, score, hole) {
+  return () => {
+    const ref = firebaseRef.child('public');
+    ref.once('value').then((snap) => {
+      snap.forEach((node) => {
+        if (node.val().id === groupKey) {
+          node.forEach((playerArray) => {
+            playerArray.forEach((player) => {
+              if (player.val().id === playerId) {
+                // update scores
+                ref.child(`${node.key}/${playerArray.key}/${player.key}/scores`).update({ [hole]: score });
+                // update last hole if not editing
+                if (player.val().lastHole < hole || !player.val().lastHole) {
+                  ref.child(`${node.key}/${playerArray.key}/${player.key}`).update({ lastHole: hole });
+                }
+              }
+            });
+          });
+        }
       });
     });
   };

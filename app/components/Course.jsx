@@ -28,6 +28,7 @@ const Course = (props) => {
     // grab relevant group round (course initially set to false)
     const groupChoice = groupRounds.find(g => g.course === false);
     dispatch(groupActions.startSelectCourse(groupChoice.id, courseChoice));
+    dispatch(groupActions.selectGroupCourse(courseChoice));
     browserHistory.push('/round-menu');
   };
 

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import TitleBar from 'TitleBar';
 import UtilityInput from 'UtilityInput';
 import * as roundActions from 'roundActions';
+import { saveGroupPlayerScore } from 'groupRoundActions';
 /* eslint-enable */
 
 const RoundHole = (props) => {
@@ -21,7 +22,11 @@ const RoundHole = (props) => {
 
       dispatch(roundActions.startSaveHoleScore(playerId, hole, score));
       dispatch(roundActions.startSavePlayerScore(playerId, hole, score));
+      dispatch(saveGroupPlayerScore(round.groupKey, round.players[i].id, score, hole));
     }
+    // update group scores
+    // round.players.forEach(player =>
+    //   dispatch(saveGroupPlayerScore(round.groupKey, player.id, player.scores)));
     // update last hole played
     dispatch(roundActions.startUpdateLastHole(hole));
     // continue to next hole

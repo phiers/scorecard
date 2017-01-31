@@ -6,6 +6,7 @@ import UtilityInput from 'UtilityInput';
 import * as playerActions from 'playerActions';
 import * as roundActions from 'roundActions';
 import * as settingsActions from 'settingsActions';
+import { addPlayersToGroup } from 'groupRoundActions';
 /* eslint-enable */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 const Round = (props) => {
@@ -29,8 +30,27 @@ const Round = (props) => {
         score: null,
       });
     }
-    // round.players.forEach(p => dispatch(roundActions.setupScoring(p.id, scores)));
-    round.players.forEach(p => dispatch(roundActions.startSetupScoring(p.id, scores)));
+    // add group to group scoring if in playing in group
+    if (round.groupKey) {
+      const key = round.groupKey;
+      // build the object to update firebase instead of counting on redux being updated
+      const groupPlayers = [];
+      // use handicap nodes from above to set player object (otherwise, handicap is null)
+      for (let i = 0; i < handicaps.length; i += 1) {
+        const p = round.players;
+        groupPlayers.push({
+          id: p[i].id,
+          name: `${p[i].first} ${p[i].last}`,
+          hdcp: parseInt(handicaps[i].textContent, 10),
+        });
+      }
+
+      dispatch(addPlayersToGroup(key, groupPlayers));
+    }
+    // set up scoring array for each player
+    round.players.forEach((p) => {
+      dispatch(roundActions.startSetupScoring(p.id, scores));
+    });
     // navigate to first hole scoring
     router.push('/round/1');
   };

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import TitleBar from 'TitleBar';
 import UtilityInput from 'UtilityInput';
 import * as roundActions from 'roundActions';
+import { saveGroupPlayerScore } from 'groupRoundActions';
 /* eslint-enable */
 
 const RoundHole = (props) => {
@@ -15,9 +16,11 @@ const RoundHole = (props) => {
   const handleSave = () => {
     const scoreNode = document.querySelectorAll('.score');
     for (let i = 0; i < scoreNode.length; i += 1) {
-      const playerID = round.players[i].roundId;
+      const playerId = round.players[i].roundId;
       const score = parseInt(scoreNode[i].textContent, 10);
-      dispatch(roundActions.saveHoleScore(playerID, hole, score));
+      dispatch(roundActions.startSaveHoleScore(playerId, hole, score));
+      dispatch(roundActions.startSavePlayerScore(playerId, hole, score));
+      dispatch(saveGroupPlayerScore(round.groupKey, round.players[i].id, score, hole));
     }
     // Navigation
     router.push('/scorecard');
