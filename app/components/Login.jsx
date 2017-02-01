@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 // import { browserHistory } from 'react-router';
 /* eslint-disable */
@@ -29,7 +29,3 @@ const Login = () => {
 };
 
 export default connect()(Login);
-
-Login.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};

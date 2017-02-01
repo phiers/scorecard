@@ -8,7 +8,7 @@ import * as settingsActions from 'settingsActions';
 /* eslint-enable */
 
 const RoundSummary = (props) => {
-  const { course, dispatch, players, round, router } = props;
+  const { course, dispatch, round, router } = props;
 
   const handleFinalizeRound = () => {
     // uncheck players in players object
@@ -17,7 +17,7 @@ const RoundSummary = (props) => {
     dispatch(roundActions.startArchiveRound());
     // set scoringMode back to false
     dispatch(settingsActions.startSetScoringMode(false));
-    alert('Your round has been submitted');
+    alert('Your round has been submitted'); // eslint-disable-line
     router.push('/');
   };
 
@@ -54,6 +54,14 @@ const RoundSummary = (props) => {
     </div>
   );
 };
+
+RoundSummary.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  router: Proptypes.object.isRequired, // eslint-disable-line
+  round: PropTypes.object.isRequired, // eslint-disable-line
+  course: PropTypes.object.isRequired, // eslint-disable-line
+};
+
 const mapStateToProps = (state) => {
   // grab selected players by comparing to round player ids
   const playerIdsArr = state.round.players.map(player => player.id);

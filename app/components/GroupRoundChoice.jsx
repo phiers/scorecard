@@ -6,14 +6,13 @@ import GroupRoundList from 'GroupRoundList';
 import * as roundActions from 'roundActions';
 import * as actions from 'groupRoundActions';
 /* eslint-enable */
+/* eslint-disable no-alert */
 
 const GroupRoundChoice = (props) => {
   const { router, groups, dispatch } = props;
   const handleContinue = () => {
     // create array of checked groups
-    const selected = groups.filter((group) => {
-      return group.checked === true;
-    });
+    const selected = groups.filter(group => group.checked === true);
     if (selected.length === 0) {
       router.push('/players');
     } else if (selected.length > 1) {
@@ -38,6 +37,7 @@ const GroupRoundChoice = (props) => {
 };
 
 GroupRoundChoice.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   groups: PropTypes.array, //eslint-disable-line
   router: PropTypes.object.isRequired, //eslint-disable-line
 };

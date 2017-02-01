@@ -18,7 +18,7 @@ const RoundMenu = (props) => {
       } else if (groups.length > 0) { // check to see if there are groups to choose from
         router.push('/group-rounds');
       } else {
-        alert('There are no active groups. Select "Add Group Round" or "New Round"');
+        alert('There are no active groups. Select "Add Group Round" or "New Round"'); // eslint-disable-line
       }
     };
 

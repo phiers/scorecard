@@ -25,7 +25,7 @@ const Course = (props) => {
     evt.preventDefault();
     // grab course selected
     const courseChoice = courses.find(c => c.id.toString() === evt.target.id);
-    // grab relevant group round (course initially set to false)
+    // grab relevant group round (course initially set to false on object)
     const groupChoice = groupRounds.find(g => g.course === false);
     dispatch(groupActions.startSelectCourse(groupChoice.id, courseChoice));
     dispatch(groupActions.selectGroupCourse(courseChoice));
@@ -76,6 +76,7 @@ export default connect(state => state)(Course);
 Course.propTypes = {
   courses: PropTypes.array.isRequired, // eslint-disable-line
   dispatch: PropTypes.func.isRequired,
+  groupRounds: PropTypes.object, // eslint-disable-line
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,

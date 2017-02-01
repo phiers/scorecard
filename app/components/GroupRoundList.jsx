@@ -28,4 +28,8 @@ const GroupRoundList = (props) => {
   );
 };
 
+GroupRoundList.propTypes = {
+  groups: PropTypes.array.isRequired, // eslint-disable-line
+};
+
 export default connect(state => ({ groups: state.groupRounds }))(GroupRoundList);

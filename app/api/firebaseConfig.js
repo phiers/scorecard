@@ -10,7 +10,7 @@ try {
   };
   firebase.initializeApp(config);
 } catch (e) {
-  console.log(e);
+  console.log(e); // eslint-disable-line
 }
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();

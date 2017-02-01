@@ -32,7 +32,7 @@ const PlayerChoice = (props) => {
         router.push('/round');
       }
     } else {
-      alert('YOU HAVE ADDED MORE THAN THREE PLAYERS');
+      alert('YOU HAVE ADDED MORE THAN THREE PLAYERS');  // eslint-disable-line
     }
   };
   const renderTitle = () => {
