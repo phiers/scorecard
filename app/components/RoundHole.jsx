@@ -25,16 +25,14 @@ const RoundHole = (props) => {
       dispatch(saveGroupPlayerScore(round.groupKey, round.players[i].id, score, hole));
     }
     // update group scores
-    // round.players.forEach(player =>
-    //   dispatch(saveGroupPlayerScore(round.groupKey, player.id, player.scores)));
     // update last hole played
     dispatch(roundActions.startUpdateLastHole(hole));
     // continue to next hole
-    if (nextHole <= 18) {
-      router.push(`/round/${nextHole}`);
-    } else {
-      router.push('/scorecard');
-    }
+    // if (nextHole <= 18) {
+    //   router.push(`/round/${nextHole}`);
+    // } else {
+    router.push('/scorecard');
+    // }
   };
 
   // const returnToRoundInfoButton = () => (

@@ -3,13 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router';
 /* eslint-disable */
-import * as settingsActions from 'settingsActions';
-import * as playerActions from 'playerActions';
-import * as courseActions from 'courseActions';
-import * as roundActions from 'roundActions';
-import * as archiveActions from 'archivedRoundActions';
-import * as groupActions from 'groupRoundActions';
-import firebase, {firebaseRef } from 'firebaseConfig';
+import {setUserId, initializeUserInfo, logout} from 'settingsActions';
+import firebase, { firebaseRef } from 'firebaseConfig'
+import loadData from 'initialFetch';
 import routes from 'routes';
 import store from 'configureStore';
 
@@ -24,13 +20,13 @@ firebase.auth().onAuthStateChanged((user) => {
       name: user.displayName,
       id: user.uid,
     };
-    // userId determines all paths in firebase, so it must e set first
-    store.dispatch(settingsActions.setUserId(player.id));
+    // userId determines all paths in firebase, so it must be set first
+    store.dispatch(setUserId(player.id));
     // Add user if first login; otherwise, initialize user info with firebase data
     const nameArr = player.name.split(' ');
     const first = nameArr[0];
     const last = nameArr[nameArr.length - 1];
-    store.dispatch(settingsActions.initializeUserInfo({
+    store.dispatch(initializeUserInfo({
       user: {
         id: player.id,
         first,
@@ -38,15 +34,11 @@ firebase.auth().onAuthStateChanged((user) => {
         roundId: 'player1',
       },
     }));
-    // add data from database
-    store.dispatch(playerActions.startFetchPlayers());
-    store.dispatch(courseActions.startFetchCourses());
-    store.dispatch(roundActions.startFetchActiveRound());
-    store.dispatch(archiveActions.startFetchArchivedRounds());
-    store.dispatch(groupActions.startFetchGroupRoundList());
+    // add data from firebase
+    loadData();
     browserHistory.push('/start');
   } else {
-    store.dispatch(settingsActions.logout());
+    store.dispatch(logout());
     browserHistory.push('/');
   }
 });
@@ -59,4 +51,4 @@ ReactDOM.render(
   <Provider store={store}>
     {routes}
   </Provider>,
-    document.getElementById('app')); //eslint-disable-line
+    document.getElementById('app'));

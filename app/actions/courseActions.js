@@ -1,4 +1,4 @@
-import { firebaseRef} from 'firebaseConfig'; // eslint-disable-line
+import { firebaseRef } from 'firebaseConfig'; // eslint-disable-line
 import defaultCourses from 'defaultCourses'; // eslint-disable-line
 
 function addCourse(course) {

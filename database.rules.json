@@ -1,12 +1,12 @@
 {
   "rules": {
     "public": {
-      ".read": "auth !== null",
+      ".read": "true",
       ".write": "auth !== null"
     },
     "users": {
       "$userId": {
-        ".read": "auth != null",
+        ".read": "true",
         ".write": "$userId === auth.uid"
       }
     }

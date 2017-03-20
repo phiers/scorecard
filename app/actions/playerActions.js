@@ -1,5 +1,4 @@
 import { firebaseRef } from 'firebaseConfig'; // eslint-disable-line
-import initialPlayers from 'defaultPlayers'; // eslint-disable-line
 
 function addPlayer(newPlayer) {
   return {
@@ -94,8 +93,6 @@ export function startFetchPlayers() {
           });
         });
         dispatch(fetchPlayers(playersArray));
-      } else {
-        initialPlayers.forEach(player => dispatch(startAddPlayer(player)));
       }
     });
   };

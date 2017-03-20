@@ -3,16 +3,16 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 /* eslint-disable */
 import TitleBar from 'TitleBar';
-import * as settingsActions from 'settingsActions';
-import * as roundActions from 'roundActions';
-import * as playerActions from 'playerActions';
+import { startSetScoringMode } from 'settingsActions';
+import {startArchiveRound, startCancelRound} from 'roundActions';
+import { startSelectPlayer } from 'playerActions';
 /* eslint-enable */
 const RoundMenu = (props) => {
   const { dispatch, groups, router, activeRound, round } = props;
 
   const renderStartSection = () => {
     const handleStart = (evt) => {
-      dispatch(settingsActions.startSetScoringMode(true));
+      dispatch(startSetScoringMode(true));
       if (evt.target.textContent === 'New Round') {
         router.push('/players');
       } else if (groups.length > 0) { // check to see if there are groups to choose from
@@ -24,9 +24,9 @@ const RoundMenu = (props) => {
 
     if (activeRound) {
       return (
-        <p>You have an active round. To resume that round, choose the appropriate button below.
-          To start a new round, cancel or archive your active round.
-      </p>
+        <p>{`You have an active round at ${round.course.name}. If you want to start
+          a new round, your active round must be canceled or archived.`}
+        </p>
       );
     }
     return (
@@ -42,19 +42,19 @@ const RoundMenu = (props) => {
       router.push('/scorecard');
     };
     const handleArchive = () => {
-      dispatch(roundActions.startArchiveRound());
-      round.players.forEach(p => dispatch(playerActions.startSelectPlayer(p.id)));
+      dispatch(startArchiveRound());
+      round.players.forEach(p => dispatch(startSelectPlayer(p.id)));
     };
     const handleCancel = () => {
-      dispatch(roundActions.startCancelRound());
-      dispatch(settingsActions.startSetScoringMode(false));
+      dispatch(startCancelRound());
+      dispatch(startSetScoringMode(false));
       // change selection of round players to false
       if (round.players) {
-        round.players.forEach(p => dispatch(playerActions.startSelectPlayer(p.id)));
+        round.players.forEach(p => dispatch(startSelectPlayer(p.id)));
       }
     };
     // check that an active round with scoring present
-    if (activeRound && props.round.lastHole) {
+    if (activeRound) {
       return (
         <div className="callout">
           <div className="column small-centered">
@@ -68,9 +68,6 @@ const RoundMenu = (props) => {
           </div>
         </div>
       );
-      // clear the active round automatically if no hole scores
-    } else if (activeRound && !props.round.lastHole) {
-      handleCancel();
     }
     return null;
   };

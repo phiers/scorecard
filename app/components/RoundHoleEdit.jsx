@@ -7,7 +7,7 @@ import * as roundActions from 'roundActions';
 import { saveGroupPlayerScore } from 'groupRoundActions';
 /* eslint-enable */
 
-const RoundHole = (props) => {
+const RoundHoleEdit = (props) => {
   const { dispatch, params, round, router } = props;
   const hole = parseInt(params.hole, 10);
   const hdcp = hole < 19 ? round.course.holeData[hole - 1].hdcp : 0;
@@ -53,7 +53,7 @@ const RoundHole = (props) => {
   );
 };
 /* eslint-disable react/forbid-prop-types */
-RoundHole.propTypes = {
+RoundHoleEdit.propTypes = {
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
   round: PropTypes.object.isRequired,
@@ -66,4 +66,4 @@ const mapStateToProps = (state) => {  // eslint-disable-line
   };
 };
 
-export default connect(mapStateToProps)(RoundHole);
+export default connect(mapStateToProps)(RoundHoleEdit);

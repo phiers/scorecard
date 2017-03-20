@@ -18,13 +18,12 @@ export function startAddGroupRound(name) {
 }
 // TODO: no reducer -- add to some firebase api file? See bigger ? about groups in redux state
 export function addPlayersToGroup(groupKey, players) {
-  return (dispatch) => {
+  return () => {
     const publicRef = firebaseRef.child('public');
     return publicRef.once('value').then((snap) => {
       snap.forEach((group) => {
         if (group.val().id === groupKey) {
           publicRef.child(`${group.key}`).push(players);
-          // .then(() => dispatch(selectCourse(id, course)));
         }
         return false;
       });
@@ -40,13 +39,12 @@ export function selectGroupCourse(course) {
 }
 
 export function startSelectCourse(id, course) {
-  return (dispatch) => {
+  return () => {
     const publicRef = firebaseRef.child('public');
     return publicRef.once('value').then((snap) => {
       snap.forEach((group) => {
         if (group.val().id === id) {
           return publicRef.child(group.key).update({ course });
-          // .then(() => dispatch(selectGroupCourse(course)));
         }
         return false;
       });

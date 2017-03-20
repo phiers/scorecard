@@ -54,12 +54,12 @@ const RoundSummary = (props) => {
     </div>
   );
 };
-
+/* eslint-disable react/forbid-prop-types */
 RoundSummary.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  router: Proptypes.object.isRequired, // eslint-disable-line
-  round: PropTypes.object.isRequired, // eslint-disable-line
-  course: PropTypes.object.isRequired, // eslint-disable-line
+  router: PropTypes.object.isRequired,
+  round: PropTypes.object.isRequired,
+  course: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => {
