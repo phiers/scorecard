@@ -25,9 +25,17 @@ const GroupRoundChoice = (props) => {
       router.push('/players');
     }
   };
+
+  const goBackButton = () => (
+    <button
+      className="button tiny"
+      onClick={() => router.push('/round-menu')}
+    > Round Menu</button>
+  );
+
   return (
     <div>
-      <TitleBar title="Group Rounds" />
+      <TitleBar left={goBackButton()} title="Group Rounds" />
       <div className="group-round">
         <GroupRoundList />
         <button className="button expanded" onClick={handleContinue}>Continue</button>

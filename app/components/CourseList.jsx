@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import Course from 'Course'; // eslint-disable-line
 
 /* eslint-disable no-confusing-arrow */
@@ -19,13 +18,6 @@ const CourseList = (props) => {
     }
     return 'Actions';
   };
-  // only render add button in manage mode
-  const renderAddButton = () => {
-    if (!scoring && !group) {
-      return <Link to="/add-course" className="button expanded">Add New Course</Link>;
-    }
-    return null;
-  };
 
   return (
     <div>
@@ -41,7 +33,6 @@ const CourseList = (props) => {
           {renderCourses()}
         </tbody>
       </table>
-      {renderAddButton()}
     </div>
   );
 };

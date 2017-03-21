@@ -24,8 +24,8 @@ const RoundMenu = (props) => {
 
     if (activeRound) {
       return (
-        <p>{`You have an active round at ${round.course.name}. If you want to start
-          a new round, your active round must be canceled or archived.`}
+        <p>You have an active round. If you want to start
+          a new round, your active round must be canceled or archived.
         </p>
       );
     }
@@ -54,7 +54,7 @@ const RoundMenu = (props) => {
       }
     };
     // check that an active round with scoring present
-    if (activeRound) {
+    if (activeRound && round.lastHole) {
       return (
         <div className="callout">
           <div className="column small-centered">
@@ -68,6 +68,8 @@ const RoundMenu = (props) => {
           </div>
         </div>
       );
+    } else if (activeRound && !round.lastHole) {
+      handleCancel();
     }
     return null;
   };

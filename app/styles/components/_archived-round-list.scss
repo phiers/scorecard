@@ -2,7 +2,7 @@
   margin: 4em auto;
 
   table {
-    width: 95%;
+    width: 99%;
   }
 
   thead tr td  {
@@ -10,13 +10,20 @@
   }
 
   tbody {
-    tr td:last-of-type {
-      text-align: center;
-    }
-    .button {
-      border-radius: 5px;
-      margin: .8em;
-      width: 5em;
+    tr {
+      margin: 0 .2rem;
+      td div.button-group {
+        display: flex;
+        margin: .25rem 0;
+
+        .button {
+          border-radius: 5px;
+          width: 5em;
+        }
+        .button:last-of-type {
+          margin-left: .75rem;
+        }
+      }
     }
   }
 }

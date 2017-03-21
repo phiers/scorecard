@@ -21,8 +21,10 @@ const ArchivedRound = (props) => {
       <td>{date}</td>
       <td>{course.name}</td>
       <td>
-        <button className="button tiny" id={id} onClick={handleView}>View</button>
-        <button className="alert button tiny" id={id} onClick={handleDelete}>Del</button>
+        <div className="button-group tiny">
+          <button className="button tiny" id={id} onClick={handleView}>View</button>
+          <button className="alert button tiny" id={id} onClick={handleDelete}>Del</button>
+        </div>
       </td>
     </tr>
   );

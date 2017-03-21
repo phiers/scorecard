@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import * as courseActions from 'courseActions';  // eslint-disable-line
-import * as roundActions from 'roundActions';  // eslint-disable-line
+import { startRemoveCourse } from 'courseActions';  // eslint-disable-line
+import { startSelectCourse, selectCourse } from 'roundActions';  // eslint-disable-line
 import * as groupActions from 'groupRoundActions'; // eslint-disable-line
 
 const Course = (props) => {
@@ -14,10 +14,10 @@ const Course = (props) => {
   const handleSelect = (evt) => {
     evt.preventDefault();
     const courseChoice = courses.find(c => c.id.toString() === evt.target.id);
-    dispatch(roundActions.startSelectCourse(courseChoice));
+    dispatch(startSelectCourse(courseChoice));
     // did this here rather than in promise to ensure state is right for round page
     // (it depends on there being a round.course object)
-    dispatch(roundActions.selectCourse(courseChoice));
+    dispatch(selectCourse(courseChoice));
     browserHistory.push('/round');
   };
   // Group select mode
@@ -36,7 +36,7 @@ const Course = (props) => {
   const handleDelete = (evt) => {
     evt.preventDefault();
     const itemId = evt.target.id;
-    dispatch(courseActions.startRemoveCourse(itemId));
+    dispatch(startRemoveCourse(itemId));
   };
 
   const handleEdit = (evt) => {
@@ -76,7 +76,7 @@ export default connect(state => state)(Course);
 Course.propTypes = {
   courses: PropTypes.array.isRequired, // eslint-disable-line
   dispatch: PropTypes.func.isRequired,
-  groupRounds: PropTypes.object, // eslint-disable-line
+  groupRounds: PropTypes.array, // eslint-disable-line
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,

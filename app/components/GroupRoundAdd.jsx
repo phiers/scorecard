@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from 'groupRoundActions'; // eslint-disable-line
-import * as settingsActions from 'settingsActions'; // eslint-disable-line
+import { startAddGroupRound } from 'groupRoundActions'; // eslint-disable-line
+import { startSetGroupMode } from 'settingsActions'; // eslint-disable-line
 import TitleBar from 'TitleBar'; // eslint-disable-line
 
 const GroupRoundAdd = (props) => {
@@ -11,14 +11,22 @@ const GroupRoundAdd = (props) => {
     evt.preventDefault();
     const name = evt.target[0].value;
     if (name !== '') {
-      dispatch(actions.startAddGroupRound(name));
-      dispatch(settingsActions.startSetGroupMode(true));
+      dispatch(startAddGroupRound(name));
+      dispatch(startSetGroupMode(true));
       router.push('/courses');
     }
   };
+
+  const goBackButton = () => (
+    <button
+      className="button tiny"
+      onClick={() => router.push('/round-menu')}
+    > Round Menu</button>
+  );
+
   return (
     <div>
-      <TitleBar title="Add Group Round" />
+      <TitleBar left={goBackButton()} title="Add Group Round" />
       <div className="settings">
         <h3>Please enter a recognizable round name</h3>
         <form onSubmit={handleSubmit}>

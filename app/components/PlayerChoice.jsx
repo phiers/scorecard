@@ -42,11 +42,19 @@ const PlayerChoice = (props) => {
     return 'Manage Players';
   };
 
-  const goHomeButton = () => (
+  // render goBack button
+  const text = mode ? 'Round Menu' : 'Main Menu';
+  const routerPath = () => {
+    if (mode) {
+      return props.router.push('/round-menu');
+    }
+    return props.router.push('/start');
+  };
+  const goBackButton = () => (
     <button
       className="button tiny"
-      onClick={() => props.router.push('/start')}
-    > Main Menu</button>
+      onClick={() => routerPath()}
+    > {text}</button>
   );
 
   const renderMessage = () => {
@@ -64,7 +72,7 @@ const PlayerChoice = (props) => {
 
   return (
     <div>
-      <TitleBar left={goHomeButton()} title={renderTitle()} />
+      <TitleBar left={goBackButton()} title={renderTitle()} />
       <div className="player-choice">
         <PlayerAddForm />
         {renderMessage()}
