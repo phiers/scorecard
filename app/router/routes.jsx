@@ -22,6 +22,7 @@ import Settings from 'Settings';
 import Start from 'Start';
 import GroupRoundChoice from 'GroupRoundChoice';
 import GroupRoundAdd from 'GroupRoundAdd';
+import Transition from 'Transition';
 /* eslint-enable */
 
 // redirect user if not logged in
@@ -60,6 +61,7 @@ export default (
       <Route path="scorecard" component={Scorecard} onEnter={requireLogin} />
       <Route path="scorecard/:id" component={ArchivedScorecard} onEnter={requireLogin} />
       <Route path="settings" component={Settings} onEnter={requireLogin} />
+      <Route path="transition" component={Transition} onEnter={requireLogin} />
       <Route path="group-rounds" component={GroupRoundChoice} onEnter={requireLogin} />
       <Route path="group-round-add" component={GroupRoundAdd} onEnter={requireLogin} />
       <IndexRoute component={Login} onEnter={redirectIfLoggedIn} />

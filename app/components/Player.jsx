@@ -21,12 +21,19 @@ const Player = (props) => {
     return null;
   };
 
+  const renderDelete = () => {
+    if (!scoringMode) {
+      return <button className="button tiny alert" onClick={handleDelete}>Del</button>;
+    }
+    return null;
+  };
+  /* eslint-disable jsx-a11y/no-static-element-interactions */
   return (
     <div>
       <li>
         {renderCheckbox()}
-        <span>{`${last}, ${first}`}</span>
-        <button className="button tiny alert" onClick={handleDelete}>Del</button>
+        <span onClick={handleCheck}>{`${last}, ${first}`}</span>
+        {renderDelete()}
       </li>
     </div>
   );

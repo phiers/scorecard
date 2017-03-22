@@ -13,34 +13,34 @@ const RoundHole = (props) => {
   const nextHole = hole + 1;
   const hdcp = hole < 19 ? round.course.holeData[hole - 1].hdcp : 0;
   const par = hole < 19 ? round.course.holeData[hole - 1].par : 0;
+
   const handleSave = () => {
     // post scores
     const scoreNode = document.querySelectorAll('.score');
     for (let i = 0; i < scoreNode.length; i += 1) {
       const playerId = round.players[i].roundId;
       const score = parseInt(scoreNode[i].textContent, 10);
-
+      // update scores in db
       dispatch(roundActions.startSaveHoleScore(playerId, hole, score));
       dispatch(roundActions.startSavePlayerScore(playerId, hole, score));
-      dispatch(saveGroupPlayerScore(round.groupKey, round.players[i].id, score, hole));
+      // update group scores
+      if (round.groupKey) {
+        dispatch(saveGroupPlayerScore(round.groupKey, round.players[i].id, score, hole));
+      }
     }
-    // update group scores
     // update last hole played
     dispatch(roundActions.startUpdateLastHole(hole));
     // continue to next hole
-    // if (nextHole <= 18) {
-    //   router.push(`/round/${nextHole}`);
-    // } else {
-    router.push('/scorecard');
-    // }
+    if (nextHole <= 18) {
+      router.push('/transition');
+      window.setTimeout(() => {
+        router.push(`/round/${nextHole}`);
+      }, 1000);
+    } else {
+      router.push('/scorecard');
+    }
   };
 
-  // const returnToRoundInfoButton = () => (
-  //   <button
-  //     className="button tiny"
-  //     onClick={() => router.push('/round')}
-  //   > Round Info</button>
-  // );
   const goHomeButton = () => (
     <button
       className="button tiny"
@@ -56,6 +56,7 @@ const RoundHole = (props) => {
       </div>
     ),
     );
+
   return (
     <div>
       <TitleBar

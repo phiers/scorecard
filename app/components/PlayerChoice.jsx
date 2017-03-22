@@ -10,6 +10,7 @@ import * as roundActions from 'roundActions';
 const PlayerChoice = (props) => {
   const { dispatch, players, router, settings, round } = props;
   const mode = settings.scoringMode;
+
   const handleContinue = () => {
     // create array of selected players
     const chosen = [];
@@ -35,6 +36,7 @@ const PlayerChoice = (props) => {
       alert('YOU HAVE ADDED MORE THAN THREE PLAYERS');  // eslint-disable-line
     }
   };
+
   const renderTitle = () => {
     if (mode) {
       return 'Choose Players';
@@ -43,7 +45,7 @@ const PlayerChoice = (props) => {
   };
 
   // render goBack button
-  const text = mode ? 'Round Menu' : 'Main Menu';
+  const text = mode ? 'Cancel' : 'Main Menu';
   const routerPath = () => {
     if (mode) {
       return props.router.push('/round-menu');
@@ -63,21 +65,21 @@ const PlayerChoice = (props) => {
     }
     return null;
   };
-  const renderButton = () => {
+
+  const continueButton = () => {
     if (mode) {
-      return <button className="button warning" onClick={handleContinue}>Continue</button>;
+      return <button className="button tiny" onClick={handleContinue}>Continue</button>;
     }
     return null;
   };
 
   return (
     <div>
-      <TitleBar left={goBackButton()} title={renderTitle()} />
+      <TitleBar left={goBackButton()} title={renderTitle()} right={continueButton()} />
       <div className="player-choice">
         <PlayerAddForm />
         {renderMessage()}
         <PlayerList />
-        {renderButton()}
       </div>
     </div>
   );
