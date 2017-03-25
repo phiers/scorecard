@@ -6,7 +6,7 @@ import ScorecardRow from 'ScorecardRow';
 import ScorecardSummary from 'ScorecardSummary';
 /* eslint-enable */
 
-class Scorecard extends Component {
+class ArchivedScorecard extends Component {
   constructor() {
     super();
     // state variable used to show or hide summary
@@ -42,7 +42,7 @@ class Scorecard extends Component {
     const goBackButton = () => (
       <button
         className="button tiny"
-        onClick={() => this.props.router.push('/roundlist')}
+        onClick={() => this.props.router.goBack()}
       > Round List</button>
     );
 
@@ -78,7 +78,7 @@ class Scorecard extends Component {
   }
 }
 /* eslint-disable react/forbid-prop-types */
-Scorecard.propTypes = {
+ArchivedScorecard.propTypes = {
   params: PropTypes.object.isRequired,
   rounds: PropTypes.array.isRequired,
   router: PropTypes.object.isRequired,
@@ -86,4 +86,4 @@ Scorecard.propTypes = {
 
 const mapStateToProps = state => ({ rounds: state.archivedRounds });
 
-export default connect(mapStateToProps)(Scorecard);
+export default connect(mapStateToProps)(ArchivedScorecard);

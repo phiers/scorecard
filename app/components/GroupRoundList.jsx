@@ -5,6 +5,7 @@ import GroupRound from 'GroupRound'; // eslint-disable-line
 
 const GroupRoundList = (props) => {
   const { groups } = props;
+
   const renderList = () => {
     if (groups.length === 0) {
       return <tr><td>No Active Groups</td></tr>;
@@ -16,9 +17,9 @@ const GroupRoundList = (props) => {
     <table>
       <thead>
         <tr className="group-list-row">
-          <td />
           <td>Name</td>
-          <td>Course</td>
+          <td>Sponsor</td>
+          <td />
         </tr>
       </thead>
       <tbody>
@@ -32,4 +33,8 @@ GroupRoundList.propTypes = {
   groups: PropTypes.array.isRequired, // eslint-disable-line
 };
 
-export default connect(state => ({ groups: state.groupRounds }))(GroupRoundList);
+const mapStateToProps = state => ({
+  groups: state.groupRounds,
+});
+
+export default connect(mapStateToProps)(GroupRoundList);

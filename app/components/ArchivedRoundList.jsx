@@ -8,6 +8,7 @@ import ArchivedRound from 'ArchivedRound';
 
 /* eslint-disable no-confusing-arrow */
 const ArchivedRoundList = (props) => {
+  const { router } = props;
   const renderRoundList = () => {
     const { rounds } = props;
     if (rounds.length > 0) {
@@ -20,8 +21,8 @@ const ArchivedRoundList = (props) => {
   const goBackButton = () => (
     <button
       className="button tiny"
-      onClick={() => props.router.push('/round-menu')}
-    > Round Menu</button>
+      onClick={() => router.goBack()}
+    > Go Back</button>
   );
 
   return (

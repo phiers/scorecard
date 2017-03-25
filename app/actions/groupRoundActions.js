@@ -7,11 +7,17 @@ function addGroupRound(round) {
   };
 }
 
-export function startAddGroupRound(name) {
+export function startAddGroupRound(groupName, sponsor) {
   return (dispatch) => {
     const publicRef = firebaseRef.child('public');
     const id = publicRef.push().key;
-    const newRound = { name, id, checked: false, course: false };
+    const newRound = {
+      name: groupName,
+      id,
+      checked: false,
+      course: false,
+      sponsor,
+    };
     return publicRef.push(newRound)
     .then(dispatch(addGroupRound(newRound)));
   };

@@ -33,8 +33,8 @@ const Settings = (props) => {
   const goBackButton = () => (
     <button
       className="button tiny"
-      onClick={() => props.router.push('/start')}
-    > Main Menu</button>
+      onClick={() => props.router.push('/manage-menu')}
+    > Go Back</button>
   );
 
   return (

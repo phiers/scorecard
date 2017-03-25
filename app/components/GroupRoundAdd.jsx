@@ -1,17 +1,20 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-
-import { startAddGroupRound } from 'groupRoundActions'; // eslint-disable-line
-import { startSetGroupMode } from 'settingsActions'; // eslint-disable-line
-import TitleBar from 'TitleBar'; // eslint-disable-line
+/* eslint-disable */
+import { startAddGroupRound } from 'groupRoundActions';
+import { startSetGroupMode } from 'settingsActions';
+import TitleBar from 'TitleBar';
+/* eslint-enable */
 
 const GroupRoundAdd = (props) => {
-  const { router, dispatch } = props;
+  const { router, dispatch, user } = props;
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const name = evt.target[0].value;
-    if (name !== '') {
-      dispatch(startAddGroupRound(name));
+    const groupName = evt.target[0].value;
+    const sponsor = `${user.last}, ${user.first}`;
+    if (groupName !== '') {
+      dispatch(startAddGroupRound(groupName, sponsor));
       dispatch(startSetGroupMode(true));
       router.push('/courses');
     }
@@ -42,6 +45,13 @@ const GroupRoundAdd = (props) => {
 GroupRoundAdd.propTypes = {
   dispatch: PropTypes.func.isRequired,
   router: PropTypes.object.isRequired, // eslint-disable-line
+  user: PropTypes.object.isRequired, // eslint-disable-line
 };
 
-export default connect()(GroupRoundAdd);
+const mapStateToProps = (state) => { // eslint-disable-line
+  return {
+    user: state.settings.user,
+  };
+};
+
+export default connect(mapStateToProps)(GroupRoundAdd);

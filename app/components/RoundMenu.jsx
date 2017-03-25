@@ -6,6 +6,7 @@ import TitleBar from 'TitleBar';
 import { startSetScoringMode } from 'settingsActions';
 import {startArchiveRound, startCancelRound} from 'roundActions';
 import { startSelectPlayer } from 'playerActions';
+import { startSelectGroup } from 'groupRoundActions';
 /* eslint-enable */
 const RoundMenu = (props) => {
   const { dispatch, groups, router, activeRound, round } = props;
@@ -44,6 +45,10 @@ const RoundMenu = (props) => {
     const handleArchive = () => {
       dispatch(startArchiveRound());
       round.players.forEach(p => dispatch(startSelectPlayer(p.id)));
+      // set group to unchecked if group round
+      if (round.key) {
+        dispatch(startSelectGroup(round.key));
+      }
     };
     const handleCancel = () => {
       dispatch(startCancelRound());
@@ -51,6 +56,10 @@ const RoundMenu = (props) => {
       // change selection of round players to false
       if (round.players) {
         round.players.forEach(p => dispatch(startSelectPlayer(p.id)));
+      }
+      // set group to unchecked if group round
+      if (round.key) {
+        dispatch(startSelectGroup(round.key));
       }
     };
     // check that an active round with scoring present
@@ -91,9 +100,6 @@ const RoundMenu = (props) => {
         {renderActiveRoundSection()}
         <div className="column small-centered">
           <Link to="/group-round-add" className="button large">Add Group Round</Link>
-        </div>
-        <div className="column small-centered">
-          <Link to="/roundList" className="button large">Round History</Link>
         </div>
       </div>
     </div>

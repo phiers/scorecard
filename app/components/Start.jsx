@@ -13,13 +13,10 @@ const Start = () => (
         <Link to="round-menu" className="button large play">Play Golf</Link>
       </div>
       <div className="column small-centered">
-        <Link to="/players" className=" button large">Manage Players</Link>
+        <Link to="/manage-menu" className="button large">Manage My Data</Link>
       </div>
       <div className="column small-centered">
-        <Link to="/courses" className=" button large">Manage Courses</Link>
-      </div>
-      <div className="column small-centered">
-        <Link to="/settings" className="button large user-info">Manage My User Info</Link>
+        <Link to="help" className="button large">Help</Link>
       </div>
       <div className="column small-centered">
         <button

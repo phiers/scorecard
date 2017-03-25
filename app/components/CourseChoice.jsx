@@ -20,18 +20,17 @@ const CourseChoice = (props) => {
   };
 
   // render goBack button
-  const text = mode ? 'Go Back' : 'Main Menu';
   const routerPath = () => {
     if (mode || group) {
       return router.push('/players');
     }
-    return props.router.push('/start');
+    return props.router.push('/manage-menu');
   };
   const goBackButton = () => (
     <button
       className="button tiny"
       onClick={() => routerPath()}
-    > {text}</button>
+    > Go Back</button>
   );
 
   // only render add button in manage mode

@@ -35,7 +35,7 @@ const RoundHole = (props) => {
       router.push('/transition');
       window.setTimeout(() => {
         router.push(`/round/${nextHole}`);
-      }, 1000);
+      }, 500);
     } else {
       router.push('/scorecard');
     }

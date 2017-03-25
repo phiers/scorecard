@@ -3,8 +3,9 @@ import { IndexRoute, Router, Route, browserHistory } from 'react-router';
 
 /* eslint-disable */
 import firebase from 'firebaseConfig';
+import Main from 'Main';
 import Login from 'Login';
-import Main from 'Main';  // TODO: not using, but worried to delete
+import ManageMenu from 'ManageMenu';
 import PlayerChoice from 'PlayerChoice';
 import Course from 'Course';
 import CourseAdd from 'CourseAdd';
@@ -22,6 +23,7 @@ import Settings from 'Settings';
 import Start from 'Start';
 import GroupRoundChoice from 'GroupRoundChoice';
 import GroupRoundAdd from 'GroupRoundAdd';
+import GroupRoundManage from 'GroupRoundManage';
 import Transition from 'Transition';
 /* eslint-enable */
 
@@ -47,6 +49,7 @@ export default (
   <Router history={browserHistory}>
     <Route path="/">
       <Route path="start" component={Start} onEnter={requireLogin} />
+      <Route path="manage-menu" component={ManageMenu} onEnter={requireLogin} />
       <Route path="players" component={PlayerChoice} onEnter={requireLogin} />
       <Route path="course/:id" component={Course} onEnter={requireLogin} />
       <Route path="add-course" component={CourseAdd} onEnter={requireLogin} />
@@ -64,6 +67,7 @@ export default (
       <Route path="transition" component={Transition} onEnter={requireLogin} />
       <Route path="group-rounds" component={GroupRoundChoice} onEnter={requireLogin} />
       <Route path="group-round-add" component={GroupRoundAdd} onEnter={requireLogin} />
+      <Route path="group-round-manage" component={GroupRoundManage} onEnter={requireLogin} />
       <IndexRoute component={Login} onEnter={redirectIfLoggedIn} />
     </Route>
   </Router>

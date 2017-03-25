@@ -35,7 +35,7 @@ const GroupRoundChoice = (props) => {
 
   return (
     <div>
-      <TitleBar left={goBackButton()} title="Group Rounds" />
+      <TitleBar left={goBackButton()} title="Choose Group" />
       <div className="group-round">
         <GroupRoundList />
         <button className="button expanded" onClick={handleContinue}>Continue</button>

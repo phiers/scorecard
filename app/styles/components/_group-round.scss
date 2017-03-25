@@ -16,7 +16,15 @@
     }
   }
   .button {
+    background: $mainblue;
+    border-radius: 5px;
     width: 75%;
     margin: 2rem auto;
+  }
+
+  .button.tiny {
+    background: $alertred;
+    width: 100%;
+    margin: .2rem;
   }
 }

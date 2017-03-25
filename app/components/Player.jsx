@@ -21,19 +21,19 @@ const Player = (props) => {
     return null;
   };
 
-  const renderDelete = () => {
-    if (!scoringMode) {
-      return <button className="button tiny alert" onClick={handleDelete}>Del</button>;
-    }
-    return null;
-  };
+  // const renderDelete = () => {
+  //   if (!scoringMode) {
+  //     return <button className="button tiny alert" onClick={handleDelete}>Del</button>;
+  //   }
+  //   return null;
+  // };
   /* eslint-disable jsx-a11y/no-static-element-interactions */
   return (
     <div>
       <li>
         {renderCheckbox()}
         <span onClick={handleCheck}>{`${last}, ${first}`}</span>
-        {renderDelete()}
+        <button className="button tiny alert" onClick={handleDelete}>Del</button>
       </li>
     </div>
   );
