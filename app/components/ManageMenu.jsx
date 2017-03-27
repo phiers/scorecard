@@ -18,6 +18,9 @@ const ManageMenu = (props) => {
       <TitleBar left={goBackButton()} title="My Data" />
       <div className="start-page">
         <div className="column small-centered">
+          <Link to="players" className="button large">My Players</Link>
+        </div>
+        <div className="column small-centered">
           <Link to="courses" className="button large">My Courses</Link>
         </div>
         <div className="column small-centered">

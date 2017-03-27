@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router';
 /* eslint-disable */
 import {setUserId, initializeUserInfo, logout} from 'settingsActions';
-import firebase, { firebaseRef } from 'firebaseConfig'
+import firebase from 'firebaseConfig'
 import loadData from 'initialFetch';
 import routes from 'routes';
 import store from 'configureStore';
@@ -47,7 +47,7 @@ store.subscribe(() => {
   store.getState();
 });
 
-ReactDOM.render(
+render(
   <Provider store={store}>
     {routes}
   </Provider>,

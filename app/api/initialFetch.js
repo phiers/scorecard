@@ -9,15 +9,15 @@ import store from 'configureStore';
 
 // Make sure one fetch is done before next one starts, using promises returned
 const loadData = () => {
-  store.dispatch(startFetchPlayers())
+  store.dispatch(startFetchActiveRound())
   .then(() =>
-    store.dispatch(startFetchCourses()))
+    store.dispatch(startFetchPlayers()))
     .then(() =>
-      store.dispatch(startFetchActiveRound()))
+      store.dispatch(startFetchCourses()))
         .then(() =>
-          store.dispatch(startFetchArchivedRounds()))
+          store.dispatch(startFetchGroupRoundList()))
             .then(() =>
-              store.dispatch(startFetchGroupRoundList()));
+              store.dispatch(startFetchArchivedRounds()));
 };
 
 export default loadData;

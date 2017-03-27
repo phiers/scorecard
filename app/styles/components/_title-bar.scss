@@ -28,6 +28,13 @@ body {
     background: $alertred;
   }
 }
+
+// Transition
+.transition {
+  background: $mainblue;
+  max-width: 600px;
+  padding-top: 50em;
+}
 // TitleBar
 .title-bar {
   align-items: baseline;

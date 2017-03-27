@@ -1,6 +1,11 @@
 import React from 'react';
 import TitleBar from 'TitleBar'; // eslint-disable-line
 
-const Transition = () => (<TitleBar title="Saving . . . ." />);
+const Transition = () => (
+  <div>
+    <TitleBar title="Saving . . . ." />
+    <div className="transition" />
+  </div>
+);
 
 export default Transition;

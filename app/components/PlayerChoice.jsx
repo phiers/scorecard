@@ -45,12 +45,12 @@ const PlayerChoice = (props) => {
   };
 
   // render goBack button
-  const text = mode ? 'Cancel' : 'Main Menu';
+  const text = mode ? 'Cancel' : 'Go Back';
   const routerPath = () => {
     if (mode) {
       return props.router.push('/round-menu');
     }
-    return props.router.push('/start');
+    return props.router.push('/manage-menu');
   };
   const goBackButton = () => (
     <button
