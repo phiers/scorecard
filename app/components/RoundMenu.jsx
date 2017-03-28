@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 /* eslint-disable */
 import TitleBar from 'TitleBar';
@@ -40,7 +40,7 @@ const RoundMenu = (props) => {
 
   const renderActiveRoundSection = () => {
     const handleResume = () => {
-      router.push('/scorecard');
+      browserHistory.push('scorecard');
     };
     const handleArchive = () => {
       dispatch(startArchiveRound());
@@ -67,10 +67,10 @@ const RoundMenu = (props) => {
       return (
         <div className="callout">
           <div className="column small-centered">
-            <button className=" button large" onClick={handleResume}>Resume Round</button>
+            <button className="button large" onClick={handleResume}>Resume Round</button>
           </div>
           <div className="column small-centered">
-            <button className=" button large" onClick={handleArchive}>Archive Round</button>
+            <button className="button large" onClick={handleArchive}>Archive Round</button>
           </div>
           <div className="column small-centered">
             <button className="button large" onClick={handleCancel}>Cancel Round</button>

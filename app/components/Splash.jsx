@@ -1,30 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router';
 /* eslint-disable */
-import firebase from 'firebaseConfig';
 import TitleBar from 'TitleBar';
 /* eslint-enable */
-const Start = () => (
+const Splash = () => (
   <div>
-    <TitleBar title="Main Menu" />
+    <TitleBar title="Loading Data..." />
     <div className="start-page">
       <div className="column small-centered">
-        <Link to="round-menu" className="button large play">Play Golf</Link>
+        <button className="button large play">Play Golf</button>
       </div>
       <div className="column small-centered">
-        <Link to="/manage-menu" className="button large">Manage My Data</Link>
+        <button className="button large">Manage My Data</button>
       </div>
       <div className="column small-centered">
-        <Link to="help" className="button large">Help</Link>
+        <button to="help" className="button large">Help</button>
       </div>
       <div className="column small-centered">
         <button
           className="alert button large"
-          onClick={() => firebase.auth().signOut()}
         >Logout</button>
       </div>
     </div>
   </div>
   );
 
-export default Start;
+export default Splash;

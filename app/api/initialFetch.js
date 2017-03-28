@@ -1,3 +1,4 @@
+import { browserHistory } from 'react-router';
 /* eslint-disable */
 import { startFetchArchivedRounds } from 'archivedRoundActions';
 import { startFetchCourses } from 'courseActions';
@@ -17,7 +18,8 @@ const loadData = () => {
         .then(() =>
           store.dispatch(startFetchGroupRoundList()))
             .then(() =>
-              store.dispatch(startFetchArchivedRounds()));
+              store.dispatch(startFetchArchivedRounds()))
+                .then(() => browserHistory.push('start'));
 };
 
 export default loadData;

@@ -34,9 +34,10 @@ firebase.auth().onAuthStateChanged((user) => {
         roundId: 'player1',
       },
     }));
+    browserHistory.push('splash');
     // add data from firebase
     loadData();
-    browserHistory.push('/start');
+    // browserHistory.push('start');
   } else {
     store.dispatch(logout());
     browserHistory.push('/');

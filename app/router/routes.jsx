@@ -20,6 +20,7 @@ import ArchivedRoundList from 'ArchivedRoundList';
 import Scorecard from 'Scorecard';
 import ArchivedScorecard from 'ArchivedScoreCard';
 import Settings from 'Settings';
+import Splash from 'Splash';
 import Start from 'Start';
 import GroupRoundChoice from 'GroupRoundChoice';
 import GroupRoundAdd from 'GroupRoundAdd';
@@ -48,6 +49,7 @@ const redirectIfLoggedIn = (nextState, replace, next) => {
 export default (
   <Router history={browserHistory}>
     <Route path="/">
+      <Route path="splash" component={Splash} />
       <Route path="start" component={Start} onEnter={requireLogin} />
       <Route path="manage-menu" component={ManageMenu} onEnter={requireLogin} />
       <Route path="players" component={PlayerChoice} onEnter={requireLogin} />
