@@ -7,12 +7,6 @@ const groupRoundReducers = (state = [], action) => {
     case 'FETCH_GROUP_ROUND_LIST':
       return [...action.list];
 
-    case 'SELECT_GROUP_COURSE': {
-      const course = action.course;
-
-      return [...state, course];
-    }
-
     case 'SELECT_GROUP':
       return state.map((group) => {
         if (group.id === action.id) {

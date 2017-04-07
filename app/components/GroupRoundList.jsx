@@ -11,7 +11,7 @@ const GroupRoundList = (props) => {
       return <tr><td>No Active Groups</td></tr>;
     }
     return groups.map(group => <GroupRound key={group.id} {...group} />,
-    );
+    ).sort((a, b) => a.id > b.id ? -1 : 1);  // eslint-disable-line
   };
   return (
     <table>

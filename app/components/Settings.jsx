@@ -23,7 +23,7 @@ const Settings = (props) => {
           roundId,
         },
       });
-      router.push('/start');
+      router.push('/manage-menu');
     }
     evt.target[0].value = '';
     evt.target[1].value = '';

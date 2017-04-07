@@ -12,11 +12,10 @@ const GroupRoundAdd = (props) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const groupName = evt.target[0].value;
-    const sponsor = `${user.last}, ${user.first}`;
+    const sponsor = `${user.first} ${user.last}`;
     if (groupName !== '') {
       dispatch(startAddGroupRound(groupName, sponsor));
-      dispatch(startSetGroupMode(true));
-      router.push('/courses');
+      router.push('round-menu');
     }
   };
 
@@ -35,7 +34,7 @@ const GroupRoundAdd = (props) => {
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Group Round Name</label>
           <input type="text" id="name" />
-          <button className="button expanded">Continue</button>
+          <button className="button expanded">Add</button>
         </form>
       </div>
     </div>

@@ -27,7 +27,7 @@ const ManageMenu = (props) => {
           <Link to="roundlist" className="button large">My Rounds</Link>
         </div>
         <div className="column small-centered">
-          <Link to="group-round-manage" className=" button large">My Group Rounds</Link>
+          <button className=" button large" onClick={() => router.push('group-round-manage')} disabled>My Group Rounds</button>
         </div>
         <div className="column small-centered">
           <Link to="settings" className="button large user-info">My User Info</Link>

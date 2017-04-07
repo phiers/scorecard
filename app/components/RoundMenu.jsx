@@ -6,10 +6,10 @@ import TitleBar from 'TitleBar';
 import { startSetScoringMode } from 'settingsActions';
 import {startArchiveRound, startCancelRound} from 'roundActions';
 import { startSelectPlayer } from 'playerActions';
-import { startSelectGroup } from 'groupRoundActions';
+import { startSelectGroup, startCancelGroupRound } from 'groupRoundActions';
 /* eslint-enable */
 const RoundMenu = (props) => {
-  const { dispatch, groups, router, activeRound, round } = props;
+  const { dispatch, groups, router, mode, round } = props;
 
   const renderStartSection = () => {
     const handleStart = (evt) => {
@@ -23,7 +23,7 @@ const RoundMenu = (props) => {
       }
     };
 
-    if (activeRound) {
+    if (mode) {
       return (
         <p>You have an active round. If you want to start
           a new round, your active round must be canceled or archived.
@@ -33,7 +33,7 @@ const RoundMenu = (props) => {
     return (
       <div className="column small-centered">
         <button className="button large" onClick={handleStart}>New Round</button>
-        <button className="button large" onClick={handleStart}>Join Group Round</button>
+        <button className="button large" onClick={handleStart} disabled>Join Group Round</button>
       </div>
     );
   };
@@ -45,11 +45,8 @@ const RoundMenu = (props) => {
     const handleArchive = () => {
       dispatch(startArchiveRound());
       round.players.forEach(p => dispatch(startSelectPlayer(p.id)));
-      // set group to unchecked if group round
-      if (round.key) {
-        dispatch(startSelectGroup(round.key));
-      }
     };
+
     const handleCancel = () => {
       dispatch(startCancelRound());
       dispatch(startSetScoringMode(false));
@@ -58,12 +55,12 @@ const RoundMenu = (props) => {
         round.players.forEach(p => dispatch(startSelectPlayer(p.id)));
       }
       // set group to unchecked if group round
-      if (round.key) {
-        dispatch(startSelectGroup(round.key));
+      if (round.groupKey) {
+        // TODO: delete group round
       }
     };
-    // check that an active round with scoring present
-    if (activeRound && round.lastHole) {
+    // check for active round with scoring
+    if (mode && round.lastHole) {
       return (
         <div className="callout">
           <div className="column small-centered">
@@ -77,7 +74,7 @@ const RoundMenu = (props) => {
           </div>
         </div>
       );
-    } else if (activeRound && !round.lastHole) {
+    } else if (mode && !round.lastHole) {
       handleCancel();
     }
     return null;
@@ -99,7 +96,7 @@ const RoundMenu = (props) => {
         </div>
         {renderActiveRoundSection()}
         <div className="column small-centered">
-          <Link to="/group-round-add" className="button large">Add Group Round</Link>
+          <button className="button large" onClick={() => router.push('group-round-add')} disabled>Add Group Round</button>
         </div>
       </div>
     </div>
@@ -108,7 +105,7 @@ const RoundMenu = (props) => {
 
 RoundMenu.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  activeRound: PropTypes.bool.isRequired,
+  mode: PropTypes.bool.isRequired,
   groups: PropTypes.array.isRequired, // eslint-disable-line
   round: PropTypes.object.isRequired, // eslint-disable-line
   router: PropTypes.object.isRequired, // eslint-disable-line
@@ -116,7 +113,7 @@ RoundMenu.propTypes = {
 
 const mapStateToProps = (state) => { // eslint-disable-line
   return {
-    activeRound: state.settings.scoringMode,
+    mode: state.settings.scoringMode,
     round: state.round,
     groups: state.groupRounds,
   };

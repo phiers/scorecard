@@ -1,13 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 import * as actions from 'groupRoundActions'; // eslint-disable-line
 
 const GroupRound = (props) => {
   const { name, id, checked, sponsor, mode, dispatch } = props;
   const handleChange = () => {
     dispatch(actions.startSelectGroup(id));
-    // browserHistory.push('/players');
   };
 
   const handleDelete = () => {

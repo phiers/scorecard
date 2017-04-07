@@ -5,6 +5,7 @@
       ".write": "auth !== null"
     },
     "users": {
+      ".read": "true",
       "$userId": {
         ".read": "true",
         ".write": "$userId === auth.uid"

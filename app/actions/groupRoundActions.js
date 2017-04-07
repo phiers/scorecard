@@ -37,23 +37,17 @@ export function addPlayersToGroup(groupKey, players) {
   };
 }
 
-export function selectGroupCourse(course) {
+function cancelGroupRound() {
   return {
-    type: 'SELECT_GROUP_COURSE',
-    course,
+    type: 'CANCEL_GROUP_ROUND',
   };
 }
 
-export function startSelectCourse(id, course) {
-  return () => {
-    const publicRef = firebaseRef.child('public');
-    return publicRef.once('value').then((snap) => {
-      snap.forEach((group) => {
-        if (group.val().id === id) {
-          return publicRef.child(group.key).update({ course });
-        }
-        return false;
-      });
+export function startCancelGroupRound(groupRoundId) {
+  return (dispatch) => {
+    const roundRef = firebaseRef.child(`public/${groupRoundId}/round`);
+    return roundRef.remove().then(() => {
+      dispatch(cancelGroupRound());
     });
   };
 }
@@ -67,6 +61,7 @@ function selectGroup(id, key) {
 }
 
 export function startSelectGroup(id) {
+  console.log('passed ID', id);
   return (dispatch) => {
     const publicRef = firebaseRef.child('public');
     publicRef.once('value').then((snapshot) => {

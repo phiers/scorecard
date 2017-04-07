@@ -15,8 +15,8 @@ const loadData = () => {
     store.dispatch(startFetchPlayers()))
     .then(() =>
       store.dispatch(startFetchCourses()))
-        .then(() =>
-          store.dispatch(startFetchGroupRoundList()))
+        // .then(() =>
+        //   store.dispatch(startFetchGroupRoundList()))
             .then(() =>
               store.dispatch(startFetchArchivedRounds()))
                 .then(() => browserHistory.push('start'));
